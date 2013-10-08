@@ -11,42 +11,43 @@
 // default constructor
 MovableObject::MovableObject ()
 {
-	width = 10;
-	height = 10;
-	sprite = -1;
-	ammoSlot = 0;
-	alive = false;
-	position = Vector2D();
-	velocity = Vector2D();
+	m_fWidth = 10;
+	m_fHeight = 10;
+	m_oPosition = Vector2D();
+	m_oVelocity = Vector2D();
+	m_iSprite = -1;
+	m_iAmmoSlot = 0;
+	m_bAlive = false;
+	
 }
 
 // constructor that takes in values
-// not sure if I need this???
-MovableObject::MovableObject (float width, float height, bool alive, Vector2D position, Vector2D velocity)
+MovableObject::MovableObject (float a_fWidth, float a_fHeight, float a_fXposition, float a_fYposition,
+							  float a_fXvelocity, float a_fYelocity, bool a_bAlive)
 {
-	width = width;
-	height = height;
-	sprite = -1;	
-	ammoSlot = 0;
-	alive = alive;
-	position = position; // check on these **
-	velocity = velocity;
+	m_fWidth = a_fWidth;
+	m_fHeight = a_fHeight;
+	m_oPosition = Vector2D(a_fXposition, a_fYposition); // check on these **
+	m_oVelocity = Vector2D(a_fXvelocity, a_fYelocity);
+	m_iSprite = -1;	
+	m_iAmmoSlot = 0;
+	m_bAlive = a_bAlive;
 }
 
 // calls the DrawSprite function from the AIE Framework
 void MovableObject::Draw()
 {
-	DrawSprite(this->sprite);
+	DrawSprite(this->m_iSprite);
 }
 
 // calls the MoveSprite function from the AIE Framework
 void MovableObject::Move()
 {
-	MoveSprite(this->sprite, this->position.GetX(), this->position.GetY());
+	MoveSprite(this->m_iSprite, this->m_oPosition.GetX(), this->m_oPosition.GetY());
 }
 
 // calls the DrawSprite function from the AIE Framework
 void MovableObject::Destroy()
 {
-	DestroySprite(this->sprite);
+	DestroySprite(this->m_iSprite);
 }

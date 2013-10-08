@@ -5,6 +5,10 @@
 // Brief:			A SHMUP game based on the Capcom game, "1943: The Battle of Midway"
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+//guards
+#ifndef _1493FUNCTIONS_H_
+#define _1493FUNCTIONS_H_
+
 #include "AIE.h"
 #include "KeyCodes.h"
 #include <string>
@@ -117,3 +121,6 @@ void updateProjectiles(movableObject *projArray);
 vector2d vectorAdd(vector2d &v, vector2d &v2);
 void drawSpriteArray(movableObject *spriteArray);
 void moveSpriteArray(movableObject *spriteArray);
+
+
+#endif

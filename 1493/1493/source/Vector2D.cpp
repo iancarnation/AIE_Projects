@@ -13,15 +13,15 @@
 // default constructor
 Vector2D::Vector2D ()
 {
-	x = 0;
-	y = 0;
+	m_fX = 0;
+	m_fY = 0;
 }
 
 // constructor that takes in position values
-Vector2D::Vector2D (float x, float y)
+Vector2D::Vector2D (float a_fX, float a_fY)
 {
-	x = x;
-	y = y;
+	m_fX = a_fX;
+	m_fY = a_fY;
 }
 
 // destructor
@@ -33,47 +33,47 @@ Vector2D::~Vector2D ()
 //////////////////////////////-- MATHS --////////////////////////////////////////////////////////////
 
 // subtracts a scalar from a vector, returns new vector
-Vector2D Vector2D::operator - (float s)
+Vector2D Vector2D::operator - (float a_fS)
 {
 	Vector2D vTemp;
-	vTemp.x = this->x - s;
-	vTemp.y = this->y - s;
+	vTemp.m_fX = this->m_fX - a_fS;
+	vTemp.m_fY = this->m_fY - a_fS;
 	return vTemp;
 }
 
 // adds a scalar to a vector, returns new vector
-Vector2D Vector2D::operator + (float s)
+Vector2D Vector2D::operator + (float a_fS)
 {
 	Vector2D vTemp;
-	vTemp.x = this->x + s;
-	vTemp.y = this->y + s;
+	vTemp.m_fX = this->m_fX + a_fS;
+	vTemp.m_fY = this->m_fY + a_fS;
 	return vTemp;
 }
 
 // multiplies a vector by a scalar, returns new vector
-Vector2D Vector2D::operator * (float s)
+Vector2D Vector2D::operator * (float a_fS)
 {
 	Vector2D vTemp;
-	vTemp.x = this->x * s;
-	vTemp.y = this->y * s;
+	vTemp.m_fX = this->m_fX * a_fS;
+	vTemp.m_fY = this->m_fY * a_fS;
 	return vTemp;
 }
 
 // subtracts one vector from another, returns new vector
-Vector2D Vector2D::operator - (const Vector2D &v2)
+Vector2D Vector2D::operator - (const Vector2D& a_rV2)
 {
 	Vector2D vTemp;
-	vTemp.x = this->x - v2.x;
-	vTemp.y = this->y - v2.y;
+	vTemp.m_fX = this->m_fX - a_rV2.m_fX;
+	vTemp.m_fY = this->m_fY - a_rV2.m_fY;
 	return vTemp;
 }
 
 // adds one vector to another, returns new vector
-Vector2D Vector2D::operator + (const Vector2D &v2)
+Vector2D Vector2D::operator + (const Vector2D& a_rV2)
 {
 	Vector2D vTemp;
-	vTemp.x = this->x + v2.x;
-	vTemp.y = this->y + v2.y;
+	vTemp.m_fX = this->m_fX + a_rV2.m_fX;
+	vTemp.m_fY = this->m_fY + a_rV2.m_fY;
 	return vTemp;
 }
 
@@ -82,23 +82,23 @@ Vector2D Vector2D::operator + (const Vector2D &v2)
 // returns x value
 float Vector2D::GetX()
 {
-	return this->x;
+	return this->m_fX;
 }
 
 // returns y value
 float Vector2D::GetY()
 {
-	return this->y;
+	return this->m_fY;
 }
 
 // sets x value
-void Vector2D::SetX(float x)
+void Vector2D::SetX(float a_fX)
 {
-	this->x = x;
+	this->m_fX = a_fX;
 }
 
 // sets y value
-void Vector2D::SetY(float y)
+void Vector2D::SetY(float a_fY)
 {
-	this->y = y;
+	this->m_fY = a_fY;
 }
