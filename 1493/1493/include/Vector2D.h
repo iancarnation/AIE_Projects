@@ -13,7 +13,7 @@ class Vector2D
 {
 	public: 
 		Vector2D();					// default constructor
-		Vector2D(float a_fX, float afY);	// constructor that takes in position values
+		Vector2D(float a_fX, float afY);	// constructor that takes in x and y values
 		~ Vector2D();				// destructor
 
 		Vector2D operator - (float a_fS);		// subtracts a scalar from a vector, returns new vector

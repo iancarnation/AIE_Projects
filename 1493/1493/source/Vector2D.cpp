@@ -21,7 +21,7 @@ Vector2D::Vector2D ()
 	//cout<< "Default Vector Constructed!\n";
 }
 
-// constructor that takes in position values
+// constructor that takes in x and y values
 Vector2D::Vector2D (float a_fX, float a_fY)
 {
 	m_fX = a_fX;

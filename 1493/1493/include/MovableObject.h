@@ -19,7 +19,7 @@ class MovableObject
 		MovableObject();					// default constructor
 		MovableObject(char *a_cNewType);	// default constructor with type name provided
 		MovableObject(char *a_cNewType, float a_fWidth, float a_fHeight, float a_fXposition, float a_fYposition, 
-					  float a_fXvelocity, float a_fYelocity, bool a_bAlive, string a_sTextureFile);	// constructor with **something** provided?
+					  float a_fXvelocity, float a_fYvelocity, bool a_bAlive, string a_sTextureFile);	// constructor with **something** provided?
 		~ MovableObject();					// destructor
 
 		void Draw();		// calls the DrawSprite function from the AIE Framework
