@@ -7,14 +7,18 @@
 
 #include "Vector2D.h"
 #include <string> 
+#include <iostream>
+using namespace std;
 
 //////////////////////////////-- CONSTRUCTION / DESTRUCTION --////////////////////////////////////////////////////////////
 
 // default constructor
 Vector2D::Vector2D ()
 {
-	m_fX = 0;
-	m_fY = 0;
+	m_fX = 0.0;
+	m_fY = 0.0;
+	m_fThreshold = .0005;
+	//cout<< "Default Vector Constructed!\n";
 }
 
 // constructor that takes in position values
@@ -22,12 +26,14 @@ Vector2D::Vector2D (float a_fX, float a_fY)
 {
 	m_fX = a_fX;
 	m_fY = a_fY;
+	m_fThreshold = .0005;
+	//cout<< "Vector constructed with given values " << a_fX << " and " << a_fY <<"!\n";
 }
 
 // destructor
 Vector2D::~Vector2D ()
 {
-
+	//cout<< "Vector Destroyed, Muhahah!\n";
 }
 
 //////////////////////////////-- MATHS --////////////////////////////////////////////////////////////
@@ -75,6 +81,15 @@ Vector2D Vector2D::operator + (const Vector2D& a_rV2)
 	vTemp.m_fX = this->m_fX + a_rV2.m_fX;
 	vTemp.m_fY = this->m_fY + a_rV2.m_fY;
 	return vTemp;
+}
+
+// tests vector equality, returns bool
+bool Vector2D::Equals(const Vector2D& a_rV2)
+{
+	if ((this->m_fX - a_rV2.m_fX < this->m_fThreshold) && (this->m_fY - a_rV2.m_fY < this->m_fThreshold))
+		return true;
+	else
+		return false;
 }
 
 //////////////////////////////-- GET / SET --////////////////////////////////////////////////////////////

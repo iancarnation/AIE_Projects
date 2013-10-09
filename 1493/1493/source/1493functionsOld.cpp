@@ -274,7 +274,12 @@ void updateProjectiles(movableObject *projArray)
 //      Utility Functions       ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// **change to DrawAllSprites()**
+vector2d vectorAdd(vector2d &v, vector2d &v2)
+{
+	vector2d result = {v.x + v2.x, v.y + v2.y};
+	return result;
+}
+
 void drawSpriteArray(movableObject *spriteArray)
 {
 	for (int i=0; i<20; i++)
@@ -283,7 +288,6 @@ void drawSpriteArray(movableObject *spriteArray)
 	}
 }
 
-// **change to MoveAllSprites**
 void moveSpriteArray(movableObject *spriteArray)
 {
 	for (int i=0; i<20; i++)

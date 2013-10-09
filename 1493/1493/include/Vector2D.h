@@ -21,6 +21,7 @@ class Vector2D
 		Vector2D operator * (float a_fS);		// multiplies a vector by a scalar, returns new vector
 		Vector2D operator - (const Vector2D& a_rV2);	// subtracts one vector from another, returns new vector
 		Vector2D operator + (const Vector2D& a_rV2);	// adds one vector to another, returns new vector
+		bool Equals(const Vector2D& a_rV2);		// tests vector equality, returns bool
 
 		float GetX();	// returns x value
 		float GetY();	// returns y value
@@ -28,8 +29,10 @@ class Vector2D
 		void SetY(float a_fY);	// sets y value
 	
 	private:		
-		float m_fX, m_fY;			// coordinate variables
+		float m_fX, m_fY;	// coordinate variables
+		float m_fThreshold;	// float comparison threshold
 
 };
 
 #endif
+
