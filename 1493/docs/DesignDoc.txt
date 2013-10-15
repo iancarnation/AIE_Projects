@@ -1,0 +1,106 @@
+Load Game
+-The game has different states: Main Menu, Play, Game Over, etc.
+
+The initial state is the Main Menu
+- start new game (Play State)
+- quit game (exits program)
+- continue with level code (enters Play State at a specific Level)
+- view high scores (loads high score list from file)**
+
+Upon entering the Play State, the appropriate Level is initiated
+
+A Level contains:
+- splash screen / opening animation & title
+- background / environment
+- the player(s)
+- enemies
+- projectiles
+
+Each Level will have a certain set of enemy unit types with their own unique behaviors/weapons,
+as well as a boss at the end.  
+
+** Could possibly have player stat progression through the levels **
+
+The player is able to move anywhere on the screen and can fire a primary or secondary(special) weapon. 
+
+Powerups (healing, new weapon, enhanced current weapon, etc.) will be dropped after killing certain enemies or sets of enemies, or possibly
+by random chance or at set points within the level.  (or a combination of these, i.e. the 'energy' boost gained later in the first level
+of 1943 after killing a squad of red planes)
+Powerups can be of limited or permanent(through the end of a level or persistant between levels) duration.
+
+
+Class Hierarchy:
+
+Game State Manager
+	- Game State
+		- Main Menu
+		- Play
+			- Level
+				- Movable object
+					- Background / Environment
+					- Player
+						- Projectile
+					- Enemy
+						- Projectile
+		- Win
+		- Game Over
+		
+     				
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+My state manager maintains a list of tasks that must be carried out each game tick.  
+Different states are achieved by requesting them of the manager, which then removes 
+and adds tasks to the list as required to achieve the desired state.  For example, 
+when switching to a paused state, the physics updates will be removed from the task list, 
+and the render manager (which maintains it's own list of items to be drawn to screen) 
+will be told not to accept any new additions to it's list, and to alter the currently 
+held items to be rendered grayscale and add a "PAUSED" graphic to the foreground of the scene.  
+While in paused mode, the game basically does nothing other than maintain that paused screen 
+and wait for input to unpause.  Similar functions are used to switch to each other state 
+required for the particular game by adding and removing tasks from the task list.
+
+
+
+
+
+
