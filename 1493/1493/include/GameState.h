@@ -10,6 +10,8 @@
 #define _GAMESTATE_H_
 
 #include "GameEngine.h"
+#include "KeyCodes.h"
+#include "AIE.h"
 
 class GameState
 {
@@ -36,6 +38,6 @@ class GameState
 
 	protected:
 		// protected constructor for making Singleton
-		GameState();
+		GameState() { }
 };
 #endif

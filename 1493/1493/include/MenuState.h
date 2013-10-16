@@ -32,11 +32,13 @@ class MenuState : public GameState
 		static MenuState* Instance(); //**verify that this is implemented correctly in cpp**
 
 	protected:
-		MenuState();
+		MenuState() { }
 
 	private:
 		static MenuState m_MenuState;
 		//**reference has pointer to background?**
+
+		int m_iBg;	 // background sprite ID m_iBg
 };
 
 #endif

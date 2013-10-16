@@ -28,7 +28,8 @@ int main( int argc, char* argv[] )
 		oGame.Update();
 		oGame.Draw();
 	}
-	while ( FrameworkUpdate() == false );
+	while (oGame.Running() && FrameworkUpdate() == false);
 
+	// cleanup the engine
 	oGame.Cleanup();
 }

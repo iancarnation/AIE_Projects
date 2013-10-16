@@ -40,12 +40,17 @@ class GameEngine
 		// renders things to the screen
 		void Draw();
 
+		// returns whether the game is running or not (m_bRunning)
+		bool Running();
+		// stops the game from running
+		void Quit();
+
 	private:
 		// the state stack
 		vector<GameState*> v_oStateStack;
 
 		// whether the game is running or not
-		bool m_running;
+		bool m_bRunning;
 };
 
 #endif

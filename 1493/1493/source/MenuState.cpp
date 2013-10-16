@@ -6,7 +6,6 @@
 // References:		http://gamedevgeek.com/tutorials/managing-game-states-in-c/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "AIE.h"
 #include "GameEngine.h"
 #include "GameState.h"
 #include "MenuState.h"
@@ -14,20 +13,19 @@
 
 MenuState MenuState::m_MenuState; // **has to do with singleton?**
 
-MovableObject menuImage("TestImage", 800, 600, 400, 300, 0, 0, true, "./images/MenuState.png");
-int temp = menuImage.GetSpriteId();
-
 // default constructor
-MenuState::MenuState()
-{
-
-}
+//MenuState::MenuState()
+//{
+//
+//}
 
 // to be executed first upon entering the state
 void MenuState::Init()
 {
 	// load menu sprite(s)
-	MoveSprite(temp, 800>>1, 600>>1);
+	MovableObject menuImage("TestImage", 800, 600, 400, 300, 0, 0, true, "./images/MenuState.png");
+	m_iBg = menuImage.GetSpriteId();
+	MoveSprite(m_iBg, 800>>1, 600>>1);
 	// reference calls bg = SDL_DisplayFormat(temp);
 	//				   SDL_FreeSurface(temp);
 
@@ -39,6 +37,7 @@ void MenuState::Init()
 void MenuState::Cleanup()
 {
 	// **clean stuff?  destroy sprites?? reference calls SDL_FreeSurface(bg);**
+	DestroySprite(m_iBg);
 
 	printf("MenuState Cleanup\n");
 }
@@ -57,6 +56,14 @@ void MenuState::HandleEvents(GameEngine* a_opGame)
 {
 	// look for key presses for menu actions
 	// maybe use a 'select' button or directional controls to select options as well
+	if (IsKeyDown('Q'))
+		{
+			a_opGame->Quit();
+		}
+	if (IsKeyDown(GLFW_KEY_ESC))
+		{
+			a_opGame->PopState();
+		}
 }
 
 void MenuState::Update(GameEngine* a_opGame)
@@ -69,10 +76,11 @@ void MenuState::Draw(GameEngine* a_opGame)
 	// reference project uses Blit from SDL, look that up and compare with GLFW?
 
 	// draw the background image??  check out ref. **
-	DrawSprite(temp);
+	DrawSprite(m_iBg);
 }
 
 MenuState* MenuState::Instance()
 {
 	// call draw function on menu sprites?
+	return &m_MenuState;
 }

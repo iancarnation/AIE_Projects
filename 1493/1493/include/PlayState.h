@@ -32,11 +32,13 @@ class PlayState : public GameState
 		static PlayState* Instance(); //**verify that this is implemented correctly in cpp**
 
 	protected:
-		PlayState();
+		PlayState() { }
 
 	private:
 		static PlayState m_PlayState;
 		//**reference has pointer to background?**
+
+		int m_iBg;	 // background sprite ID 
 };
 
 #endif

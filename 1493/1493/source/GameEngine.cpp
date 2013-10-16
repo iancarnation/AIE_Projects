@@ -33,7 +33,7 @@ void GameEngine::Cleanup()
 	printf("GameEngine Cleanup\n");
 
 	// destroy sprites and clean memory
-	DestroyGame(); // **need to create**
+	////DestroySprite(); // **need to create**
 	//shutdown Framework
 	Shutdown();
 }
@@ -99,4 +99,16 @@ void GameEngine::Draw()
 {
 	// let the state draw the screen
 	v_oStateStack.back()->Draw(this);
+}
+
+// returns whether the game is running or not (m_bRunning)
+bool GameEngine::Running()
+{
+	return this->m_bRunning;
+}
+
+// stops the game from running
+void GameEngine::Quit()
+{
+	this->m_bRunning = false;
 }

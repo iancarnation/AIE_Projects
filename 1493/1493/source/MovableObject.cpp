@@ -55,6 +55,12 @@ MovableObject::MovableObject(char *a_cNewType, float a_fWidth, float a_fHeight, 
 	m_iSpriteId = CreateSprite(m_pTextureName, 800, 600, true);
 }
 
+// destructor
+MovableObject::~MovableObject ()
+{
+	//cout<< "Vector Destroyed, Muhahah!\n";
+}
+
 // calls the DrawSprite function from the AIE Framework
 void MovableObject::Draw()
 {

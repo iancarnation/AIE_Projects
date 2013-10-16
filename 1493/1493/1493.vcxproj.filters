@@ -20,19 +20,7 @@
     <ClCompile Include="source\Vector2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\Vector2DTester.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\MovableObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\1493functionsOld.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\1493mainOld.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\1493functions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\GameEngine.cpp">
@@ -62,12 +50,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\MovableObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\1493functionsOld.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\1493functions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\GameEngine.h">

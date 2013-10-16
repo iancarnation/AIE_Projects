@@ -32,12 +32,12 @@ class IntroState : public GameState
 		static IntroState* Instance(); //**verify that this is implemented correctly in cpp**
 
 	protected:
-		IntroState();
+		IntroState() { }
 
 	private:
 		static IntroState m_IntroState;
-		int m_alpha; //**used for fading out intro**
-		int m_bg;
+		int m_iAlpha; //**used for fading out intro**
+		int m_iBg;	 // background sprite ID 
 };
 
 #endif

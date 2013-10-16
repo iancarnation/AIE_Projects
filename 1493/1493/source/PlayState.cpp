@@ -6,24 +6,27 @@
 // References:		http://gamedevgeek.com/tutorials/managing-game-states-in-c/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "AIE.h"
 #include "GameEngine.h"
 #include "GameState.h"
 #include "PlayState.h"
 #include "MenuState.h"
+#include "MovableObject.h"
 
 PlayState PlayState::m_PlayState; // **has to do with singleton?**
 
 // default constructor
-PlayState::PlayState()
-{
-
-}
+//PlayState::PlayState()
+//{
+//
+//}
 
 // to be executed first upon entering the state
 void PlayState::Init()
 {
 	// load sprites
+	MovableObject playImage("TestImage", 800, 600, 400, 300, 0, 0, true, "./images/PlayState.png");
+	m_iBg = playImage.GetSpriteId();
+	MoveSprite(m_iBg, 800>>1, 600>>1);
 
 	//** reference calls SDL_Surface* temp = SDL_LoadBMP("play.bmp");
 	//					 bg = SDL_DisplayFormat(temp);
@@ -34,9 +37,10 @@ void PlayState::Init()
 }
 
 // to be executed when state is popped from end of stack
-void Cleanup()
+void PlayState::Cleanup()
 {
 	// **clean stuff? (sprite & fader?)**
+	DestroySprite(m_iBg);
 	
 	printf("PlayState Cleanup\n");
 }
@@ -61,6 +65,14 @@ void PlayState::Resume()
 void PlayState::HandleEvents(GameEngine* a_opGame)
 {
 	// look for key presses to quit or go to the menu
+	if (IsKeyDown('M'))
+		{
+			a_opGame->PushState(MenuState::Instance());
+		}
+	if (IsKeyDown('Q'))
+		{
+			a_opGame->Quit();
+		}
 
 	// look for player input for movement control
 }
@@ -77,7 +89,7 @@ void PlayState::Draw(GameEngine* a_opGame)
 	// ^^ probably irrelevant??
 
 	// call draw functions of all movable objects?
-	DrawSprite(temp);
+	DrawSprite(m_iBg);
 }
 
 PlayState* PlayState::Instance()
