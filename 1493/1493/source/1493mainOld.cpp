@@ -39,7 +39,6 @@ int main( int argc, char* argv[] )
 			case GAME_STATE_LOSE:
 				loseScreen(currentState);
 				break;
-	
 		};
 	} 
 	while ( FrameworkUpdate() == false );
