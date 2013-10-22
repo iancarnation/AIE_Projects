@@ -33,6 +33,36 @@ Test2: Scalar = 6.66
 Expected1 = (0,0)
 Expected2 = (14.652,57.276)
 
+CompoundAssignVectorMinusScalar()
+
+Test1: Scalar = -1.35
+Expected1 = (1.35,1.35)
+Expected2 = (3.55,9.95)
+
+Test2: Scalar = 6.66
+Expected1 = (-6.66,-6.66)
+Expected2 = (-4.46,1.94)
+
+CompoundAssignVectorPlusScalar()
+
+Test1: Scalar = -1.35
+Expected1 = (-1.35,-1.35)
+Expected2 = (0.85,7.25)
+
+Test2: Scalar = 6.66
+Expected1 = (6.66,6.66)
+Expected2 = (8.86,15.26)
+
+CompoundAssignVectorTimesScalar()
+
+Test1: Scalar = -1.35
+Expected1 = (0,0)
+Expected2 = (-2.97,-11.61)
+
+Test2: Scalar = 6.66
+Expected1 = (0,0)
+Expected2 = (14.652,57.276)
+
 SubVectorFromVector()
 
 Test1: Subtractor = (-1.35,2.22)
@@ -53,4 +83,22 @@ Test2: Adder = (6.66,3.33)
 Expected1 = (6.66,3.33)
 Expected2 = (8.86,11.93)
 
+CompoundAssignVectorSubtract()
 
+Test1: Subtractor = (-1.35,2.22)
+Expected1 = (1.35,-2.22)
+Expected2 = (3.55,6.38)
+
+Test2: Subtractor = (6.66, 3.33)
+Expected1 = (-6.66,-3.33)
+Expected2 = (-4.46,5.27)
+
+CompoundAssignVectorAdd()
+
+Test1: Adder = (-1.35,2.22)
+Expected1 = (-1.35,2.22)
+Expected2 = (0.85,10.82)
+
+Test2: Adder = (6.66,3.33)
+Expected1 = (6.66,3.33)
+Expected2 = (8.86,11.93)

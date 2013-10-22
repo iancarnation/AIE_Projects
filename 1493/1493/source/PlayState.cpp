@@ -10,7 +10,7 @@
 #include "GameState.h"
 #include "PlayState.h"
 #include "MenuState.h"
-#include "MovableObject.h"
+#include "Player.h"
 
 PlayState PlayState::m_PlayState; // **has to do with singleton?**
 
@@ -24,9 +24,12 @@ PlayState PlayState::m_PlayState; // **has to do with singleton?**
 void PlayState::Init()
 {
 	// load sprites
-	MovableObject playImage("TestImage", 800, 600, 400, 300, 0, 0, true, "./images/PlayState.png");
+	Sprite playImage("TestImage", 800, 600, 400, 300, 0, 0, true, "./images/PlayState.png");
 	m_iBg = playImage.GetSpriteId();
 	MoveSprite(m_iBg, 800>>1, 600>>1);
+
+	Player oPlayer("Player", 40, 70, 400, 500, 0, 0, true, "./images/playerImage.png");
+	MoveSprite(oPlayer.GetSpriteId(), 800>>1, 600>>1);
 
 	//** reference calls SDL_Surface* temp = SDL_LoadBMP("play.bmp");
 	//					 bg = SDL_DisplayFormat(temp);
@@ -90,6 +93,7 @@ void PlayState::Draw(GameEngine* a_opGame)
 
 	// call draw functions of all movable objects?
 	DrawSprite(m_iBg);
+	DrawSprite(oPlayer.Get
 }
 
 PlayState* PlayState::Instance()

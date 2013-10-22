@@ -18,7 +18,7 @@ bool SubScalarFromVector(Vector2D& a_rDefault, Vector2D& a_rGiven, float a_fS,
 		bPassed1 = true;
 	}
 	else
-		cout<<"Failed :(\n\n";
+		cout<<"Failed :(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(\n\n";
 
 	cout<< "Expected (" << a_rExpected1.GetX() << "," << a_rExpected1.GetY() << ")\n";
 	cout<< "Result:  (" << oTempVector.GetX() << "," << oTempVector.GetY() << ")\n\n";
@@ -32,7 +32,7 @@ bool SubScalarFromVector(Vector2D& a_rDefault, Vector2D& a_rGiven, float a_fS,
 		bPassed2 = true;
 	}
 	else
-		cout<<"Failed :(\n\n";
+		cout<<"Failed :(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(\n\n";
 
 	cout<< "Expected (" << a_rExpected2.GetX() << "," << a_rExpected2.GetY() << ")\n";
 	cout<< "Result:  (" << oTempVector.GetX() << "," << oTempVector.GetY() << ")\n\n";
@@ -58,7 +58,7 @@ bool AddScalarToVector(Vector2D& a_rDefault, Vector2D& a_rGiven, float a_fS,
 		bPassed1 = true;
 	}
 	else
-		cout<<"Failed :(\n\n";
+		cout<<"Failed :(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(\n\n";
 
 	cout<< "Expected (" << a_rExpected1.GetX() << "," << a_rExpected1.GetY() << ")\n";
 	cout<< "Result:  (" << oTempVector.GetX() << "," << oTempVector.GetY() << ")\n\n";
@@ -72,7 +72,7 @@ bool AddScalarToVector(Vector2D& a_rDefault, Vector2D& a_rGiven, float a_fS,
 		bPassed2 = true;
 	}
 	else
-		cout<<"Failed :(\n\n";
+		cout<<"Failed :(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(\n\n";
 
 	cout<< "Expected (" << a_rExpected2.GetX() << "," << a_rExpected2.GetY() << ")\n";
 	cout<< "Result:  (" << oTempVector.GetX() << "," << oTempVector.GetY() << ")\n\n";
@@ -98,7 +98,7 @@ bool MultiplyScalarByVector(Vector2D& a_rDefault, Vector2D& a_rGiven, float a_fS
 		bPassed1 = true;
 	}
 	else
-		cout<<"Failed :(\n\n";
+		cout<<"Failed :(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(\n\n";
 
 	cout<< "Expected (" << a_rExpected1.GetX() << "," << a_rExpected1.GetY() << ")\n";
 	cout<< "Result:  (" << oTempVector.GetX() << "," << oTempVector.GetY() << ")\n\n";
@@ -112,10 +112,130 @@ bool MultiplyScalarByVector(Vector2D& a_rDefault, Vector2D& a_rGiven, float a_fS
 		bPassed2 = true;
 	}
 	else
-		cout<<"Failed :(\n\n";
+		cout<<"Failed :(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(\n\n";
 
 	cout<< "Expected (" << a_rExpected2.GetX() << "," << a_rExpected2.GetY() << ")\n";
 	cout<< "Result:  (" << oTempVector.GetX() << "," << oTempVector.GetY() << ")\n\n";
+
+	if (bPassed1 && bPassed2)
+		return true;
+	else
+		return false;
+}
+
+// sets a vector equal to itself minus a scalar
+bool CompoundAssignVectorMinusScalar(Vector2D a_rDefault, Vector2D a_rGiven, float a_fS, //// removed default and given reference, made value and it works????
+						 Vector2D& a_rExpected1, Vector2D& a_rExpected2)
+{
+	bool bPassed1 = false, bPassed2 = false;
+
+	// test default
+	cout<< "Subtraction Assignment of Default Vector with Scalar: ";
+	a_rDefault -= a_fS;
+	if (a_rDefault.Equals(a_rExpected1))
+	{
+		cout<<"Success!!\n\n";
+		bPassed1 = true;
+	}
+	else
+		cout<<"Failed :(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(:(\n\n";
+
+	cout<< "Expected (" << a_rExpected1.GetX() << "," << a_rExpected1.GetY() << ")\n";
+	cout<< "Result:  (" << a_rDefault.GetX() << "," << a_rDefault.GetY() << ")\n\n";
+
+	// test given
+	cout<< "Subtraction Assignment of Given Vector with Scalar: ";
+	a_rGiven -= a_fS;
+	if (a_rGiven.Equals(a_rExpected2))
+	{
+		cout<<"Success!!\n\n";
+		bPassed2 = true;
+	}
+	else
+		cout<<"Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
+
+	cout<< "Expected (" << a_rExpected2.GetX() << "," << a_rExpected2.GetY() << ")\n";
+	cout<< "Result:  (" << a_rGiven.GetX() << "," << a_rGiven.GetY() << ")\n\n";
+
+	if (bPassed1 && bPassed2)
+		return true;
+	else
+		return false;
+}
+
+// sets a vector equal to itself plus a scalar
+bool CompoundAssignVectorPlusScalar(Vector2D& a_rDefault, Vector2D& a_rGiven, float a_fS,
+						 Vector2D& a_rExpected1, Vector2D& a_rExpected2)
+{
+	bool bPassed1 = false, bPassed2 = false;
+
+	// test default
+	cout<< "Addition Assignment of Default Vector with Scalar: ";
+	a_rDefault += a_fS;
+	if (a_rDefault.Equals(a_rExpected1))
+	{
+		cout<<"Success!!\n\n";
+		bPassed1 = true;
+	}
+	else
+		cout<<"Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
+
+	cout<< "Expected (" << a_rExpected1.GetX() << "," << a_rExpected1.GetY() << ")\n";
+	cout<< "Result:  (" << a_rDefault.GetX() << "," << a_rDefault.GetY() << ")\n\n";
+
+	// test given
+	cout<< "Addition Assignment of Given Vector with Scalar: ";
+	a_rGiven += a_fS;
+	if (a_rGiven.Equals(a_rExpected2))
+	{
+		cout<<"Success!!\n\n";
+		bPassed2 = true;
+	}
+	else
+		cout<<"Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
+
+	cout<< "Expected (" << a_rExpected2.GetX() << "," << a_rExpected2.GetY() << ")\n";
+	cout<< "Result:  (" << a_rGiven.GetX() << "," << a_rGiven.GetY() << ")\n\n";
+
+	if (bPassed1 && bPassed2)
+		return true;
+	else
+		return false;
+}
+
+// sets a vector equal to itself multiplied by scalar
+bool CompoundAssignVectorTimesScalar(Vector2D& a_rDefault, Vector2D& a_rGiven, float a_fS,
+						 Vector2D& a_rExpected1, Vector2D& a_rExpected2)
+{
+	bool bPassed1 = false, bPassed2 = false;
+
+	// test default
+	cout<< "Multiplication Assignment of Default Vecto with Scalarr: ";
+	a_rDefault *= a_fS;
+	if (a_rDefault.Equals(a_rExpected1))
+	{
+		cout<<"Success!!\n\n";
+		bPassed1 = true;
+	}
+	else
+		cout<<"Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
+
+	cout<< "Expected (" << a_rExpected1.GetX() << "," << a_rExpected1.GetY() << ")\n";
+	cout<< "Result:  (" << a_rDefault.GetX() << "," << a_rDefault.GetY() << ")\n\n";
+
+	// test given
+	cout<< "Multiplication Assignment of Given Vector with Scalar: ";
+	a_rGiven *= a_fS;
+	if (a_rGiven.Equals(a_rExpected2))
+	{
+		cout<<"Success!!\n\n";
+		bPassed2 = true;
+	}
+	else
+		cout<<"Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
+
+	cout<< "Expected (" << a_rExpected2.GetX() << "," << a_rExpected2.GetY() << ")\n";
+	cout<< "Result:  (" << a_rGiven.GetX() << "," << a_rGiven.GetY() << ")\n\n";
 
 	if (bPassed1 && bPassed2)
 		return true;
@@ -138,7 +258,7 @@ bool SubVectorFromVector(Vector2D& a_rDefault, Vector2D& a_rGiven, Vector2D& a_r
 		bPassed1 = true;
 	}
 	else
-		cout<<"Failed :(\n\n";
+		cout<<"Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
 
 	cout<< "Expected (" << a_rExpected1.GetX() << "," << a_rExpected1.GetY() << ")\n";
 	cout<< "Result:  (" << oTempVector.GetX() << "," << oTempVector.GetY() << ")\n\n";
@@ -152,7 +272,7 @@ bool SubVectorFromVector(Vector2D& a_rDefault, Vector2D& a_rGiven, Vector2D& a_r
 		bPassed2 = true;
 	}
 	else
-		cout<<"Failed :(\n\n";
+		cout<<"Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
 
 	cout<< "Expected (" << a_rExpected2.GetX() << "," << a_rExpected2.GetY() << ")\n";
 	cout<< "Result:  (" << oTempVector.GetX() << "," << oTempVector.GetY() << ")\n\n";
@@ -178,7 +298,7 @@ bool Add2Vectors(Vector2D& a_rDefault, Vector2D& a_rGiven, Vector2D& a_rAdder,
 		bPassed1 = true;
 	}
 	else
-		cout<<"Failed :(\n\n";
+		cout<<"Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
 
 	cout<< "Expected (" << a_rExpected1.GetX() << "," << a_rExpected1.GetY() << ")\n";
 	cout<< "Result:  (" << oTempVector.GetX() << "," << oTempVector.GetY() << ")\n\n";
@@ -192,7 +312,7 @@ bool Add2Vectors(Vector2D& a_rDefault, Vector2D& a_rGiven, Vector2D& a_rAdder,
 		bPassed2 = true;
 	}
 	else
-		cout<<"Failed :(\n\n";
+		cout<<"Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
 
 	cout<< "Expected (" << a_rExpected2.GetX() << "," << a_rExpected2.GetY() << ")\n";
 	cout<< "Result:  (" << oTempVector.GetX() << "," << oTempVector.GetY() << ")\n\n";
@@ -202,6 +322,87 @@ bool Add2Vectors(Vector2D& a_rDefault, Vector2D& a_rGiven, Vector2D& a_rAdder,
 	else
 		return false;
 }
+
+// add one vector to another
+bool CompoundAssignVectorSubtract(Vector2D& a_rDefault, Vector2D& a_rGiven, Vector2D& a_rAdder,
+						 Vector2D& a_rExpected1, Vector2D& a_rExpected2)
+{
+	bool bPassed1 = false, bPassed2 = false;
+
+	// test default
+	cout<< "Assigning Vector With Subtracted Vector: ";
+	a_rDefault -= a_rAdder;
+	if (a_rDefault.Equals(a_rExpected1))
+	{
+		cout<<"Success!!\n\n";
+		bPassed1 = true;
+	}
+	else
+		cout<<"Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
+
+	cout<< "Expected (" << a_rExpected1.GetX() << "," << a_rExpected1.GetY() << ")\n";
+	cout<< "Result:  (" << a_rDefault.GetX() << "," << a_rDefault.GetY() << ")\n\n";
+
+	// test given
+	cout<< "Assigning Vector With Subtracted Vector: ";
+	a_rGiven -= a_rAdder;
+	if (a_rGiven.Equals(a_rExpected2))
+	{
+		cout<<"Success!!\n\n";
+		bPassed2 = true;
+	}
+	else
+		cout<<"Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
+
+	cout<< "Expected (" << a_rExpected2.GetX() << "," << a_rExpected2.GetY() << ")\n";
+	cout<< "Result:  (" << a_rGiven.GetX() << "," << a_rGiven.GetY() << ")\n\n";
+
+	if (bPassed1 && bPassed2)
+		return true;
+	else
+		return false;
+}
+
+// add one vector to another
+bool CompoundAssignVectorAdd(Vector2D& a_rDefault, Vector2D& a_rGiven, Vector2D& a_rAdder,
+						 Vector2D& a_rExpected1, Vector2D& a_rExpected2)
+{
+	bool bPassed1 = false, bPassed2 = false;
+
+	// test default
+	cout<< "Assigning Vector With Added Vector: ";
+	a_rDefault += a_rAdder;
+	if (a_rDefault.Equals(a_rExpected1))
+	{
+		cout<<"Success!!\n\n";
+		bPassed1 = true;
+	}
+	else
+		cout<<"Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
+
+	cout<< "Expected (" << a_rExpected1.GetX() << "," << a_rExpected1.GetY() << ")\n";
+	cout<< "Result:  (" << a_rDefault.GetX() << "," << a_rDefault.GetY() << ")\n\n";
+
+	// test given
+	cout<< "Assigning Vector With Added Vector: ";
+	a_rGiven += a_rAdder;
+	if (a_rGiven.Equals(a_rExpected2))
+	{
+		cout<<"Success!!\n\n";
+		bPassed2 = true;
+	}
+	else
+		cout<<"Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
+
+	cout<< "Expected (" << a_rExpected2.GetX() << "," << a_rExpected2.GetY() << ")\n";
+	cout<< "Result:  (" << a_rGiven.GetX() << "," << a_rGiven.GetY() << ")\n\n";
+
+	if (bPassed1 && bPassed2)
+		return true;
+	else
+		return false;
+}
+
 
 // tests getter and setter functions
 void TestGetSet(Vector2D& a_rDefault, Vector2D& a_rGiven)
@@ -242,14 +443,14 @@ void TestMaths(Vector2D& a_rDefault, Vector2D& a_rGiven)
 	if (SubScalarFromVector(a_rDefault, a_rGiven, -1.35, Vector2D(1.35,1.35), Vector2D(3.55,9.95)))
 		cout<< "\nTest 1 Passed!\n\n";
  	else
-		cout<< "\nTest 1 Failed :(\n\n";
+		cout<< "\nTest 1 Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
 	cout<< "---------------------------------------------------------------------\n";
 
 	// Test 2
 	if (SubScalarFromVector(a_rDefault, a_rGiven, 6.66, Vector2D(-6.66,-6.66), Vector2D(-4.46,1.94)))
 		cout<< "\nTest 2 Passed!\n\n";
 	else
-		cout<< "\nTest 2 Failed :(\n\n";
+		cout<< "\nTest 2 Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
 	cout<< "---------------------------------------------------------------------\n";
 
 	// --------- add a scalar to a vector ---------------
@@ -257,14 +458,14 @@ void TestMaths(Vector2D& a_rDefault, Vector2D& a_rGiven)
 	if (AddScalarToVector(a_rDefault, a_rGiven, -1.35, Vector2D(-1.35,-1.35), Vector2D(0.85,7.25)))
 		cout<< "\nTest 1 Passed!\n\n";
 	else
-		cout<< "\nTest 1 Failed :(\n\n";
+		cout<< "\nTest 1 Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
 	cout<< "---------------------------------------------------------------------\n";
 
 	// Test 2
 	if (AddScalarToVector(a_rDefault, a_rGiven, 6.66, Vector2D(6.66,6.66), Vector2D(8.86,15.26)))
 		cout<< "\nTest 2 Passed!\n\n";
 	else
-		cout<< "\nTest 2 Failed :(\n\n";
+		cout<< "\nTest 2 Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
 	cout<< "---------------------------------------------------------------------\n";
 
 		// --------- multiply scalar by vector ---------------
@@ -272,14 +473,59 @@ void TestMaths(Vector2D& a_rDefault, Vector2D& a_rGiven)
 	if (MultiplyScalarByVector(a_rDefault, a_rGiven, -1.35, Vector2D(0,0), Vector2D(-2.97,-11.61)))
 		cout<< "\nTest 1 Passed!\n\n";
 	else
-		cout<< "\nTest 1 Failed :(\n\n";
+		cout<< "\nTest 1 Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
 	cout<< "---------------------------------------------------------------------\n";
 
 	// Test 2
 	if (MultiplyScalarByVector(a_rDefault, a_rGiven, 6.66, Vector2D(0,0), Vector2D(14.652,57.276)))
 		cout<< "\nTest 2 Passed!\n\n";
 	else
-		cout<< "\nTest 2 Failed :(\n\n";
+		cout<< "\nTest 2 Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
+	cout<< "---------------------------------------------------------------------\n";
+
+	// --------- compound assign vector minus scalar ---------------
+	// Test 1
+	if (CompoundAssignVectorMinusScalar(a_rDefault, a_rGiven, -1.35, Vector2D(1.35,1.35), Vector2D(3.55,9.95)))
+		cout<< "\nTest 1 Passed!\n\n";
+ 	else
+		cout<< "\nTest 1 Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
+	cout<< "---------------------------------------------------------------------\n";
+
+	// Test 2
+	if (CompoundAssignVectorMinusScalar(a_rDefault, a_rGiven, 6.66, Vector2D(-6.66,-6.66), Vector2D(-4.46,1.94)))
+		cout<< "\nTest 2 Passed!\n\n";
+	else
+		cout<< "\nTest 2 Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
+	cout<< "---------------------------------------------------------------------\n";
+
+	// --------- compound assign vector plus scalar ---------------
+	// Test 1
+	if (CompoundAssignVectorPlusScalar(a_rDefault, a_rGiven, -1.35, Vector2D(-1.35,-1.35), Vector2D(0.85,7.25)))
+		cout<< "\nTest 1 Passed!\n\n";
+	else
+		cout<< "\nTest 1 Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
+	cout<< "---------------------------------------------------------------------\n";
+
+	// Test 2
+	if (CompoundAssignVectorPlusScalar(a_rDefault, a_rGiven, 6.66, Vector2D(6.66,6.66), Vector2D(8.86,15.26)))
+		cout<< "\nTest 2 Passed!\n\n";
+	else
+		cout<< "\nTest 2 Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
+	cout<< "---------------------------------------------------------------------\n";
+
+		// --------- compound assign vector times scalar ---------------
+	// Test 1
+	if (CompoundAssignVectorTimesScalar(a_rDefault, a_rGiven, -1.35, Vector2D(0,0), Vector2D(-2.97,-11.61)))
+		cout<< "\nTest 1 Passed!\n\n";
+	else
+		cout<< "\nTest 1 Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
+	cout<< "---------------------------------------------------------------------\n";
+
+	// Test 2
+	if (CompoundAssignVectorTimesScalar(a_rDefault, a_rGiven, 6.66, Vector2D(0,0), Vector2D(14.652,57.276)))
+		cout<< "\nTest 2 Passed!\n\n";
+	else
+		cout<< "\nTest 2 Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
 	cout<< "---------------------------------------------------------------------\n";
 
 		// --------- subtract vector from a vector ---------------
@@ -287,14 +533,14 @@ void TestMaths(Vector2D& a_rDefault, Vector2D& a_rGiven)
 	if (SubVectorFromVector(a_rDefault, a_rGiven, Vector2D(-1.35,2.22), Vector2D(1.35,-2.22), Vector2D(3.55,6.38)))
 		cout<< "\nTest 1 Passed!\n\n";
 	else
-		cout<< "\nTest 1 Failed :(\n\n";
+		cout<< "\nTest 1 Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
 	cout<< "---------------------------------------------------------------------\n";
 
 	// Test 2
 	if (SubVectorFromVector(a_rDefault, a_rGiven, Vector2D(6.66,3.33), Vector2D(-6.66,-3.33), Vector2D(-4.46,5.27)))
 		cout<< "\nTest 2 Passed!\n\n";
 	else
-		cout<< "\nTest 2 Failed :(\n\n";
+		cout<< "\nTest 2 Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
 	cout<< "---------------------------------------------------------------------\n";
 
 			// --------- add one vector to another vector ---------------
@@ -302,13 +548,43 @@ void TestMaths(Vector2D& a_rDefault, Vector2D& a_rGiven)
 	if (Add2Vectors(a_rDefault, a_rGiven, Vector2D(-1.35,2.22), Vector2D(-1.35,2.22), Vector2D(0.85,10.82)))
 		cout<< "\nTest 1 Passed!\n\n";
 	else
-		cout<< "\nTest 1 Failed :(\n\n";
+		cout<< "\nTest 1 Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
 	cout<< "---------------------------------------------------------------------\n";
 	// Test 2
 	if (Add2Vectors(a_rDefault, a_rGiven, Vector2D(6.66,3.33), Vector2D(6.66,3.33), Vector2D(8.86,11.93)))
 		cout<< "\nTest 2 Passed!\n\n";
 	else
-		cout<< "\nTest 2 Failed :(\n\n";
+		cout<< "\nTest 2 Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
+	cout<< "---------------------------------------------------------------------\n";
+
+			// --------- compound assign vector subtraction ---------------
+	// Test 1
+	if (CompoundAssignVectorSubtract(a_rDefault, a_rGiven, Vector2D(-1.35,2.22), Vector2D(1.35,-2.22), Vector2D(3.55,6.38)))
+		cout<< "\nTest 1 Passed!\n\n";
+	else
+		cout<< "\nTest 1 Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
+	cout<< "---------------------------------------------------------------------\n";
+
+	// Test 2
+	if (CompoundAssignVectorSubtract(a_rDefault, a_rGiven, Vector2D(6.66,3.33), Vector2D(-6.66,-3.33), Vector2D(-4.46,5.27)))
+		cout<< "\nTest 2 Passed!\n\n";
+	else
+		cout<< "\nTest 2 Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
+	cout<< "---------------------------------------------------------------------\n";
+
+			// --------- compound assign vector addition ---------------
+	// Test 1
+	if (CompoundAssignVectorAdd(a_rDefault, a_rGiven, Vector2D(-1.35,2.22), Vector2D(-1.35,2.22), Vector2D(0.85,10.82)))
+		cout<< "\nTest 1 Passed!\n\n";
+	else
+		cout<< "\nTest 1 Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
+	cout<< "---------------------------------------------------------------------\n";
+
+	// Test 2
+	if (CompoundAssignVectorAdd(a_rDefault, a_rGiven, Vector2D(6.66,3.33), Vector2D(6.66,3.33), Vector2D(8.86,11.93)))
+		cout<< "\nTest 2 Passed!\n\n";
+	else
+		cout<< "\nTest 2 Failed :(:(:(:(:(:(:(:(:(:(:(\n\n";
 	cout<< "---------------------------------------------------------------------\n";
 }
 

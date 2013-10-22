@@ -65,12 +65,33 @@ Vector2D Vector2D::operator * (float a_fS)
 	return vTemp;
 }
 
+// sets a vector equal to itself minus a scalar
+void Vector2D::operator -= (float a_fS)
+{
+	m_fX -= a_fS;
+	m_fY -= a_fS;
+}
+
+// sets a vector equal to itself plus a scalar
+void Vector2D::operator += (float a_fS)
+{
+	m_fX += a_fS;
+	m_fY += a_fS;
+}
+
+// sets a vector equal to itself multiplied by a scalar
+void Vector2D::operator *= (float a_fS)
+{
+	m_fX *= a_fS;
+	m_fY *= a_fS;
+}
+
 // subtracts one vector from another, returns new vector
 Vector2D Vector2D::operator - (const Vector2D& a_rV2)
 {
 	Vector2D vTemp;
-	vTemp.m_fX = this->m_fX - a_rV2.m_fX;
-	vTemp.m_fY = this->m_fY - a_rV2.m_fY;
+	vTemp.m_fX -= a_rV2.m_fX;
+	vTemp.m_fY -= a_rV2.m_fY;
 	return vTemp;
 }
 
@@ -78,9 +99,23 @@ Vector2D Vector2D::operator - (const Vector2D& a_rV2)
 Vector2D Vector2D::operator + (const Vector2D& a_rV2)
 {
 	Vector2D vTemp;
-	vTemp.m_fX = this->m_fX + a_rV2.m_fX;
-	vTemp.m_fY = this->m_fY + a_rV2.m_fY;
+	vTemp.m_fX += a_rV2.m_fX;
+	vTemp.m_fY += a_rV2.m_fY;
 	return vTemp;
+}
+
+// sets a vector equal to itself minus another vector
+void Vector2D::operator -= (Vector2D& a_rV2)
+{
+	m_fX -= a_rV2.m_fX;
+	m_fY -= a_rV2.m_fY;
+}
+
+// sets a vector equal to itself plus another vector
+void Vector2D::operator += (Vector2D& a_rV2)
+{
+	m_fX += a_rV2.m_fX;
+	m_fY += a_rV2.m_fY;
 }
 
 // tests vector equality, returns bool

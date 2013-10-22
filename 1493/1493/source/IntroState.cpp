@@ -10,7 +10,7 @@
 #include "GameState.h"
 #include "IntroState.h"
 #include "PlayState.h"
-#include "MovableObject.h"
+#include "Sprite.h"
 
 IntroState IntroState::m_IntroState; // **has to do with singleton?**
 
@@ -24,7 +24,7 @@ IntroState IntroState::m_IntroState; // **has to do with singleton?**
 void IntroState::Init()
 {
 	// load intro sprite
-	MovableObject introImage("TestImage", 800, 600, 400, 300, 0, 0, true, "./images/IntroState.png");
+	Sprite introImage("TestImage", 800, 600, 400, 300, 0, 0, true, "./images/IntroState.png");
 	m_iBg = introImage.GetSpriteId();
 	MoveSprite(m_iBg, 800>>1, 600>>1);
 	// do something to make a "fade"

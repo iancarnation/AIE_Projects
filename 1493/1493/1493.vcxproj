@@ -109,7 +109,8 @@
     <ClCompile Include="source\GameEngine.cpp" />
     <ClCompile Include="source\IntroState.cpp" />
     <ClCompile Include="source\MenuState.cpp" />
-    <ClCompile Include="source\MovableObject.cpp" />
+    <ClCompile Include="source\Player.cpp" />
+    <ClCompile Include="source\Sprite.cpp" />
     <ClCompile Include="source\PlayState.cpp" />
     <ClCompile Include="source\Vector2D.cpp" />
   </ItemGroup>
@@ -118,7 +119,8 @@
     <ClInclude Include="include\GameState.h" />
     <ClInclude Include="include\IntroState.h" />
     <ClInclude Include="include\MenuState.h" />
-    <ClInclude Include="include\MovableObject.h" />
+    <ClInclude Include="include\Player.h" />
+    <ClInclude Include="include\Sprite.h" />
     <ClInclude Include="include\PlayState.h" />
     <ClInclude Include="include\Vector2D.h" />
     <ClInclude Include="include\AIE.h" />

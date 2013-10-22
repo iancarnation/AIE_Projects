@@ -9,7 +9,7 @@
 #include "GameEngine.h"
 #include "GameState.h"
 #include "MenuState.h"
-#include "MovableObject.h"
+#include "Sprite.h"
 
 MenuState MenuState::m_MenuState; // **has to do with singleton?**
 
@@ -23,7 +23,7 @@ MenuState MenuState::m_MenuState; // **has to do with singleton?**
 void MenuState::Init()
 {
 	// load menu sprite(s)
-	MovableObject menuImage("TestImage", 800, 600, 400, 300, 0, 0, true, "./images/MenuState.png");
+	Sprite menuImage("TestImage", 800, 600, 400, 300, 0, 0, true, "./images/MenuState.png");
 	m_iBg = menuImage.GetSpriteId();
 	MoveSprite(m_iBg, 800>>1, 600>>1);
 	// reference calls bg = SDL_DisplayFormat(temp);
@@ -60,6 +60,10 @@ void MenuState::HandleEvents(GameEngine* a_opGame)
 		{
 			a_opGame->Quit();
 		}
+	/*if (IsKeyDown('M'))		//  **make key delay function**
+		{
+			a_opGame->PopState();   
+		}*/
 	if (IsKeyDown(GLFW_KEY_ESC))
 		{
 			a_opGame->PopState();

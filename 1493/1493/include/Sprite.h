@@ -1,26 +1,26 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// File:			MovableObject.h
+// File:			Sprite.h
 // Author:			Ian Rich
 // Date Created:	October 2013
 // Brief:			Movable Object Class Prototype
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //guards
-#ifndef _MOVABLEOBJECT_H_
-#define _MOVABLEOBJECT_H_
+#ifndef _SPRITE_H_
+#define _SPRITE_H_
 
 #include "Vector2D.h"
 #include <string>
 using namespace std;
 
-class MovableObject
+class Sprite
 {
 	public:
-		MovableObject();					// default constructor
-		MovableObject(char *a_cNewType);	// default constructor with type name provided
-		MovableObject(char *a_cNewType, float a_fWidth, float a_fHeight, float a_fXposition, float a_fYposition, 
-					  float a_fXvelocity, float a_fYvelocity, bool a_bAlive, const char* a_pTextureName);	// constructor with **something** provided?
-		~ MovableObject();					// destructor
+		Sprite();					// default constructor
+		Sprite(char *a_cNewType);	// default constructor with type name provided
+		Sprite(char *a_cNewType, float a_fWidth, float a_fHeight, float a_fXposition, float a_fYposition, 
+					  float a_fXvelocity, float a_fYvelocity, bool a_bAlive, const char* a_cpTextureName);	// constructor with **something** provided?
+		~ Sprite();					// destructor
 
 		void Draw();		// calls the DrawSprite function from the AIE Framework
 		void Move();		// calls the MoveSprite function from the AIE Framework
@@ -37,7 +37,7 @@ class MovableObject
 		bool m_bAlive;
 		Vector2D m_oPosition;
 		Vector2D m_oVelocity;
-		const char* m_pTextureName;
+		const char* m_cpTextureName;
 };
 
 #endif
