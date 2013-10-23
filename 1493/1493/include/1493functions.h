@@ -46,17 +46,6 @@ typedef enum GAME_STATE
 	GAME_STATE_SHUTDOWN,
 };
 
-// declare constants
-const int SCREEN_X = 1280;
-const int SCREEN_Y = 780;
-
-const int PLAYER_X = SCREEN_X / 2;
-const int PLAYER_Y = SCREEN_Y - (SCREEN_Y / 3);
-const int PLAYER_W = 40;
-const int PLAYER_H = 70;
-
-const int PLAYER_MOVEMENT_FACTOR = 1;
-
 // function prototypes
 
 ////////////////////////////////////////////////

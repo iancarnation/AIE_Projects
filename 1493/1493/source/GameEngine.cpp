@@ -6,9 +6,6 @@
 // References:		http://gamedevgeek.com/tutorials/managing-game-states-in-c/, http://www.dreamincode.net/forums/topic/118898-state-management/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// *** Maybe refactor this into just a game state manager?? ***
-
-#include "AIE.h"
 #include "GameEngine.h"
 #include "GameState.h"
 

@@ -9,16 +9,18 @@
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 
+#include "AIE.h"
+#include "KeyCodes.h"
 #include "Sprite.h"
-#include <string>
+#include <list>
 using namespace std;
 
 class Player: public Sprite
 {
 	public:
 		Player();		// default consructor
-		Player(char *a_cNewType, float a_fWidth, float a_fHeight, float a_fXposition, float a_fYposition, 
-					  float a_fXvelocity, float a_fYvelocity, float a_fMoveFactor, bool a_bAlive, const char* a_cpTextureName);		// constructor with parameters 
+		Player(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_position, 
+			   Vector2D a_velocity, float a_fMoveFactor, bool a_bAlive, const char* a_cpTextureName);		// constructor with parameters 
 		~ Player();		// destructor
 		
 		// checks for input from user and initiates appropriate action
@@ -27,8 +29,12 @@ class Player: public Sprite
 		void Draw();
 
 	private:
-		// projectile array
-		// current ammo slot
+		// checks for fire button and triggers projectile sprites
+		void CheckFire(double a_dDeltaTime);
+
+		bool m_bFired;
+		double m_dTimeWaited;
+		Sprite m_aProjectiles [20];
 };
 
 #endif

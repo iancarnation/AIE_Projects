@@ -9,7 +9,9 @@
 #ifndef _PLAYSTATE_H_
 #define _PLAYSTATE_H_
 
+#include "GameEngine.h"
 #include "GameState.h"
+#include "MenuState.h"
 #include "Sprite.h"
 #include "Player.h"
 #include <list>

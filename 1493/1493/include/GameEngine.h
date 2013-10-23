@@ -11,8 +11,8 @@
 #ifndef _GAMEENGINE_H_
 #define _GAMEENGINE_H_
 
-// **need AIE header or any others??**
-
+#include "AIE.h"
+#include "StaticConstants.h"
 #include <vector>
 using namespace std;
 

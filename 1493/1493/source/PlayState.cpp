@@ -6,11 +6,7 @@
 // References:		http://gamedevgeek.com/tutorials/managing-game-states-in-c/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "GameEngine.h"
-#include "GameState.h"
 #include "PlayState.h"
-#include "MenuState.h"
-#include "Player.h"
 
 PlayState PlayState::m_PlayState; // **has to do with singleton?**
 
@@ -26,12 +22,12 @@ void PlayState::Init()
 {
 
 	// load sprites
-	Sprite oBGimage("Background", 1024, 768, 612, 300, 0, 0, 0, true, "./images/bgImage.png");
-	MoveSprite(oBGimage.GetSpriteId(), 1024>>1, 768>>1);
+	Sprite oBGimage("Background", SCREEN_X, SCREEN_Y, SCREEN_CENTER, ZERO_VELOCITY, 0, true, "./images/bgImage.png");
+	//MoveSprite(oBGimage.GetSpriteId(), 1024>>1, 768>>1);
 	m_SpriteList.push_back(oBGimage);
 
-	Player oPlayer("Player", 40, 70, 400, 500, 0, 0, 1, true, "./images/playerImage.png");
-	MoveSprite(oPlayer.GetSpriteId(), 1024>>1, 768>>1);
+	Player oPlayer("Player", 40, 70, Vector2D(400, 500), ZERO_VELOCITY, 1, true, "./images/playerImage.png");
+	//MoveSprite(oPlayer.GetSpriteId(), 1024>>1, 768>>1);
 	m_PlayerList.push_back(oPlayer);
 	//** reference calls SDL_Surface* temp = SDL_LoadBMP("play.bmp");
 	//					 bg = SDL_DisplayFormat(temp);

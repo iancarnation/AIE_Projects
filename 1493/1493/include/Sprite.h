@@ -2,15 +2,18 @@
 // File:			Sprite.h
 // Author:			Ian Rich
 // Date Created:	October 2013
-// Brief:			Movable Object Class Prototype
+// Brief:			Sprite (Renderable/Movable) Object Class Definition
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //guards
 #ifndef _SPRITE_H_
 #define _SPRITE_H_
 
+#include "AIE.h"
 #include "Vector2D.h"
+#include "StaticConstants.h"
 #include <string>
+#include <GL/glfw.h>
 using namespace std;
 
 class Sprite
@@ -18,8 +21,8 @@ class Sprite
 	public:
 		Sprite();					// default constructor
 		Sprite(char *a_cNewType);	// default constructor with type name provided
-		Sprite(char *a_cNewType, float a_fWidth, float a_fHeight, float a_fXposition, float a_fYposition, 
-					  float a_fXvelocity, float a_fYvelocity, float a_fMoveFactor, bool a_bAlive, const char* a_cpTextureName);	// constructor with **something** provided?
+		Sprite(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_position, 
+			   Vector2D a_velocity, float a_fMoveFactor, bool a_bAlive, const char* a_cpTextureName);	// constructor with **something** provided?
 		~ Sprite();					// destructor
 
 		virtual void Update();		// run functions for changing state of objects
@@ -34,7 +37,7 @@ class Sprite
 		Vector2D& GetVelocity();	// returns the velocity vector
 		float& GetMoveFactor();	// returns the increment by which a sprite will move
 
-	private:
+	protected:
 		char m_cType[20];
 		float m_fWidth, m_fHeight;
 		int m_iSpriteId;
@@ -44,6 +47,8 @@ class Sprite
 		Vector2D m_oVelocity;
 		float m_fMoveFactor;
 		const char* m_cpTextureName;
+
+		double m_dDeltaTime;
 };
 
 #endif

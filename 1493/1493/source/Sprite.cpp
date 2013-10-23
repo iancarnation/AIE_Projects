@@ -2,10 +2,9 @@
 // File:			Sprite.cpp
 // Author:			Ian Rich
 // Date Created:	October 2013
-// Brief:			Movable Object Class Definition
+// Brief:			Sprite (Renderable/Movable) Object Class Definition
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "AIE.h"
 #include "Sprite.h"
 
 // default constructor
@@ -21,7 +20,7 @@ Sprite::Sprite()
 	m_iAmmoSlot = 0;
 	m_bAlive = false;
 	m_cpTextureName = "";
-	
+	m_dDeltaTime = GetDeltaTime();
 }
 
 // default constructor with type name provided
@@ -37,12 +36,13 @@ Sprite::Sprite(char *a_cNewType)
 	m_iAmmoSlot = 0;
 	m_bAlive = false;
 	m_cpTextureName = "";
-	
+	m_dDeltaTime = GetDeltaTime();
+
 	m_iSpriteId = CreateSprite(m_cpTextureName, m_fWidth, m_fHeight, true);  //delete?
 }
 // constructor that takes in values
-Sprite::Sprite(char *a_cNewType, float a_fWidth, float a_fHeight, float a_fXposition, float a_fYposition,
-							 float a_fXvelocity, float a_fYvelocity, float a_fMoveFactor, bool a_bAlive, const char* a_cpTextureName)
+Sprite::Sprite(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_position, 
+			   Vector2D a_velocity, float a_fMoveFactor, bool a_bAlive, const char* a_cpTextureName)
 {
 	SetType(a_cNewType);
 	m_fWidth = a_fWidth;
@@ -54,6 +54,7 @@ Sprite::Sprite(char *a_cNewType, float a_fWidth, float a_fHeight, float a_fXposi
 	m_iAmmoSlot = 0;
 	m_bAlive = a_bAlive;
 	m_cpTextureName = a_cpTextureName;
+	m_dDeltaTime = GetDeltaTime();
 
 	m_iSpriteId = CreateSprite(m_cpTextureName, m_fWidth, m_fHeight, true); //delete?
 	

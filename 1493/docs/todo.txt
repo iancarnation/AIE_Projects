@@ -1,9 +1,23 @@
-1943 TODO
+1943 TODO - CLASS
 
-
-- create Player Class
-- make Player Display and move
+- make Player shoot projectiles
 - create Enemy Class
 - make Enemies Display and move
 
+
+
+
+
 - remove singleton pattern from GameEngine and GameStates?
+
+HOME---------------------------------------------------------------
+
+-clean up movement code, etc. by changing to protected
+
+
+
+DONE----------------------------------------------------------------
+
+- create Player Class
+- make Player Display and move
+- Object containers / control flow diagram

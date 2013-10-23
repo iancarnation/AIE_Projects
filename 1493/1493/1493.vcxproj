@@ -122,6 +122,7 @@
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\Sprite.h" />
     <ClInclude Include="include\PlayState.h" />
+    <ClInclude Include="include\StaticConstants.h" />
     <ClInclude Include="include\Vector2D.h" />
     <ClInclude Include="include\AIE.h" />
     <ClInclude Include="include\KeyCodes.h" />
