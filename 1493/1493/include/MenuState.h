@@ -38,7 +38,7 @@ class MenuState : public GameState
 		static MenuState m_MenuState;
 		//**reference has pointer to background?**
 
-		int m_iBg;	 // background sprite ID m_iBg
+		int m_iBG;	 // background sprite ID m_iBg
 };
 
 #endif

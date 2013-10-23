@@ -16,6 +16,7 @@ Sprite::Sprite()
 	m_fHeight = 10;
 	m_oPosition = Vector2D();
 	m_oVelocity = Vector2D();
+	m_fMoveFactor = 1;
 	m_iSpriteId = -1; //**figure out where to initialize/check for this
 	m_iAmmoSlot = 0;
 	m_bAlive = false;
@@ -31,28 +32,31 @@ Sprite::Sprite(char *a_cNewType)
 	m_fHeight = 10;
 	m_oPosition = Vector2D();
 	m_oVelocity = Vector2D();
-	m_iSpriteId = -1; //**figure out where to initialize/check for this
+	m_fMoveFactor = 1;
+	//m_iSpriteId = -1; //**figure out where to initialize/check for this
 	m_iAmmoSlot = 0;
 	m_bAlive = false;
 	m_cpTextureName = "";
 	
-	m_iSpriteId = CreateSprite(m_cpTextureName, 800, 600, true);
+	m_iSpriteId = CreateSprite(m_cpTextureName, m_fWidth, m_fHeight, true);  //delete?
 }
 // constructor that takes in values
 Sprite::Sprite(char *a_cNewType, float a_fWidth, float a_fHeight, float a_fXposition, float a_fYposition,
-							 float a_fXvelocity, float a_fYvelocity, bool a_bAlive, const char* a_cpTextureName)
+							 float a_fXvelocity, float a_fYvelocity, float a_fMoveFactor, bool a_bAlive, const char* a_cpTextureName)
 {
 	SetType(a_cNewType);
 	m_fWidth = a_fWidth;
 	m_fHeight = a_fHeight;
 	m_oPosition = Vector2D(a_fXposition, a_fYposition); // check on these **
 	m_oVelocity = Vector2D(a_fXvelocity, a_fYvelocity);
-	m_iSpriteId = -1;	//**figure out where to initialize/check for this
+	m_fMoveFactor = a_fMoveFactor;
+	//m_iSpriteId = -1;	//**figure out where to initialize/check for this
 	m_iAmmoSlot = 0;
 	m_bAlive = a_bAlive;
 	m_cpTextureName = a_cpTextureName;
 
-	m_iSpriteId = CreateSprite(m_cpTextureName, 800, 600, true);
+	m_iSpriteId = CreateSprite(m_cpTextureName, m_fWidth, m_fHeight, true); //delete?
+	
 }
 
 // destructor
@@ -61,22 +65,34 @@ Sprite::~Sprite ()
 	//cout<< "Vector Destroyed, Muhahah!\n";
 }
 
-// calls the DrawSprite function from the AIE Framework
-void Sprite::Draw()
+// run functions for changing state of objects
+void Sprite::Update()
 {
-	DrawSprite(this->m_iSpriteId);
+	Move();
 }
 
 // calls the MoveSprite function from the AIE Framework
 void Sprite::Move()
 {
-	MoveSprite(this->m_iSpriteId, this->m_oPosition.GetX(), this->m_oPosition.GetY());
+	MoveSprite(m_iSpriteId, m_oPosition.GetX(), m_oPosition.GetY());
+}
+
+// calls the DrawSprite function from the AIE Framework
+void Sprite::Draw()
+{
+	DrawSprite(m_iSpriteId);
 }
 
 // calls the DrawSprite function from the AIE Framework
 void Sprite::Destroy()
 {
-	DestroySprite(this->m_iSpriteId);
+	DestroySprite(m_iSpriteId);
+}
+
+// returns the 'type' as a char array
+char* Sprite::GetType()
+{
+	return m_cType;
 }
 
 // gives the object a 'type' name as a char array
@@ -86,13 +102,25 @@ void Sprite::SetType(char *a_cNewType)
 	strcpy(m_cType,a_cNewType);
 }
 
-// returns the 'type' as a char array
-char* Sprite::GetType()
+int& Sprite::GetSpriteId()
 {
-	return this->m_cType;
+	return m_iSpriteId;
 }
 
-int Sprite::GetSpriteId()
+// returns the position vector
+Vector2D& Sprite::GetPosition()
 {
-	return this->m_iSpriteId;
+	return m_oPosition;
+}
+
+// returns the velocity vector
+Vector2D& Sprite::GetVelocity()
+{
+	return m_oVelocity;
+}
+
+// returns the increment by which a sprite will move
+float& Sprite::GetMoveFactor()
+{
+	return m_fMoveFactor;
 }

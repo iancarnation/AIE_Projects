@@ -130,13 +130,13 @@ bool Vector2D::Equals(const Vector2D& a_rV2)
 //////////////////////////////-- GET / SET --////////////////////////////////////////////////////////////
 
 // returns x value
-float Vector2D::GetX()
+float& Vector2D::GetX()
 {
 	return this->m_fX;
 }
 
 // returns y value
-float Vector2D::GetY()
+float& Vector2D::GetY()
 {
 	return this->m_fY;
 }

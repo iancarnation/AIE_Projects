@@ -15,22 +15,24 @@
 PlayState PlayState::m_PlayState; // **has to do with singleton?**
 
 // default constructor
-//PlayState::PlayState()
-//{
-//
-//}
+PlayState::PlayState()
+{
+	
+
+}
 
 // to be executed first upon entering the state
 void PlayState::Init()
 {
+
 	// load sprites
-	Sprite playImage("TestImage", 800, 600, 400, 300, 0, 0, true, "./images/PlayState.png");
-	m_iBg = playImage.GetSpriteId();
-	MoveSprite(m_iBg, 800>>1, 600>>1);
+	Sprite oBGimage("Background", 1024, 768, 612, 300, 0, 0, 0, true, "./images/bgImage.png");
+	MoveSprite(oBGimage.GetSpriteId(), 1024>>1, 768>>1);
+	m_SpriteList.push_back(oBGimage);
 
-	Player oPlayer("Player", 40, 70, 400, 500, 0, 0, true, "./images/playerImage.png");
-	MoveSprite(oPlayer.GetSpriteId(), 800>>1, 600>>1);
-
+	Player oPlayer("Player", 40, 70, 400, 500, 0, 0, 1, true, "./images/playerImage.png");
+	MoveSprite(oPlayer.GetSpriteId(), 1024>>1, 768>>1);
+	m_PlayerList.push_back(oPlayer);
 	//** reference calls SDL_Surface* temp = SDL_LoadBMP("play.bmp");
 	//					 bg = SDL_DisplayFormat(temp);
 	//					 SDL_FreeSurface(temp)**
@@ -43,7 +45,10 @@ void PlayState::Init()
 void PlayState::Cleanup()
 {
 	// **clean stuff? (sprite & fader?)**
-	DestroySprite(m_iBg);
+	for each(Sprite s in m_SpriteList)
+	{
+		s.Destroy();
+	}
 	
 	printf("PlayState Cleanup\n");
 }
@@ -82,7 +87,15 @@ void PlayState::HandleEvents(GameEngine* a_opGame)
 
 void PlayState::Update(GameEngine* a_opGame)
 {
-	// call update functions for all movable objects?
+	for(list<Sprite>::iterator it = m_SpriteList.begin(); it != m_SpriteList.end(); it++)
+	{
+		it->Update();
+	}
+	for (list<Player>::iterator it = m_PlayerList.begin(); it != m_PlayerList.end(); it++)
+	{
+		it->Update();
+	}
+	// call update functions for all objects?
 }
 
 void PlayState::Draw(GameEngine* a_opGame)
@@ -92,9 +105,18 @@ void PlayState::Draw(GameEngine* a_opGame)
 	// ^^ probably irrelevant??
 
 	// call draw functions of all movable objects?
-	DrawSprite(m_iBg);
-	DrawSprite(oPlayer.Get
+	for (list<Sprite>::iterator it = m_SpriteList.begin(); it != m_SpriteList.end(); it++)
+	{
+		it->Draw();
+	}
+	for (list<Player>::iterator it = m_PlayerList.begin(); it != m_PlayerList.end(); it++)
+	{
+		it->Draw();
+	}
+	//DrawSprite(oPlayer.Get
 }
+
+
 
 PlayState* PlayState::Instance()
 {

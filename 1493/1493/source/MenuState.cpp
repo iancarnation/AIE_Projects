@@ -23,9 +23,9 @@ MenuState MenuState::m_MenuState; // **has to do with singleton?**
 void MenuState::Init()
 {
 	// load menu sprite(s)
-	Sprite menuImage("TestImage", 800, 600, 400, 300, 0, 0, true, "./images/MenuState.png");
-	m_iBg = menuImage.GetSpriteId();
-	MoveSprite(m_iBg, 800>>1, 600>>1);
+	Sprite menuImage("TestImage", 1024, 768, 612, 384, 0, 0, 0,true, "./images/MenuState.png");
+	m_iBG = menuImage.GetSpriteId();
+	MoveSprite(m_iBG, 1024>>1, 768>>1);
 	// reference calls bg = SDL_DisplayFormat(temp);
 	//				   SDL_FreeSurface(temp);
 
@@ -37,7 +37,7 @@ void MenuState::Init()
 void MenuState::Cleanup()
 {
 	// **clean stuff?  destroy sprites?? reference calls SDL_FreeSurface(bg);**
-	DestroySprite(m_iBg);
+	DestroySprite(m_iBG);
 
 	printf("MenuState Cleanup\n");
 }
@@ -80,7 +80,7 @@ void MenuState::Draw(GameEngine* a_opGame)
 	// reference project uses Blit from SDL, look that up and compare with GLFW?
 
 	// draw the background image??  check out ref. **
-	DrawSprite(m_iBg);
+	DrawSprite(m_iBG);
 }
 
 MenuState* MenuState::Instance()

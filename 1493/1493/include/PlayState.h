@@ -10,6 +10,9 @@
 #define _PLAYSTATE_H_
 
 #include "GameState.h"
+#include "Sprite.h"
+#include "Player.h"
+#include <list>
 
 class PlayState : public GameState
 {
@@ -28,17 +31,19 @@ class PlayState : public GameState
 		void Update(GameEngine* a_opGame);
 		// renders things to the screen
 		void Draw(GameEngine* a_opGame);
+	
 
 		static PlayState* Instance(); //**verify that this is implemented correctly in cpp**
 
 	protected:
-		PlayState() { }
+		PlayState();
 
 	private:
 		static PlayState m_PlayState;
-		//**reference has pointer to background?**
 
-		int m_iBg;	 // background sprite ID 
+		list<Sprite> m_SpriteList;
+		list<Player> m_PlayerList;
+		//list<Enemy> m_SpriteList;
 };
 
 #endif

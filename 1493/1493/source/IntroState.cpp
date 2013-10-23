@@ -24,9 +24,9 @@ IntroState IntroState::m_IntroState; // **has to do with singleton?**
 void IntroState::Init()
 {
 	// load intro sprite
-	Sprite introImage("TestImage", 800, 600, 400, 300, 0, 0, true, "./images/IntroState.png");
-	m_iBg = introImage.GetSpriteId();
-	MoveSprite(m_iBg, 800>>1, 600>>1);
+	Sprite introImage("TestImage", 1024, 768, 612, 384, 0, 0, 0, true, "./images/IntroState.png");
+	m_iBG = introImage.GetSpriteId();
+	MoveSprite(m_iBG, 1024>>1, 768>>1);
 	// do something to make a "fade"
 
 	// run the fade
@@ -39,7 +39,7 @@ void IntroState::Init()
 void IntroState::Cleanup()
 {
 	// **clean stuff? (sprite & fader?)**
-	DestroySprite(m_iBg);
+	DestroySprite(m_iBG);
 
 	printf("IntroState Cleanup\n");
 }
@@ -61,6 +61,7 @@ void IntroState::HandleEvents(GameEngine* a_opGame)
 		{
 			a_opGame->ChangeState(PlayState::Instance());
 		}
+
 	if (IsKeyDown('Q'))
 		{
 			a_opGame->Quit();
@@ -79,7 +80,7 @@ void IntroState::Draw(GameEngine* a_opGame)
 	// reference project uses Blit from SDL, look that up and compare with GLFW?
 
 	// draw the background image??  check out ref. **
-	DrawSprite(m_iBg);
+	DrawSprite(m_iBG);
 }
 
 IntroState* IntroState::Instance()

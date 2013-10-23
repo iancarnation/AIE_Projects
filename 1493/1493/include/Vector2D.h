@@ -28,8 +28,8 @@ class Vector2D
 		void operator += (Vector2D& a_rV2);		// sets a vector equal to itself plus another vector
 		bool Equals(const Vector2D& a_rV2);		// tests vector equality, returns bool
 
-		float GetX();	// returns x value
-		float GetY();	// returns y value
+		float& GetX();	// returns x value
+		float& GetY();	// returns y value
 		void SetX(float a_fX);	// sets x value
 		void SetY(float a_fY);	// sets y value
 	

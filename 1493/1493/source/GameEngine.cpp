@@ -15,7 +15,7 @@
 // initialize the framework **is this needed?**
 void GameEngine::Init()
 {
-	Initialise(800, 600, false);
+	Initialise(1024, 768, false);
 
 	printf("GameEngine Init\n");
 }

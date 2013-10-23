@@ -18,11 +18,13 @@ class Player: public Sprite
 	public:
 		Player();		// default consructor
 		Player(char *a_cNewType, float a_fWidth, float a_fHeight, float a_fXposition, float a_fYposition, 
-					  float a_fXvelocity, float a_fYvelocity, bool a_bAlive, const char* a_cpTextureName);		// constructor with parameters 
+					  float a_fXvelocity, float a_fYvelocity, float a_fMoveFactor, bool a_bAlive, const char* a_cpTextureName);		// constructor with parameters 
 		~ Player();		// destructor
 		
 		// checks for input from user and initiates appropriate action
-		void PlayerInput();
+		void Input();
+		void Update();
+		void Draw();
 
 	private:
 		// projectile array

@@ -37,7 +37,7 @@ class IntroState : public GameState
 	private:
 		static IntroState m_IntroState;
 		int m_iAlpha; //**used for fading out intro**
-		int m_iBg;	 // background sprite ID 
+		int m_iBG;	 // background sprite ID 
 };
 
 #endif

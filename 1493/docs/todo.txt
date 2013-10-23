@@ -1,0 +1,9 @@
+1943 TODO
+
+
+- create Player Class
+- make Player Display and move
+- create Enemy Class
+- make Enemies Display and move
+
+- remove singleton pattern from GameEngine and GameStates?
