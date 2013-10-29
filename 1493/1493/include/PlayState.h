@@ -46,8 +46,10 @@ class PlayState : public GameState
 
 		list<EnvironmentObj> m_EnvironList;
 		list<Player> m_PlayerList;
-		//list<Enemy> m_SpriteList;
+		list<Enemy> m_EnemyList;
 
+		// initializes enemy objects
+		void InitEnemies();
 		// triggers enemy spawns based on player's distance from level start
 		void EnemyTrigger(EnvironmentObj& a_bg, Player& a_player);
 };
