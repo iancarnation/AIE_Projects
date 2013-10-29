@@ -13,6 +13,7 @@
 #include "GameState.h"
 #include "MenuState.h"
 #include "Sprite.h"
+#include "EnvironmentObj.h"
 #include "Player.h"
 #include <list>
 
@@ -43,9 +44,12 @@ class PlayState : public GameState
 	private:
 		static PlayState m_PlayState;
 
-		list<Sprite> m_SpriteList;
+		list<EnvironmentObj> m_EnvironList;
 		list<Player> m_PlayerList;
 		//list<Enemy> m_SpriteList;
+
+		// triggers enemy spawns based on player's distance from level start
+		void EnemyTrigger(EnvironmentObj& a_bg, Player& a_player);
 };
 
 #endif

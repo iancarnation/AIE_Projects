@@ -21,6 +21,11 @@ Sprite::Sprite()
 	m_bAlive = false;
 	m_cpTextureName = "";
 	m_dDeltaTime = GetDeltaTime();
+
+	m_fTop = m_oPosition.GetY() - (m_fHeight / 2);
+	m_fBottom = m_oPosition.GetY() + (m_fHeight / 2);
+	m_fLeft = m_oPosition.GetX() - (m_fWidth / 2);
+	m_fRight = m_oPosition.GetX() + (m_fWidth / 2);
 }
 
 // default constructor with type name provided
@@ -38,23 +43,33 @@ Sprite::Sprite(char *a_cNewType)
 	m_cpTextureName = "";
 	m_dDeltaTime = GetDeltaTime();
 
+	m_fTop = m_oPosition.GetY() - (m_fHeight / 2);
+	m_fBottom = m_oPosition.GetY() + (m_fHeight / 2);
+	m_fLeft = m_oPosition.GetX() - (m_fWidth / 2);
+	m_fRight = m_oPosition.GetX() + (m_fWidth / 2);
+
 	m_iSpriteId = CreateSprite(m_cpTextureName, m_fWidth, m_fHeight, true);  //delete?
 }
 // constructor that takes in values
-Sprite::Sprite(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_position, 
-			   Vector2D a_velocity, float a_fMoveFactor, bool a_bAlive, const char* a_cpTextureName)
+Sprite::Sprite(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Position, 
+			   Vector2D a_Velocity, float a_fMoveFactor, bool a_bAlive, const char* a_cpTextureName)
 {
 	SetType(a_cNewType);
 	m_fWidth = a_fWidth;
 	m_fHeight = a_fHeight;
-	m_oPosition = Vector2D(a_fXposition, a_fYposition); // check on these **
-	m_oVelocity = Vector2D(a_fXvelocity, a_fYvelocity);
+	m_oPosition = a_Position; // check on these **
+	m_oVelocity = a_Velocity;
 	m_fMoveFactor = a_fMoveFactor;
 	//m_iSpriteId = -1;	//**figure out where to initialize/check for this
 	m_iAmmoSlot = 0;
 	m_bAlive = a_bAlive;
 	m_cpTextureName = a_cpTextureName;
 	m_dDeltaTime = GetDeltaTime();
+
+	m_fTop = m_oPosition.GetY() - (m_fHeight / 2);
+	m_fBottom = m_oPosition.GetY() + (m_fHeight / 2);
+	m_fLeft = m_oPosition.GetX() - (m_fWidth / 2);
+	m_fRight = m_oPosition.GetX() + (m_fWidth / 2);
 
 	m_iSpriteId = CreateSprite(m_cpTextureName, m_fWidth, m_fHeight, true); //delete?
 	
@@ -120,8 +135,45 @@ Vector2D& Sprite::GetVelocity()
 	return m_oVelocity;
 }
 
+void Sprite::SetPosition(Vector2D a_oPos)
+{
+	m_oPosition = a_oPos;
+}
+
+void Sprite::SetVelocity(Vector2D a_oVel)
+{
+	m_oVelocity = a_oVel;
+}
+
 // returns the increment by which a sprite will move
 float& Sprite::GetMoveFactor()
 {
 	return m_fMoveFactor;
+}
+
+// returns whether the sprite is "alive"(visible) or not
+bool Sprite::IsAlive()
+{
+	return m_bAlive;
+}
+
+// changes "alive" marker
+void Sprite::SetAlive(bool a_bValue)
+{
+	m_bAlive = a_bValue;
+}
+
+float& Sprite::GetEdge(Boundary edge)
+{
+	switch(edge)
+	{
+	case TOP:
+		return m_fTop;
+	case BOTTOM:
+		return m_fBottom;
+	case LEFT:
+		return m_fLeft;
+	case RIGHT:
+		return m_fRight;
+	};
 }

@@ -14,7 +14,6 @@ PlayState PlayState::m_PlayState; // **has to do with singleton?**
 PlayState::PlayState()
 {
 	
-
 }
 
 // to be executed first upon entering the state
@@ -22,9 +21,9 @@ void PlayState::Init()
 {
 
 	// load sprites
-	Sprite oBGimage("Background", SCREEN_X, SCREEN_Y, SCREEN_CENTER, ZERO_VELOCITY, 0, true, "./images/bgImage.png");
+	EnvironmentObj oBGimage("Background", SCREEN_X, SCREEN_Y * 8, SCREEN_CENTER, Vector2D(0, 0.1), 0, true, "./images/bgImage.png");
 	//MoveSprite(oBGimage.GetSpriteId(), 1024>>1, 768>>1);
-	m_SpriteList.push_back(oBGimage);
+	m_EnvironList.push_back(oBGimage);
 
 	Player oPlayer("Player", 40, 70, Vector2D(400, 500), ZERO_VELOCITY, 1, true, "./images/playerImage.png");
 	//MoveSprite(oPlayer.GetSpriteId(), 1024>>1, 768>>1);
@@ -41,9 +40,14 @@ void PlayState::Init()
 void PlayState::Cleanup()
 {
 	// **clean stuff? (sprite & fader?)**
-	for each(Sprite s in m_SpriteList)
+	for each(EnvironmentObj e in m_EnvironList)
 	{
-		s.Destroy();
+		e.Destroy();
+	}
+
+	for each(Player p in m_PlayerList)
+	{
+		p.Destroy();
 	}
 	
 	printf("PlayState Cleanup\n");
@@ -83,7 +87,7 @@ void PlayState::HandleEvents(GameEngine* a_opGame)
 
 void PlayState::Update(GameEngine* a_opGame)
 {
-	for(list<Sprite>::iterator it = m_SpriteList.begin(); it != m_SpriteList.end(); it++)
+	for (list<EnvironmentObj>::iterator it = m_EnvironList.begin(); it != m_EnvironList.end(); it++)
 	{
 		it->Update();
 	}
@@ -91,7 +95,7 @@ void PlayState::Update(GameEngine* a_opGame)
 	{
 		it->Update();
 	}
-	// call update functions for all objects?
+
 }
 
 void PlayState::Draw(GameEngine* a_opGame)
@@ -101,7 +105,7 @@ void PlayState::Draw(GameEngine* a_opGame)
 	// ^^ probably irrelevant??
 
 	// call draw functions of all movable objects?
-	for (list<Sprite>::iterator it = m_SpriteList.begin(); it != m_SpriteList.end(); it++)
+	for (list<EnvironmentObj>::iterator it = m_EnvironList.begin(); it != m_EnvironList.end(); it++)
 	{
 		it->Draw();
 	}
@@ -112,6 +116,14 @@ void PlayState::Draw(GameEngine* a_opGame)
 	//DrawSprite(oPlayer.Get
 }
 
+// triggers enemy spawns based on player's distance from level start
+void PlayState::EnemyTrigger(EnvironmentObj& a_bg, Player& a_player)
+{
+	if (a_bg.GetEdge(BOTTOM) - a_player.GetEdge(TOP) > 20)
+	{
+		// trigger first wave
+	}
+}
 
 
 PlayState* PlayState::Instance()

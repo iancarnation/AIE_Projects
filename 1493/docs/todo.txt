@@ -1,13 +1,16 @@
 1943 TODO - CLASS
 
-- make Player shoot projectiles
-- create Enemy Class
+- background scrolling
 - make Enemies Display and move
+- enemy spawn logic
 
 
 
 
 
+
+
+- make Projectile and Enemy classes abstract (to create different types later)?
 - remove singleton pattern from GameEngine and GameStates?
 
 HOME---------------------------------------------------------------
@@ -21,3 +24,6 @@ DONE----------------------------------------------------------------
 - create Player Class
 - make Player Display and move
 - Object containers / control flow diagram
+- make Player shoot projectiles
+- create Enemy Class
+- create Projectile Class

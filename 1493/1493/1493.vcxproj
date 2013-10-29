@@ -44,6 +44,7 @@
     <EmbedManifest>false</EmbedManifest>
     <TargetName>$(ProjectName)_d</TargetName>
     <IncludePath>C:\Users\student\Documents\Ian Rich Docs\Projects\1493\1493\include\GL;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\student\Documents\Ian Rich Docs\Projects\1493\1493\resources;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IntDir>obj\</IntDir>
@@ -106,20 +107,27 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\1493main.cpp" />
+    <ClCompile Include="source\Enemy.cpp" />
+    <ClCompile Include="source\Environment.cpp" />
     <ClCompile Include="source\GameEngine.cpp" />
     <ClCompile Include="source\IntroState.cpp" />
     <ClCompile Include="source\MenuState.cpp" />
     <ClCompile Include="source\Player.cpp" />
+    <ClCompile Include="source\Projectile.cpp" />
     <ClCompile Include="source\Sprite.cpp" />
     <ClCompile Include="source\PlayState.cpp" />
     <ClCompile Include="source\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Enemy.h" />
+    <ClInclude Include="include\EnvironmentObj.h" />
     <ClInclude Include="include\GameEngine.h" />
     <ClInclude Include="include\GameState.h" />
+    <ClInclude Include="include\gl\glfw.h" />
     <ClInclude Include="include\IntroState.h" />
     <ClInclude Include="include\MenuState.h" />
     <ClInclude Include="include\Player.h" />
+    <ClInclude Include="include\Projectile.h" />
     <ClInclude Include="include\Sprite.h" />
     <ClInclude Include="include\PlayState.h" />
     <ClInclude Include="include\StaticConstants.h" />

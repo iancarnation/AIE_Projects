@@ -12,10 +12,12 @@
 class Vector2D
 {
 	public: 
-		Vector2D();					// default constructor
+		Vector2D();							// default constructor
+		Vector2D(const Vector2D& a_rVecSource);		// copy constructor
 		Vector2D(float a_fX, float afY);	// constructor that takes in x and y values
-		~ Vector2D();				// destructor
+		~ Vector2D();						// destructor
 
+		Vector2D operator = (const Vector2D& a_rVecSource); // sets one vector equal to another
 		Vector2D operator - (float a_fS);		// subtracts a scalar from a vector, returns new vector
 		Vector2D operator + (float a_fS);		// adds a scalar to a vector, returns new vector
 		Vector2D operator * (float a_fS);		// multiplies a vector by a scalar, returns new vector
@@ -26,7 +28,8 @@ class Vector2D
 		Vector2D operator + (const Vector2D& a_rV2);	// adds one vector to another, returns new vector
 		void operator -= (Vector2D& a_rV2);		// sets a vector equal to itself minus another vector
 		void operator += (Vector2D& a_rV2);		// sets a vector equal to itself plus another vector
-		bool Equals(const Vector2D& a_rV2);		// tests vector equality, returns bool
+		//bool Equals(const Vector2D& a_rV2);		// tests vector equality, returns bool
+		bool operator == (const Vector2D& a_rV2);	// tests vector equality
 
 		float GetX() const;	// returns x value
 		float GetY() const;	// returns y value

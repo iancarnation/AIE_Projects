@@ -14,14 +14,12 @@ class Projectile: public Sprite
 {
 	public:
 		Projectile();	// default constructor
-		Projectile(char *a_cNewType, float a_fWidth, float a_fHeight, float a_fXposition, float a_fYposition, 
-					  float a_fXvelocity, float a_fYvelocity, float a_fMoveFactor, bool a_bAlive, const char* a_cpTextureName);		// constructor with parameters 
+		Projectile(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Position, 
+				   Vector2D a_Velocity, float a_fMoveFactor, bool a_bAlive, const char* a_cpTextureName);		// constructor with parameters 
 		~Projectile();	// destructor
 
-		void Update();
-		void Draw();
-
-		
-}
+		void Update(Vector2D& a_oPlayerPosition);
+		void Draw();	
+};
 
 #endif

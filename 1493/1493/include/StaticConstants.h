@@ -14,7 +14,9 @@
 	static const float SCREEN_X = 1024;
 	static const float SCREEN_Y = 768;
 	static const Vector2D SCREEN_CENTER(SCREEN_X/2, SCREEN_Y/2);
-	static const Vector2D HOLDING_AREA(SCREEN_X/2, SCREEN_Y/2);
+	static const Vector2D HOLDING_AREA(SCREEN_X + 50, SCREEN_Y + 50);
 	static const Vector2D ZERO_VELOCITY;
+
+	enum Boundary { TOP, BOTTOM, LEFT, RIGHT };
 
 #endif

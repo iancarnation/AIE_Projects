@@ -21,6 +21,14 @@ Vector2D::Vector2D ()
 	//cout<< "Default Vector Constructed!\n";
 }
 
+// copy constructor
+Vector2D::Vector2D(const Vector2D& a_rVecSource)
+{
+	m_fX = a_rVecSource.GetX();
+	m_fY = a_rVecSource.GetY();
+	m_fThreshold = .0005;
+}
+
 // constructor that takes in x and y values
 Vector2D::Vector2D (float a_fX, float a_fY)
 {
@@ -38,6 +46,15 @@ Vector2D::~Vector2D ()
 
 //////////////////////////////-- MATHS --////////////////////////////////////////////////////////////
 
+// sets one vector equal to another
+Vector2D Vector2D::operator = (const Vector2D& a_rVecSource)
+{
+	m_fX = a_rVecSource.GetX();
+	m_fY = a_rVecSource.GetY();
+
+	// return the existing object to allow for chaining
+	return *this;
+}
 // subtracts a scalar from a vector, returns new vector
 Vector2D Vector2D::operator - (float a_fS)
 {
@@ -119,7 +136,7 @@ void Vector2D::operator += (Vector2D& a_rV2)
 }
 
 // tests vector equality, returns bool
-bool Vector2D::Equals(const Vector2D& a_rV2)
+bool Vector2D::operator == (const Vector2D& a_rV2)
 {
 	if ((this->m_fX - a_rV2.m_fX < this->m_fThreshold) && (this->m_fY - a_rV2.m_fY < this->m_fThreshold))
 		return true;
