@@ -18,7 +18,7 @@ class Projectile: public Sprite
 				   Vector2D a_Velocity, float a_fMoveFactor, bool a_bAlive, const char* a_cpTextureName);		// constructor with parameters 
 		~Projectile();	// destructor
 
-		void Update(Vector2D& a_oPlayerPosition);
+		void Update();
 		void Draw();	
 };
 

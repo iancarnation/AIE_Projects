@@ -25,7 +25,7 @@ Player::Player(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Pos
 
 	for (int i=0; i<20; i++)
 	{
-		m_aProjectiles[i] = Projectile("Projectile", 10, 10, HOLDING_AREA, ZERO_VELOCITY, 2, false, "./images/cannonBall.png");
+		m_aProjectiles[i] = Projectile("Projectile", 10, 10, HOLDING_AREA, ZERO_VELOCITY, 500000, false, "./images/cannonBall.png");
 	}
 }
 
@@ -45,8 +45,9 @@ void Player::Input()
 void Player::Update()
 {
 	Input();
+	UpdateEdges();
 	Sprite::Update();
-	UpdateProjectiles(m_oPosition);
+	UpdateProjectiles();
 }
 
 void Player::Draw()
@@ -81,9 +82,7 @@ void Player::Movement()
 void Player::Abilities(double a_dDeltaTime)
 {
 	// set minimum waiting time between shots (while button held down)
-	double threshold = 0.1; 
-	bool reset = false;
-
+	double threshold = 0.1;
 
 	if (IsKeyDown(','))
 	{
@@ -128,12 +127,12 @@ void Player::Abilities(double a_dDeltaTime)
 }
 
 // checks if projectile has been triggered or moved off screen and moves it accordingly
-void Player::UpdateProjectiles(Vector2D& a_oPosition)
+void Player::UpdateProjectiles()
 {
 	for (int i=0; i<20; i++)
 	{
 		if (m_aProjectiles[i].IsAlive())
-			m_aProjectiles[i].Update(a_oPosition);
+			m_aProjectiles[i].Update();
 	}
 }
 

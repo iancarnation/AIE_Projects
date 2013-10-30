@@ -25,7 +25,7 @@ class Sprite
 		Sprite(char *a_cNewType);	// default constructor with type name provided
 		Sprite(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Position, 
 			   Vector2D a_Velocity, float a_fMoveFactor, bool a_bAlive, const char* a_cpTextureName);	// constructor with **something** provided?
-		~ Sprite();					// destructor
+		virtual ~ Sprite();					// destructor
 
 		virtual void Update();		// run functions for changing state of objects
 		void Move();				// calls the MoveSprite function from the AIE Framework
@@ -42,7 +42,10 @@ class Sprite
 		float& GetMoveFactor();		// returns the increment by which a sprite will move
 		bool IsAlive();				// returns whether the sprite is "alive"(visible) or not
 		void SetAlive(bool a_bValue);		// changes "alive" marker
-		float& GetEdge(Boundary edge);		
+		float& GetEdge(Boundary edge);		// returns an object's edge value
+		void UpdateEdges();			// updates the values of object boundaries
+		// screen edge collision
+		bool IsOnScreen();
 
 	protected:
 		char m_cType[20];

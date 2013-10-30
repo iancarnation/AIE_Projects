@@ -100,6 +100,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="ReadMe.txt" />
     <None Include="resources\fonts\arial.fnt" />
     <None Include="resources\shaders\StaticFW_Pixel.glsl" />

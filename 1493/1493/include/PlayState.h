@@ -15,7 +15,9 @@
 #include "Sprite.h"
 #include "EnvironmentObj.h"
 #include "Player.h"
+#include "Enemy.h"
 #include <list>
+#include <map>
 
 class PlayState : public GameState
 {
@@ -44,14 +46,17 @@ class PlayState : public GameState
 	private:
 		static PlayState m_PlayState;
 
-		list<EnvironmentObj> m_EnvironList;
-		list<Player> m_PlayerList;
-		list<Enemy> m_EnemyList;
+		vector<EnvironmentObj> m_EnvironList;
+		vector<Player> m_PlayerList;
+		map<string,list<Enemy>> m_mEnemyList;
+
+		list<Enemy> m_EnemyA1List;
+		list<Enemy> m_EnemyA2List;
 
 		// initializes enemy objects
 		void InitEnemies();
 		// triggers enemy spawns based on player's distance from level start
-		void EnemyTrigger(EnvironmentObj& a_bg, Player& a_player);
+		void EnemySpawnCheck();
 };
 
 #endif

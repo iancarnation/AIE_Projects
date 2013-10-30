@@ -115,7 +115,7 @@ char* Sprite::GetType()
 void Sprite::SetType(char *a_cNewType)
 {
 	// copy NewType into m_cType
-	strcpy(m_cType,a_cNewType);
+	strcpy_s(m_cType,a_cNewType);
 }
 
 int& Sprite::GetSpriteId()
@@ -163,17 +163,39 @@ void Sprite::SetAlive(bool a_bValue)
 	m_bAlive = a_bValue;
 }
 
-float& Sprite::GetEdge(Boundary edge)
+float& Sprite::GetEdge(Boundary a_edge)
 {
-	switch(edge)
+	switch(a_edge)
 	{
 	case TOP:
 		return m_fTop;
+		break;
 	case BOTTOM:
 		return m_fBottom;
+		break;
 	case LEFT:
 		return m_fLeft;
+		break;
 	case RIGHT:
 		return m_fRight;
+		break;
 	};
+}
+
+// updates the values of object boundaries
+void Sprite::UpdateEdges()
+{
+	m_fTop = m_oPosition.GetY() - (m_fHeight / 2);
+	m_fBottom = m_oPosition.GetY() + (m_fHeight / 2);
+	m_fLeft = m_oPosition.GetX() - (m_fWidth / 2);
+	m_fRight = m_oPosition.GetX() + (m_fWidth / 2);
+}
+
+// is sprite on screen?
+bool Sprite::IsOnScreen()
+{
+	if (m_fTop > 0 && m_fBottom < SCREEN_Y && m_fLeft > 0 && m_fRight < SCREEN_X)
+		return true;
+	else
+		return false;
 }

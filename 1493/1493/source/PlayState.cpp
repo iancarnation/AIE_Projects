@@ -21,12 +21,12 @@ void PlayState::Init()
 {
 
 	// load environment objects
-	EnvironmentObj oBGimage("Background", SCREEN_X, SCREEN_Y * 8, SCREEN_CENTER, Vector2D(0, 0.1), 0, true, "./images/bgImage.png");
+	EnvironmentObj oBGimage("Background", SCREEN_X, SCREEN_Y * 8, Vector2D(SCREEN_X/2, SCREEN_Y), Vector2D(0, 0.1), 0, true, "./images/bgImage.png");
 	//MoveSprite(oBGimage.GetSpriteId(), 1024>>1, 768>>1);
 	m_EnvironList.push_back(oBGimage);
 
 	// load player object(s)
-	Player oPlayer("Player", 40, 70, Vector2D(400, 500), ZERO_VELOCITY, 1, true, "./images/playerImage.png");
+	Player oPlayer("Player", 30, 90, Vector2D(400, 500), ZERO_VELOCITY, 1, true, "./images/Player.png");
 	//MoveSprite(oPlayer.GetSpriteId(), 1024>>1, 768>>1);
 	m_PlayerList.push_back(oPlayer);
 
@@ -88,25 +88,27 @@ void PlayState::HandleEvents(GameEngine* a_opGame)
 
 void PlayState::Update(GameEngine* a_opGame)
 {
+	// check for enemy spawn trigger point
+	EnemySpawnCheck();
+
 	// update Environment Objects
-	for (list<EnvironmentObj>::iterator it = m_EnvironList.begin(); it != m_EnvironList.end(); it++)
+	for (vector<EnvironmentObj>::iterator it = m_EnvironList.begin(); it != m_EnvironList.end(); it++)
 	{
 		it->Update();
 	}
 
 	// update Player Objects
-	for (list<Player>::iterator it = m_PlayerList.begin(); it != m_PlayerList.end(); it++)
+	for (vector<Player>::iterator it = m_PlayerList.begin(); it != m_PlayerList.end(); it++)
 	{
 		it->Update();
 	}
 
 	// update Enemy objects
-	for (list<list<Enemy>>::iterator itList = m_EnemyList.begin(); it != m_EnemyList.end(); it++)
+	for (map < string, list<Enemy> >::iterator mapIt = m_mEnemyList.begin(); mapIt != m_mEnemyList.end(); mapIt++)
 	{
-		for (list<Enemy>::iterator it = itList.begin(); it != itList.end(); it++)
+		for (list<Enemy>::iterator it = mapIt->second.begin(); it != mapIt->second.end(); it++)
 			it->Update();
 	}
-
 }
 
 void PlayState::Draw(GameEngine* a_opGame)
@@ -116,56 +118,86 @@ void PlayState::Draw(GameEngine* a_opGame)
 	// ^^ probably irrelevant??
 
 	// draw Environment objects
-	for (list<EnvironmentObj>::iterator it = m_EnvironList.begin(); it != m_EnvironList.end(); it++)
+	for (vector<EnvironmentObj>::iterator it = m_EnvironList.begin(); it != m_EnvironList.end(); it++)
 	{
 		it->Draw();
 	}
 
 	// draw Player objects
-	for (list<Player>::iterator it = m_PlayerList.begin(); it != m_PlayerList.end(); it++)
+	for (vector<Player>::iterator it = m_PlayerList.begin(); it != m_PlayerList.end(); it++)
 	{
 		it->Draw();
 	}
 
 	// draw Enemy objects
-	for (list<list<Enemy>>::iterator itList = m_EnemyList.begin(); it != m_EnemyList.end(); it++)
+	for (map < string, list<Enemy> >::iterator mapIt = m_mEnemyList.begin(); mapIt != m_mEnemyList.end(); mapIt++)
 	{
-		for (list<Enemy>::iterator it = itList.begin(); it != itList.end(); it++)
+		for (list<Enemy>::iterator it = mapIt->second.begin(); it != mapIt->second.end(); it++)
 			it->Draw();
 	}
 }
 
 // initializes enemy objects
-void InitEnemies()
+void PlayState::InitEnemies()
 {
-	list<Enemy> EnemyAlist;
-
+	// Enemy Type A Group 1
 	for (int i=0; i<5; i++)
 	{
-		Enemy oEnemyA("EnemyA", 40, 70, HOLDING_AREA, ZERO_VELOCITY, 1, false, "./images/playerImage.png");
-		EnemyAlist.push_back(oEnemyA)
+		Enemy oEnemyA1("EnemyA1", 40, 70, HOLDING_AREA, ZERO_VELOCITY, 1, false, "./images/EnemyA.png");
+		m_EnemyA1List.push_back(oEnemyA1);
 	}
 
-	m_EnemyList.push_back(EnemyAlist);
+	m_mEnemyList["EnemyA1"] = m_EnemyA1List;
 
-	list<Enemy> EnemyBlist;
-
+	// Enemy Type A Group 2
 	for (int i=0; i<5; i++)
 	{
-		Enemy oEnemyB("EnemyB", 40, 70, HOLDING_AREA, ZERO_VELOCITY, 1, false, "./images/playerImage.png");
-		EnemyBlist.push_back(oEnemyB)
+		Enemy oEnemyA2("EnemyA2", 40, 70, HOLDING_AREA, ZERO_VELOCITY, 1, false, "./images/EnemyA.png");
+		m_EnemyA2List.push_back(oEnemyA2);
 	}
 
-	m_EnemyList.push_back(EnemyBlist);
+	m_mEnemyList["EnemyA2"] = m_EnemyA2List;
+
+	//// Enemy Group B
+
+	//for (int i=0; i<5; i++)
+	//{
+	//	Enemy oEnemyB("EnemyB", 40, 70, HOLDING_AREA, ZERO_VELOCITY, 1, false, "./images/EnemyA.png");
+	//	m_EnemyBlist.push_back(oEnemyB);
+	//}
+
+	//m_EnemyList.push_back(m_EnemyBlist);
 }
 
 // triggers enemy spawns based on player's distance from level start
-void PlayState::EnemyTrigger(EnvironmentObj& a_bg, Player& a_player)
+void PlayState::EnemySpawnCheck()
 {
-	if (a_bg.GetEdge(BOTTOM) - a_player.GetEdge(TOP) > 20)
+	EnvironmentObj& orBG = m_EnvironList[0];
+	Player& orPlayer = m_PlayerList[0];
+
+	list<Enemy>& A1 = m_mEnemyList.at("EnemyA1");
+	list<Enemy>& A2 = m_mEnemyList.at("EnemyA2");
+
+	if (orBG.GetEdge(BOTTOM) > 4000 && orBG.GetEdge(BOTTOM) < 4001)
 	{
-		// trigger first wave
-		
+		Vector2D startPos(100,-50), offset(80,0), velocity(0, 0.25);
+		// trigger first group
+		for (list<Enemy>::iterator it = A1.begin(); it != A1.end(); it++)
+		{
+			it->Spawn(startPos, velocity);
+			startPos += offset;
+		}
+	}
+
+	if (orBG.GetEdge(BOTTOM) > 4500 && orBG.GetEdge(BOTTOM) < 4501)
+	{
+		Vector2D startPos(1000,-50), offset(-100,0), velocity(-0.5, 0.25);
+
+		for (list<Enemy>::iterator it = A2.begin(); it != A2.end(); it++)
+		{
+			it->Spawn(startPos, velocity);
+			startPos += offset;
+		}
 	}
 }
 

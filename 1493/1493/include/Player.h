@@ -34,7 +34,7 @@ class Player: public Sprite
 		// check for fire input / firing timing control 
 		void Abilities(double a_dDeltaTime);
 		// checks if projectile has been triggered or moved off screen and moves it accordingly
-		void UpdateProjectiles(Vector2D& a_oPosition);
+		void UpdateProjectiles();
 		void DrawProjectiles();
 
 		bool m_bFiring;

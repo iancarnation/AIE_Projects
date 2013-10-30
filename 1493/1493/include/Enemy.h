@@ -24,15 +24,22 @@ class Enemy: public Sprite
 		void Behavior();
 		void Update();
 		void Draw();
+		// enemy spawn initialization
+		void Spawn(Vector2D& a_oStart, Vector2D& a_oVelocity);
 
 	private:
 		// enemy movement logic
 		void Movement();
 		// weapons control / logic
 		void Abilities(double a_dDeltaTime);
+		void UpdateProjectiles();
+		void DrawProjectiles();
+		// screen edge collision
+		// void ScreenCollision();
+		
 	
 		bool m_bFiring;
-		//double m_dTimeWaited;
+		double m_dTimeWaited;
 		Projectile m_aProjectiles[20];
 };
 

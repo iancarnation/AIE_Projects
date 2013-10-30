@@ -28,13 +28,15 @@ Projectile::~Projectile()
 
 }
 
-void Projectile::Update(Vector2D& a_oPlayerPosition)
+void Projectile::Update()
 {
 	// update projectile's position
-	m_oPosition += m_oVelocity;
+	m_oPosition += m_oVelocity * GetDeltaTime();
+
+	UpdateEdges();
 	
 	// if projectile goes off screen, it's no longer alive, velocity = 0, and is returned to holding area
-	if (m_oPosition.GetY() < 0)
+	if (IsAlive() && !IsOnScreen())
 	{
 		SetAlive(false);
 		m_oVelocity = ZERO_VELOCITY;
