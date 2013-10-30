@@ -22,10 +22,11 @@ Player::Player(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Pos
 {
 	m_bFiring = false;
 	m_dTimeWaited = 0;
+	m_iHealth = 5;
 
 	for (int i=0; i<20; i++)
 	{
-		m_aProjectiles[i] = Projectile("Projectile", 10, 10, HOLDING_AREA, ZERO_VELOCITY, 500000, false, "./images/cannonBall.png");
+		m_aProjectiles[i] = Projectile("Projectile", 10, 10, HOLDING_AREA, ZERO_VELOCITY, 1, false, "./images/cannonBall.png");
 	}
 }
 
@@ -54,6 +55,25 @@ void Player::Draw()
 {
 	Sprite::Draw();
 	DrawProjectiles();
+}
+
+// returns player health
+int Player::GetHealth() const
+{
+	return m_iHealth;
+}
+
+// changes player's health by given amount
+void Player::SetHealth(int a_iAmt)
+{
+	m_iHealth += a_iAmt;
+	// change health display
+}
+
+// returns projectile array
+Projectile* Player::GetProjectiles()
+{
+	return m_aProjectiles;
 }
 
 // player movement: gets the relevant position value and adjusts it by its "MovementFactor"

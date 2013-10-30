@@ -44,8 +44,9 @@ class Sprite
 		void SetAlive(bool a_bValue);		// changes "alive" marker
 		float& GetEdge(Boundary edge);		// returns an object's edge value
 		void UpdateEdges();			// updates the values of object boundaries
-		// screen edge collision
-		bool IsOnScreen();
+		bool IsOnScreen();			// is object on the screen?
+		bool IsCollidingWith(Sprite* a_sprite2);	// sprite collision
+		void Die();		// "kills" projectile and returns it to holding area
 
 	protected:
 		char m_cType[20];

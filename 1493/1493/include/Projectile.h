@@ -20,6 +20,7 @@ class Projectile: public Sprite
 
 		void Update();
 		void Draw();	
+		//void Die();		// "kills" projectile and returns it to holding area
 };
 
 #endif

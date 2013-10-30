@@ -28,8 +28,8 @@ class Vector2D
 		Vector2D operator + (const Vector2D& a_rV2);	// adds one vector to another, returns new vector
 		void operator -= (Vector2D& a_rV2);		// sets a vector equal to itself minus another vector
 		void operator += (Vector2D& a_rV2);		// sets a vector equal to itself plus another vector
-		//bool Equals(const Vector2D& a_rV2);		// tests vector equality, returns bool
 		bool operator == (const Vector2D& a_rV2);	// tests vector equality
+		float Dot(const Vector2D& a_rV2);		// dot product of 2 vectors
 
 		float GetX() const;	// returns x value
 		float GetY() const;	// returns y value

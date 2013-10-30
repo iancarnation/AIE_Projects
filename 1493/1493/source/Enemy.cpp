@@ -21,6 +21,7 @@ Enemy::Enemy(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Posit
 {
 	m_bFiring = false;
 	m_dTimeWaited = 0;
+	m_iTicker = 0;
 
 	for (int i=0; i<20; i++)
 	{
@@ -47,6 +48,7 @@ void Enemy::Update()
 	UpdateEdges();
 	Sprite::Update();
 	UpdateProjectiles();
+	ScreenCollision();
 }
 
 void Enemy::Draw()
@@ -65,7 +67,7 @@ void Enemy::Movement()
 void Enemy::Abilities(double a_dDeltaTime)
 {
 	// set minimum waiting time between shots (while button held down)
-	double threshold = 0.25; 
+	int iTickThreshold = 500; 
 
 	if (!m_bFiring && IsOnScreen())
 	{
@@ -73,7 +75,7 @@ void Enemy::Abilities(double a_dDeltaTime)
 
 		orCurrentProj.SetAlive(true);
 		orCurrentProj.SetPosition(m_oPosition);		// projectile's position is current player's position
-		orCurrentProj.GetVelocity().SetY(- orCurrentProj.GetMoveFactor());		// projectile has upward Y velocity
+		orCurrentProj.GetVelocity().SetY(m_fMoveFactor);		// projectile has Y velocity
 		m_bFiring = true;
 		m_iAmmoSlot += 1;
 		//reset = true;
@@ -82,14 +84,14 @@ void Enemy::Abilities(double a_dDeltaTime)
 	// firing delay logic
 	if (m_bFiring)
 	{
-		// add the delta time to the total time since the last shot
-		m_dTimeWaited += a_dDeltaTime;
+		// increment ticker
+		m_iTicker ++;
 
 		// if the time since the last shot is greater than the threshold
-		if (m_dTimeWaited >= threshold)
+		if (m_iTicker >= iTickThreshold)
 		{
 			m_bFiring = false;
-			m_dTimeWaited = 0;
+			m_iTicker = 0;
 		}
 	}
 	// cycle the rotating ammo slot
@@ -103,6 +105,12 @@ void Enemy::Spawn(Vector2D& a_oStart,  Vector2D& a_oVelocity)
 	SetAlive(true);
 	SetPosition(a_oStart);
 	SetVelocity(a_oVelocity);
+}
+
+// returns projectile array
+Projectile* Enemy::GetProjectiles()
+{
+	return m_aProjectiles;
 }
 
 void Enemy::UpdateProjectiles()
@@ -124,14 +132,10 @@ void Enemy::DrawProjectiles()
 	}
 }
 
-//// screen edge collision
-//void Enemy::ScreenCollision()
-//{
-//	if (GetEdge(TOP) > SCREEN_Y && (GetPosition().GetX() <= SCREEN_X && GetPosition().GetX() > 0) &&
-//		GetEdge(BOTTOM) > SCREEN_Y)
-//	{
-//		SetAlive(false);
-//		SetPosition(HOLDING_AREA);
-//		SetVelocity(ZERO_VELOCITY);
-//	}
-//}
+// screen edge collision
+void Enemy::ScreenCollision()
+{
+	if (IsOnScreen())
+		if(!IsOnScreen())
+			Die();
+}

@@ -26,7 +26,9 @@ class Player: public Sprite
 		void Input();
 		void Update();
 		void Draw();
-
+		int GetHealth() const;			// returns player health
+		void SetHealth(int a_iAmt);		// changes player's health by given amount
+		Projectile* GetProjectiles();	// returns projectile array
 
 	private:
 		// player movement: gets the relevant position value and adjusts it by its "MovementFactor"
@@ -40,6 +42,7 @@ class Player: public Sprite
 		bool m_bFiring;
 		double m_dTimeWaited;
 		Projectile m_aProjectiles[20];
+		int m_iHealth;
 };
 
 #endif

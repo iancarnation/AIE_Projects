@@ -7,6 +7,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "PlayState.h"
+#include "DeathState.h"
 
 PlayState PlayState::m_PlayState; // **has to do with singleton?**
 
@@ -109,6 +110,13 @@ void PlayState::Update(GameEngine* a_opGame)
 		for (list<Enemy>::iterator it = mapIt->second.begin(); it != mapIt->second.end(); it++)
 			it->Update();
 	}
+
+	// Check for collisions
+	CollisionChecks();
+
+	// Check for player death
+	if (m_PlayerList[0].GetHealth() == 0)
+		a_opGame->ChangeState(DeathState::Instance());
 }
 
 void PlayState::Draw(GameEngine* a_opGame)
@@ -135,6 +143,13 @@ void PlayState::Draw(GameEngine* a_opGame)
 		for (list<Enemy>::iterator it = mapIt->second.begin(); it != mapIt->second.end(); it++)
 			it->Draw();
 	}
+
+	// draw player health
+	static char c_PlayerHealth[4] = {'\n'};
+	//// load string
+	sprintf(c_PlayerHealth, "%d", m_PlayerList[0].GetHealth());
+	//// draw the string
+	DrawString(c_PlayerHealth, 950, 700, SColour(0,0,0,255));
 }
 
 // initializes enemy objects
@@ -158,15 +173,14 @@ void PlayState::InitEnemies()
 
 	m_mEnemyList["EnemyA2"] = m_EnemyA2List;
 
-	//// Enemy Group B
+	// Enemy Type A Group 3
+	for (int i=0; i<7; i++)
+	{
+		Enemy oEnemyA3("EnemyA3", 40, 70, HOLDING_AREA, ZERO_VELOCITY, 1, false, "./images/EnemyA.png");
+		m_EnemyA3List.push_back(oEnemyA3);
+	}
 
-	//for (int i=0; i<5; i++)
-	//{
-	//	Enemy oEnemyB("EnemyB", 40, 70, HOLDING_AREA, ZERO_VELOCITY, 1, false, "./images/EnemyA.png");
-	//	m_EnemyBlist.push_back(oEnemyB);
-	//}
-
-	//m_EnemyList.push_back(m_EnemyBlist);
+	m_mEnemyList["EnemyA3"] = m_EnemyA3List;
 }
 
 // triggers enemy spawns based on player's distance from level start
@@ -177,10 +191,14 @@ void PlayState::EnemySpawnCheck()
 
 	list<Enemy>& A1 = m_mEnemyList.at("EnemyA1");
 	list<Enemy>& A2 = m_mEnemyList.at("EnemyA2");
+	list<Enemy>& A3 = m_mEnemyList.at("EnemyA3");
 
+	// Group A1
+	//// if the bottom of the background image passes through the 4000th pixel
 	if (orBG.GetEdge(BOTTOM) > 4000 && orBG.GetEdge(BOTTOM) < 4001)
 	{
-		Vector2D startPos(100,-50), offset(80,0), velocity(0, 0.25);
+		Vector2D startPos(100,-50), offset(100,0), velocity(0, 0.2);
+
 		// trigger first group
 		for (list<Enemy>::iterator it = A1.begin(); it != A1.end(); it++)
 		{
@@ -189,11 +207,26 @@ void PlayState::EnemySpawnCheck()
 		}
 	}
 
+	// Group A2
 	if (orBG.GetEdge(BOTTOM) > 4500 && orBG.GetEdge(BOTTOM) < 4501)
 	{
-		Vector2D startPos(1000,-50), offset(-100,0), velocity(-0.5, 0.25);
+		Vector2D startPos(1000,-50), offset(-100,0), velocity(-0.25, 0.2);
 
+		// trigger second group
 		for (list<Enemy>::iterator it = A2.begin(); it != A2.end(); it++)
+		{
+			it->Spawn(startPos, velocity);
+			startPos += offset;
+		}
+	}
+
+	// Group A3
+	if (orBG.GetEdge(BOTTOM) > 5000 && orBG.GetEdge(BOTTOM) < 5001)
+	{
+		Vector2D startPos(50,-50), offset(100,0), velocity(0.25, 0.2);
+
+		// trigger second group
+		for (list<Enemy>::iterator it = A3.begin(); it != A3.end(); it++)
 		{
 			it->Spawn(startPos, velocity);
 			startPos += offset;
@@ -201,6 +234,61 @@ void PlayState::EnemySpawnCheck()
 	}
 }
 
+// Check for collisions
+void PlayState::CollisionChecks()
+{
+	// check Player's projectile collisions
+	//// iterate through vector of player objects
+	for (vector<Player>::iterator it = m_PlayerList.begin(); it != m_PlayerList.end(); it++)
+	{
+		// iterate through player's projectiles
+		for (int i=0; i<20; i++)
+		{
+			Projectile& orCurrentProj = it->GetProjectiles()[i];
+
+			// if projectile is alive
+			if (orCurrentProj.IsAlive())
+			{
+				// iterate through master map of enemy lists
+				for (map < string, list<Enemy> >::iterator mapIt = m_mEnemyList.begin(); mapIt != m_mEnemyList.end(); mapIt++)
+				{
+					// iterate through list of enemy objects
+					for (list<Enemy>::iterator it = mapIt->second.begin(); it != mapIt->second.end(); it++)
+					{	
+						// if the enemy object is colliding with the current projectile:
+						if (it->IsCollidingWith(&orCurrentProj))
+						{
+							orCurrentProj.Die();	// kill projectile
+							it->Die();				// kill enemy
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// check Enemy's projectile collisions
+	//// iterate through master map of enemy lists
+	for (map < string, list<Enemy> >::iterator mapIt = m_mEnemyList.begin(); mapIt != m_mEnemyList.end(); mapIt++)
+	{
+		// iterate through list of enemy objects
+		for (list<Enemy>::iterator it = mapIt->second.begin(); it != mapIt->second.end(); it++)
+		{
+			// iterate through enemy's projectiles
+			for (int i=0; i<20; i++)
+			{
+				Projectile& orCurrentProj = it->GetProjectiles()[i];
+
+				// if projectile is colliding with player
+				if (orCurrentProj.IsAlive() && orCurrentProj.IsCollidingWith(&m_PlayerList[0]))
+				{
+					orCurrentProj.Die();		// kill projectile
+					m_PlayerList[0].SetHealth(-1);	// reduce player's health
+				}
+			}
+		}
+	}
+}
 
 PlayState* PlayState::Instance()
 {

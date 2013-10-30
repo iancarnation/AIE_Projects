@@ -52,11 +52,14 @@ class PlayState : public GameState
 
 		list<Enemy> m_EnemyA1List;
 		list<Enemy> m_EnemyA2List;
+		list<Enemy> m_EnemyA3List;
 
 		// initializes enemy objects
 		void InitEnemies();
 		// triggers enemy spawns based on player's distance from level start
 		void EnemySpawnCheck();
+		// Check for collisions
+		void CollisionChecks();
 };
 
 #endif

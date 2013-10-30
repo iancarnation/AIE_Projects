@@ -144,6 +144,12 @@ bool Vector2D::operator == (const Vector2D& a_rV2)
 		return false;
 }
 
+// dot product of 2 vectors
+float Vector2D::Dot(const Vector2D& a_rV2)
+{
+	return (this->m_fX * a_rV2.m_fX) + (this->m_fY * a_rV2.m_fY);
+}
+
 //////////////////////////////-- GET / SET --////////////////////////////////////////////////////////////
 
 // returns x value

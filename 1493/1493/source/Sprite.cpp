@@ -199,3 +199,26 @@ bool Sprite::IsOnScreen()
 	else
 		return false;
 }
+
+// sprite collision
+bool Sprite::IsCollidingWith(Sprite* a_pSprite2)
+{
+	if (this->GetEdge(BOTTOM) < a_pSprite2->GetEdge(TOP))
+		return 0;
+	if (this->GetEdge(TOP) > a_pSprite2->GetEdge(BOTTOM))
+		return 0;
+	if (this->GetEdge(RIGHT) < a_pSprite2->GetEdge(LEFT))
+		return 0;
+	if (this->GetEdge(LEFT) > a_pSprite2->GetEdge(RIGHT))
+		return 0;
+
+	return 1;
+}
+
+// "kills" projectile and returns it to holding area
+void Sprite::Die()
+{
+	SetAlive(false);
+	m_oVelocity = ZERO_VELOCITY;
+	m_oPosition = HOLDING_AREA;
+}

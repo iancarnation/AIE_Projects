@@ -31,16 +31,14 @@ Projectile::~Projectile()
 void Projectile::Update()
 {
 	// update projectile's position
-	m_oPosition += m_oVelocity * GetDeltaTime();
+	m_oPosition += m_oVelocity;
 
 	UpdateEdges();
 	
 	// if projectile goes off screen, it's no longer alive, velocity = 0, and is returned to holding area
 	if (IsAlive() && !IsOnScreen())
 	{
-		SetAlive(false);
-		m_oVelocity = ZERO_VELOCITY;
-		m_oPosition = HOLDING_AREA;
+		Die();
 	}
 	
 	// run the Superclass update function (MoveSprite)
@@ -51,3 +49,8 @@ void Projectile::Draw()
 {
 	Sprite::Draw();
 }
+
+//void Projectile::Die()
+//{
+//	Sprite::Die();
+//}

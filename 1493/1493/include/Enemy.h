@@ -26,6 +26,8 @@ class Enemy: public Sprite
 		void Draw();
 		// enemy spawn initialization
 		void Spawn(Vector2D& a_oStart, Vector2D& a_oVelocity);
+		// returns projectile array
+		Projectile* GetProjectiles();
 
 	private:
 		// enemy movement logic
@@ -35,12 +37,13 @@ class Enemy: public Sprite
 		void UpdateProjectiles();
 		void DrawProjectiles();
 		// screen edge collision
-		// void ScreenCollision();
+		void ScreenCollision();
 		
 	
 		bool m_bFiring;
 		double m_dTimeWaited;
 		Projectile m_aProjectiles[20];
+		int m_iTicker;
 };
 
 #endif

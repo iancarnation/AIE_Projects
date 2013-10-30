@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\1493main.cpp" />
+    <ClCompile Include="source\DeathState.cpp" />
     <ClCompile Include="source\Enemy.cpp" />
     <ClCompile Include="source\Environment.cpp" />
     <ClCompile Include="source\GameEngine.cpp" />
@@ -120,6 +121,7 @@
     <ClCompile Include="source\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\DeathState.h" />
     <ClInclude Include="include\Enemy.h" />
     <ClInclude Include="include\EnvironmentObj.h" />
     <ClInclude Include="include\GameEngine.h" />
