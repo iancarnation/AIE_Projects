@@ -1,15 +1,13 @@
 1943 TODO - CLASS
 
-- background scrolling
-- make Enemies Display and move
-- enemy spawn logic
+
+- animation
+- enhance enemy movement (after class refactor?)
+- make level class
 
 
-
-
-
-
-
+- collision optimisation (grid hashing, etc..)
+- make movement pattern class?
 - make Projectile and Enemy classes abstract (to create different types later)?
 - remove singleton pattern from GameEngine and GameStates?
 
@@ -27,3 +25,9 @@ DONE----------------------------------------------------------------
 - make Player shoot projectiles
 - create Enemy Class
 - create Projectile Class
+- background scrolling
+- make Enemies Display and move
+- enemy spawn logic
+11/4
+- enemy/player collision
+- enemy aim

@@ -144,10 +144,46 @@ bool Vector2D::operator == (const Vector2D& a_rV2)
 		return false;
 }
 
+// returns magnitude of vector
+float Vector2D::GetMagnitude() const
+{
+	return sqrt(m_fX * m_fX + m_fY * m_fY);
+}
+
+// normalize a vector
+void Vector2D::Normalize()
+{
+	float s = GetMagnitude();
+	m_fX = m_fX / s;
+	m_fY = m_fY / s;
+}
+
+// returns a normalized version of vector
+Vector2D Vector2D::ReturnNormalized() const
+{
+	float fMag = GetMagnitude();
+	Vector2D vec(m_fX / fMag, m_fY / fMag);
+	return vec;
+}
+
+// gets distance bethween two points
+float Vector2D::GetDistance(const Vector2D a_rV2) const
+{
+	return sqrt((a_rV2.GetX() - m_fX) * (a_rV2.GetX() - m_fX) + (a_rV2.GetY() - m_fY) * (a_rV2.GetY() - m_fY));
+}
+
 // dot product of 2 vectors
-float Vector2D::Dot(const Vector2D& a_rV2)
+float Vector2D::Dot(const Vector2D& a_rV2) const
 {
 	return (this->m_fX * a_rV2.m_fX) + (this->m_fY * a_rV2.m_fY);
+}
+
+// calculates angle between two vectors
+float Vector2D::GetAngle(const Vector2D& a_rV2) const
+{
+	Vector2D V1 = this->ReturnNormalized();
+	float dot = V1.Dot(a_rV2.ReturnNormalized());
+	return acos(dot);
 }
 
 //////////////////////////////-- GET / SET --////////////////////////////////////////////////////////////

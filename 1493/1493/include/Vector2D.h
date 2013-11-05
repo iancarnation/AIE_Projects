@@ -9,6 +9,8 @@
 #ifndef _VECTOR2D_H_
 #define _VECTOR2D_H_
 
+#include <math.h>
+
 class Vector2D
 {
 	public: 
@@ -29,7 +31,13 @@ class Vector2D
 		void operator -= (Vector2D& a_rV2);		// sets a vector equal to itself minus another vector
 		void operator += (Vector2D& a_rV2);		// sets a vector equal to itself plus another vector
 		bool operator == (const Vector2D& a_rV2);	// tests vector equality
-		float Dot(const Vector2D& a_rV2);		// dot product of 2 vectors
+		
+		float GetMagnitude() const;				// returns magnitude of vector
+		void Normalize();						// normalize a vector
+		Vector2D ReturnNormalized() const;		// returns a normalized version of vector	
+		float GetDistance(const Vector2D a_rV2) const;	// calculates distance bethween two vectors
+		float Dot(const Vector2D& a_rV2) const;		// dot product of 2 vectors
+		float GetAngle(const Vector2D& a_rV2) const;	// calculates angle between two vectors
 
 		float GetX() const;	// returns x value
 		float GetY() const;	// returns y value

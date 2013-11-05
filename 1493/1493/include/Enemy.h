@@ -21,8 +21,8 @@ class Enemy: public Sprite
 		~ Enemy();		// destructor
 		
 		// controls enemy movement and attack behavior
-		void Behavior();
-		void Update();
+		void Behavior(Vector2D& a_oPlayerPos);
+		void Update(Vector2D& a_oPlayerPos);
 		void Draw();
 		// enemy spawn initialization
 		void Spawn(Vector2D& a_oStart, Vector2D& a_oVelocity);
@@ -33,7 +33,7 @@ class Enemy: public Sprite
 		// enemy movement logic
 		void Movement();
 		// weapons control / logic
-		void Abilities(double a_dDeltaTime);
+		void Abilities(double a_dDeltaTime, Vector2D& a_oPlayerPos);
 		void UpdateProjectiles();
 		void DrawProjectiles();
 		// screen edge collision

@@ -14,6 +14,8 @@
 #include "Vector2D.h"
 #include "StaticConstants.h"
 #include <string>
+#include <math.h>
+
 //#include <GL/glfw.h>
 
 using namespace std;
@@ -39,6 +41,8 @@ class Sprite
 		Vector2D& GetVelocity();	// returns the velocity vector
 		void SetPosition(Vector2D a_oPos);
 		void SetVelocity(Vector2D a_oVel);
+		void SetVelocityToward(const Vector2D a_rV2);		// calculates velocity for going towards a certain vector
+
 		float& GetMoveFactor();		// returns the increment by which a sprite will move
 		bool IsAlive();				// returns whether the sprite is "alive"(visible) or not
 		void SetAlive(bool a_bValue);		// changes "alive" marker

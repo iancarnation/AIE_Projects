@@ -31,7 +31,7 @@ Projectile::~Projectile()
 void Projectile::Update()
 {
 	// update projectile's position
-	m_oPosition += m_oVelocity;
+	m_oPosition += m_oVelocity * m_fMoveFactor;
 
 	UpdateEdges();
 	

@@ -145,6 +145,18 @@ void Sprite::SetVelocity(Vector2D a_oVel)
 	m_oVelocity = a_oVel;
 }
 
+// calculates velocity for going towards a certain vector
+void Sprite::SetVelocityToward(const Vector2D a_rV2)
+{
+	/*float fAngle = GetPosition().GetAngle(a_rV2);
+	Vector2D vect(cos(fAngle), sin(fAngle));
+	SetVelocity(vect);*/
+
+	Vector2D direction((m_oPosition.GetX() - a_rV2.GetX()), (m_oPosition.GetY() - a_rV2.GetY()));
+	direction.Normalize();
+	SetVelocity(direction);
+}
+
 // returns the increment by which a sprite will move
 float& Sprite::GetMoveFactor()
 {

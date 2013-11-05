@@ -108,7 +108,7 @@ void PlayState::Update(GameEngine* a_opGame)
 	for (map < string, list<Enemy> >::iterator mapIt = m_mEnemyList.begin(); mapIt != m_mEnemyList.end(); mapIt++)
 	{
 		for (list<Enemy>::iterator it = mapIt->second.begin(); it != mapIt->second.end(); it++)
-			it->Update();
+			it->Update(m_PlayerList[0].GetPosition());
 	}
 
 	// Check for collisions
@@ -158,7 +158,7 @@ void PlayState::InitEnemies()
 	// Enemy Type A Group 1
 	for (int i=0; i<5; i++)
 	{
-		Enemy oEnemyA1("EnemyA1", 40, 70, HOLDING_AREA, ZERO_VELOCITY, 1, false, "./images/EnemyA.png");
+		Enemy oEnemyA1("EnemyA1", 40, 70, HOLDING_AREA, ZERO_VELOCITY, 1.75, false, "./images/EnemyA.png");
 		m_EnemyA1List.push_back(oEnemyA1);
 	}
 
@@ -167,7 +167,7 @@ void PlayState::InitEnemies()
 	// Enemy Type A Group 2
 	for (int i=0; i<5; i++)
 	{
-		Enemy oEnemyA2("EnemyA2", 40, 70, HOLDING_AREA, ZERO_VELOCITY, 1, false, "./images/EnemyA.png");
+		Enemy oEnemyA2("EnemyA2", 40, 70, HOLDING_AREA, ZERO_VELOCITY, 1.75, false, "./images/EnemyA.png");
 		m_EnemyA2List.push_back(oEnemyA2);
 	}
 
@@ -176,7 +176,7 @@ void PlayState::InitEnemies()
 	// Enemy Type A Group 3
 	for (int i=0; i<7; i++)
 	{
-		Enemy oEnemyA3("EnemyA3", 40, 70, HOLDING_AREA, ZERO_VELOCITY, 1, false, "./images/EnemyA.png");
+		Enemy oEnemyA3("EnemyA3", 40, 70, HOLDING_AREA, ZERO_VELOCITY, 2, false, "./images/EnemyA.png");
 		m_EnemyA3List.push_back(oEnemyA3);
 	}
 
@@ -284,6 +284,28 @@ void PlayState::CollisionChecks()
 				{
 					orCurrentProj.Die();		// kill projectile
 					m_PlayerList[0].SetHealth(-1);	// reduce player's health
+				}
+			}
+		}
+	}
+
+	// check player/enemy collisions
+	//// iterate through vector of player objects
+	for (vector<Player>::iterator it = m_PlayerList.begin(); it != m_PlayerList.end(); it++)
+	{
+		Player& orCurrentPlayer = *it;
+
+		// iterate through master map of enemy lists
+		for (map < string, list<Enemy> >::iterator mapIt = m_mEnemyList.begin(); mapIt != m_mEnemyList.end(); mapIt++)
+		{
+			// iterate through list of enemy objects
+			for (list<Enemy>::iterator it = mapIt->second.begin(); it != mapIt->second.end(); it++)
+			{	
+				// if the enemy object is colliding with the current projectile:
+				if (it->IsCollidingWith(&orCurrentPlayer))
+				{
+					it->Die();						// kill enemy
+					orCurrentPlayer.SetHealth(-1);	// damage Player
 				}
 			}
 		}

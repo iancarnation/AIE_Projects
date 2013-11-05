@@ -25,7 +25,7 @@ Enemy::Enemy(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Posit
 
 	for (int i=0; i<20; i++)
 	{
-		m_aProjectiles[i] = Projectile("Projectile", 10, 10, HOLDING_AREA, ZERO_VELOCITY, -500000, false, "./images/cannonBall.png");
+		m_aProjectiles[i] = Projectile("Projectile", 10, 10, HOLDING_AREA, ZERO_VELOCITY, -1, false, "./images/cannonBall.png");
 	}
 }
 
@@ -36,15 +36,15 @@ Enemy::~Enemy()
 }
 
 // checks for input from user and initiates appropriate action
-void Enemy::Behavior()
+void Enemy::Behavior(Vector2D& a_oPlayerPos)
 {
 	Movement();
-	Abilities(GetDeltaTime());
+	Abilities(GetDeltaTime(), a_oPlayerPos);
 }
 
-void Enemy::Update()
+void Enemy::Update(Vector2D& a_oPlayerPos)
 {
-	Behavior();
+	Behavior(a_oPlayerPos);
 	UpdateEdges();
 	Sprite::Update();
 	UpdateProjectiles();
@@ -60,11 +60,11 @@ void Enemy::Draw()
 // enemy movement logic
 void Enemy::Movement()
 {
-	m_oPosition += m_oVelocity;
+	m_oPosition += m_oVelocity * m_fMoveFactor;
 }
 
 // weapons control / logic
-void Enemy::Abilities(double a_dDeltaTime)
+void Enemy::Abilities(double a_dDeltaTime, Vector2D& a_oPlayerPos)
 {
 	// set minimum waiting time between shots (while button held down)
 	int iTickThreshold = 500; 
@@ -75,7 +75,7 @@ void Enemy::Abilities(double a_dDeltaTime)
 
 		orCurrentProj.SetAlive(true);
 		orCurrentProj.SetPosition(m_oPosition);		// projectile's position is current player's position
-		orCurrentProj.GetVelocity().SetY(m_fMoveFactor);		// projectile has Y velocity
+		orCurrentProj.SetVelocityToward(a_oPlayerPos);		// projectile has velocity towards player
 		m_bFiring = true;
 		m_iAmmoSlot += 1;
 		//reset = true;
@@ -96,7 +96,7 @@ void Enemy::Abilities(double a_dDeltaTime)
 	}
 	// cycle the rotating ammo slot
 	if (m_iAmmoSlot == 19)
-			m_iAmmoSlot = 0;
+		m_iAmmoSlot = 0;
 }
 
 // enemy spawn initialization
