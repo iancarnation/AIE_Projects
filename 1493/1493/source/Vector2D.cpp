@@ -24,8 +24,8 @@ Vector2D::Vector2D ()
 // copy constructor
 Vector2D::Vector2D(const Vector2D& a_rVecSource)
 {
-	m_fX = a_rVecSource.GetX();
-	m_fY = a_rVecSource.GetY();
+	m_fX = a_rVecSource.m_fX;
+	m_fY = a_rVecSource.m_fY;
 	m_fThreshold = .0005;
 }
 
@@ -49,8 +49,8 @@ Vector2D::~Vector2D ()
 // sets one vector equal to another
 Vector2D Vector2D::operator = (const Vector2D& a_rVecSource)
 {
-	m_fX = a_rVecSource.GetX();
-	m_fY = a_rVecSource.GetY();
+	m_fX = a_rVecSource.m_fX;
+	m_fY = a_rVecSource.m_fY;
 
 	// return the existing object to allow for chaining
 	return *this;
@@ -169,7 +169,7 @@ Vector2D Vector2D::ReturnNormalized() const
 // gets distance bethween two points
 float Vector2D::GetDistance(const Vector2D a_rV2) const
 {
-	return sqrt((a_rV2.GetX() - m_fX) * (a_rV2.GetX() - m_fX) + (a_rV2.GetY() - m_fY) * (a_rV2.GetY() - m_fY));
+	return sqrt((a_rV2.m_fX - m_fX) * (a_rV2.m_fX - m_fX) + (a_rV2.m_fY - m_fY) * (a_rV2.m_fY - m_fY));
 }
 
 // dot product of 2 vectors
@@ -184,30 +184,4 @@ float Vector2D::GetAngle(const Vector2D& a_rV2) const
 	Vector2D V1 = this->ReturnNormalized();
 	float dot = V1.Dot(a_rV2.ReturnNormalized());
 	return acos(dot);
-}
-
-//////////////////////////////-- GET / SET --////////////////////////////////////////////////////////////
-
-// returns x value
-float Vector2D::GetX() const
-{
-	return this->m_fX;
-}
-
-// returns y value
-float Vector2D::GetY() const
-{
-	return this->m_fY;
-}
-
-// sets x value
-void Vector2D::SetX(float a_fX)
-{
-	this->m_fX = a_fX;
-}
-
-// sets y value
-void Vector2D::SetY(float a_fY)
-{
-	this->m_fY = a_fY;
 }

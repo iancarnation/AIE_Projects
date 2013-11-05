@@ -32,10 +32,10 @@ void EnvironmentObj::Update()
 {
 	m_oPosition += m_oVelocity;
 
-	m_fTop = m_oPosition.GetY() - (m_fHeight / 2);
-	m_fBottom = m_oPosition.GetY() + (m_fHeight / 2);
-	m_fLeft = m_oPosition.GetX() - (m_fWidth / 2);
-	m_fRight = m_oPosition.GetX() + (m_fWidth / 2);
+	m_fTop = m_oPosition.m_fY - (m_fHeight / 2);
+	m_fBottom = m_oPosition.m_fY + (m_fHeight / 2);
+	m_fLeft = m_oPosition.m_fX - (m_fWidth / 2);
+	m_fRight = m_oPosition.m_fX + (m_fWidth / 2);
 
 	Sprite::Update();
 }

@@ -22,10 +22,10 @@ Sprite::Sprite()
 	m_cpTextureName = "";
 	m_dDeltaTime = GetDeltaTime();
 
-	m_fTop = m_oPosition.GetY() - (m_fHeight / 2);
-	m_fBottom = m_oPosition.GetY() + (m_fHeight / 2);
-	m_fLeft = m_oPosition.GetX() - (m_fWidth / 2);
-	m_fRight = m_oPosition.GetX() + (m_fWidth / 2);
+	m_fTop = m_oPosition.m_fY - (m_fHeight / 2);
+	m_fBottom = m_oPosition.m_fY + (m_fHeight / 2);
+	m_fLeft = m_oPosition.m_fX - (m_fWidth / 2);
+	m_fRight = m_oPosition.m_fX + (m_fWidth / 2);
 }
 
 // default constructor with type name provided
@@ -43,10 +43,10 @@ Sprite::Sprite(char *a_cNewType)
 	m_cpTextureName = "";
 	m_dDeltaTime = GetDeltaTime();
 
-	m_fTop = m_oPosition.GetY() - (m_fHeight / 2);
-	m_fBottom = m_oPosition.GetY() + (m_fHeight / 2);
-	m_fLeft = m_oPosition.GetX() - (m_fWidth / 2);
-	m_fRight = m_oPosition.GetX() + (m_fWidth / 2);
+	m_fTop = m_oPosition.m_fY - (m_fHeight / 2);
+	m_fBottom = m_oPosition.m_fY + (m_fHeight / 2);
+	m_fLeft = m_oPosition.m_fX - (m_fWidth / 2);
+	m_fRight = m_oPosition.m_fX + (m_fWidth / 2);
 
 	m_iSpriteId = CreateSprite(m_cpTextureName, m_fWidth, m_fHeight, true);  //delete?
 }
@@ -66,10 +66,10 @@ Sprite::Sprite(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Pos
 	m_cpTextureName = a_cpTextureName;
 	m_dDeltaTime = GetDeltaTime();
 
-	m_fTop = m_oPosition.GetY() - (m_fHeight / 2);
-	m_fBottom = m_oPosition.GetY() + (m_fHeight / 2);
-	m_fLeft = m_oPosition.GetX() - (m_fWidth / 2);
-	m_fRight = m_oPosition.GetX() + (m_fWidth / 2);
+	m_fTop = m_oPosition.m_fY - (m_fHeight / 2);
+	m_fBottom = m_oPosition.m_fY + (m_fHeight / 2);
+	m_fLeft = m_oPosition.m_fX - (m_fWidth / 2);
+	m_fRight = m_oPosition.m_fX + (m_fWidth / 2);
 
 	m_iSpriteId = CreateSprite(m_cpTextureName, m_fWidth, m_fHeight, true); //delete?
 	
@@ -90,7 +90,7 @@ void Sprite::Update()
 // calls the MoveSprite function from the AIE Framework
 void Sprite::Move()
 {
-	MoveSprite(m_iSpriteId, m_oPosition.GetX(), m_oPosition.GetY());
+	MoveSprite(m_iSpriteId, m_oPosition.m_fX, m_oPosition.m_fY);
 }
 
 // calls the DrawSprite function from the AIE Framework
@@ -152,7 +152,7 @@ void Sprite::SetVelocityToward(const Vector2D a_rV2)
 	Vector2D vect(cos(fAngle), sin(fAngle));
 	SetVelocity(vect);*/
 
-	Vector2D direction((m_oPosition.GetX() - a_rV2.GetX()), (m_oPosition.GetY() - a_rV2.GetY()));
+	Vector2D direction((m_oPosition.m_fX - a_rV2.m_fX), (m_oPosition.m_fY - a_rV2.m_fY));
 	direction.Normalize();
 	SetVelocity(direction);
 }
@@ -197,10 +197,10 @@ float& Sprite::GetEdge(Boundary a_edge)
 // updates the values of object boundaries
 void Sprite::UpdateEdges()
 {
-	m_fTop = m_oPosition.GetY() - (m_fHeight / 2);
-	m_fBottom = m_oPosition.GetY() + (m_fHeight / 2);
-	m_fLeft = m_oPosition.GetX() - (m_fWidth / 2);
-	m_fRight = m_oPosition.GetX() + (m_fWidth / 2);
+	m_fTop = m_oPosition.m_fY - (m_fHeight / 2);
+	m_fBottom = m_oPosition.m_fY + (m_fHeight / 2);
+	m_fLeft = m_oPosition.m_fX - (m_fWidth / 2);
+	m_fRight = m_oPosition.m_fX + (m_fWidth / 2);
 }
 
 // is sprite on screen?

@@ -38,13 +38,7 @@ class Vector2D
 		float GetDistance(const Vector2D a_rV2) const;	// calculates distance bethween two vectors
 		float Dot(const Vector2D& a_rV2) const;		// dot product of 2 vectors
 		float GetAngle(const Vector2D& a_rV2) const;	// calculates angle between two vectors
-
-		float GetX() const;	// returns x value
-		float GetY() const;	// returns y value
-		void SetX(float a_fX);	// sets x value
-		void SetY(float a_fY);	// sets y value
-	
-	private:		
+			
 		float m_fX, m_fY;	// coordinate variables
 		float m_fThreshold;	// float comparison threshold
 

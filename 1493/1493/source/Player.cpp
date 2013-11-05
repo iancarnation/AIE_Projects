@@ -82,19 +82,19 @@ void Player::Movement()
 	// player movement: gets the relevant position value and adjusts it by its "MovementFactor"
 	if (IsKeyDown('W') || IsKeyDown(GLFW_KEY_UP))
 	{
-		m_oPosition.SetY(m_oPosition.GetY() - m_fMoveFactor);
+		m_oPosition.m_fY -= m_fMoveFactor;
 	}
 	if (IsKeyDown('S') || IsKeyDown(GLFW_KEY_DOWN))
 	{
-		m_oPosition.SetY(m_oPosition.GetY() + m_fMoveFactor);
+		m_oPosition.m_fY += m_fMoveFactor;
 	}
 	if (IsKeyDown('A') || IsKeyDown(GLFW_KEY_LEFT))
 	{
-		m_oPosition.SetX(m_oPosition.GetX() - m_fMoveFactor);
+		m_oPosition.m_fX -= m_fMoveFactor;
 	}
 	if (IsKeyDown('D') || IsKeyDown(GLFW_KEY_RIGHT))
 	{
-		m_oPosition.SetX(m_oPosition.GetX() + m_fMoveFactor);
+		m_oPosition.m_fX += m_fMoveFactor;
 	}
 }
 
@@ -112,7 +112,7 @@ void Player::Abilities(double a_dDeltaTime)
 
 			orCurrentProj.SetAlive(true);
 			orCurrentProj.SetPosition(m_oPosition);		// projectile's position is current player's position
-			orCurrentProj.GetVelocity().SetY(- orCurrentProj.GetMoveFactor());		// projectile has upward Y velocity
+			orCurrentProj.GetVelocity().m_fY -= orCurrentProj.GetMoveFactor();		// projectile has upward Y velocity
 			m_bFiring = true;
 			m_iAmmoSlot += 1;
 			//reset = true;
