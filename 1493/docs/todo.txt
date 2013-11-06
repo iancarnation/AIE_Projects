@@ -1,15 +1,15 @@
 1943 TODO - CLASS
 
-
+- delta time!
 - animation
-- enhance enemy movement (after class refactor?)
 - make level class
 
 
 - collision optimisation (grid hashing, etc..)
-- make movement pattern class?
+- make movement manager
 - make Projectile and Enemy classes abstract (to create different types later)?
 - remove singleton pattern from GameEngine and GameStates?
+- data-driven level design/scripting (xml??)
 
 HOME---------------------------------------------------------------
 
@@ -31,3 +31,6 @@ DONE----------------------------------------------------------------
 11/4
 - enemy/player collision
 - enemy aim
+11/5
+- made vector x,y public, removed get/set functions, updated code
+- added Vector3 class and adjusted math functions&operators

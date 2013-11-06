@@ -119,6 +119,7 @@
     <ClCompile Include="source\Sprite.cpp" />
     <ClCompile Include="source\PlayState.cpp" />
     <ClCompile Include="source\Vector2D.cpp" />
+    <ClCompile Include="source\Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\DeathState.h" />
@@ -137,6 +138,7 @@
     <ClInclude Include="include\Vector2D.h" />
     <ClInclude Include="include\AIE.h" />
     <ClInclude Include="include\KeyCodes.h" />
+    <ClInclude Include="include\Vector3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

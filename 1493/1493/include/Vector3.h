@@ -16,7 +16,7 @@ class Vector3
 	public: 
 		Vector3();							// default constructor
 		Vector3(const Vector3& a_rVecSource);		// copy constructor
-		Vector3(float a_fX, float afY);	// constructor that takes in x and y values
+		Vector3(float a_fX, float a_fY, float a_fZ);	// constructor that takes in x and y values
 		~ Vector3();						// destructor
 
 		Vector3 operator = (const Vector3& a_rVecSource); // sets one vector equal to another
@@ -37,9 +37,10 @@ class Vector3
 		Vector3 ReturnNormalized() const;		// returns a normalized copy of vector	
 		float GetDistance(const Vector3 a_rV2) const;	// calculates distance bethween two vectors
 		float Dot(const Vector3& a_rV2) const;		// dot product of 2 vectors
+		Vector3 Cross(const Vector3& a_rV2) const;	// cross product of 2 vectors
 		float GetAngle(const Vector3& a_rV2) const;	// calculates angle between two vectors
 			
-		float m_fX, m_fY;	// coordinate variables
+		float m_fX, m_fY, m_fZ;	// coordinate variables
 		float m_fThreshold;	// float comparison threshold
 
 };
