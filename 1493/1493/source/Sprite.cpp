@@ -15,7 +15,9 @@ Sprite::Sprite()
 	m_fHeight = 10;
 	m_oPosition = Vector2D();
 	m_oVelocity = Vector2D();
-	m_fMoveFactor = 1;
+	m_oForce = Vector2D();
+	m_fMass = 1;
+	m_fMovementForce = 1;
 	m_iSpriteId = -1; //**figure out where to initialize/check for this
 	m_iAmmoSlot = 0;
 	m_bAlive = false;
@@ -36,7 +38,9 @@ Sprite::Sprite(char *a_cNewType)
 	m_fHeight = 10;
 	m_oPosition = Vector2D();
 	m_oVelocity = Vector2D();
-	m_fMoveFactor = 1;
+	m_oForce = Vector2D();
+	m_fMass = 1;
+	m_fMovementForce = 1;
 	//m_iSpriteId = -1; //**figure out where to initialize/check for this
 	m_iAmmoSlot = 0;
 	m_bAlive = false;
@@ -52,14 +56,16 @@ Sprite::Sprite(char *a_cNewType)
 }
 // constructor that takes in values
 Sprite::Sprite(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Position, 
-			   Vector2D a_Velocity, float a_fMoveFactor, bool a_bAlive, const char* a_cpTextureName)
+			   Vector2D a_Velocity, Vector2D a_Force, float a_fMass, float a_fMovementForce, bool a_bAlive, const char* a_cpTextureName)
 {
 	SetType(a_cNewType);
 	m_fWidth = a_fWidth;
 	m_fHeight = a_fHeight;
 	m_oPosition = a_Position; // check on these **
 	m_oVelocity = a_Velocity;
-	m_fMoveFactor = a_fMoveFactor;
+	m_oForce = a_Force;
+	m_fMass = a_fMass;
+	m_fMovementForce = a_fMovementForce;
 	//m_iSpriteId = -1;	//**figure out where to initialize/check for this
 	m_iAmmoSlot = 0;
 	m_bAlive = a_bAlive;
@@ -160,7 +166,7 @@ void Sprite::SetVelocityToward(const Vector2D a_rV2)
 // returns the increment by which a sprite will move
 float& Sprite::GetMoveFactor()
 {
-	return m_fMoveFactor;
+	return m_fMovementForce;
 }
 
 // returns whether the sprite is "alive"(visible) or not

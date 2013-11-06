@@ -19,4 +19,6 @@
 
 	enum Boundary { TOP, BOTTOM, LEFT, RIGHT };
 
+	static double dTime;
+
 #endif

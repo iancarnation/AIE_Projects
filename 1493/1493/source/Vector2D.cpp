@@ -82,6 +82,15 @@ Vector2D Vector2D::operator * (float a_fS)
 	return vTemp;
 }
 
+// divides a vector by a scalar, returns new vector
+Vector2D Vector2D::operator / (float a_fS)
+{
+	Vector2D vTemp;
+	vTemp.m_fX = this->m_fX / a_fS;
+	vTemp.m_fY = this->m_fY / a_fS;
+	return vTemp;
+}
+
 // sets a vector equal to itself minus a scalar
 void Vector2D::operator -= (float a_fS)
 {
@@ -101,6 +110,13 @@ void Vector2D::operator *= (float a_fS)
 {
 	m_fX *= a_fS;
 	m_fY *= a_fS;
+}
+
+// sets a vector equal to itself divided by a scalar
+void Vector2D::operator /= (float a_fS)
+{
+	m_fX /= a_fS;
+	m_fY /= a_fS;
 }
 
 // subtracts one vector from another, returns new vector
@@ -184,4 +200,15 @@ float Vector2D::GetAngle(const Vector2D& a_rV2) const
 	Vector2D V1 = this->ReturnNormalized();
 	float dot = V1.Dot(a_rV2.ReturnNormalized());
 	return acos(dot);
+}
+
+// truncates a vector
+void Vector2D::Truncate(float max)
+{
+	float i = max / GetMagnitude();
+	if (i < 1.0)
+		i = 1.0;
+
+	m_fX *= i;
+	m_fY *= i;
 }

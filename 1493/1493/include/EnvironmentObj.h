@@ -15,7 +15,7 @@ class EnvironmentObj: public Sprite
 	public:
 		EnvironmentObj();	// default constructor
 		EnvironmentObj(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Position, 
-				   Vector2D a_Velocity, float a_fMoveFactor, bool a_bAlive, const char* a_cpTextureName);		// constructor with parameters 
+				   Vector2D a_Velocity, Vector2D a_Force, float a_fMass, float a_fMovementForce, bool a_bAlive, const char* a_cpTextureName);		// constructor with parameters 
 		~EnvironmentObj();	// destructor
 
 		void Update();

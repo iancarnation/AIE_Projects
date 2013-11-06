@@ -24,7 +24,7 @@ IntroState IntroState::m_IntroState; // **has to do with singleton?**
 void IntroState::Init()
 {
 	// load intro sprite
-	Sprite introImage("TestImage", SCREEN_X, SCREEN_Y, SCREEN_CENTER, ZERO_VELOCITY, 0, true, "./images/IntroState.png");
+	Sprite introImage("TestImage", SCREEN_X, SCREEN_Y, SCREEN_CENTER, ZERO_VELOCITY, Vector2D(), 0, 0, true, "./images/IntroState.png");
 	m_iBG = introImage.GetSpriteId();
 	MoveSprite(m_iBG, 1024>>1, 768>>1);
 	// do something to make a "fade"
@@ -68,7 +68,7 @@ void IntroState::HandleEvents(GameEngine* a_opGame)
 		}
 }
 
-void IntroState::Update(GameEngine* a_opGame)
+void IntroState::Update(GameEngine* a_opGame,double dt)
 {
 	// decrement the alpha of the fader covering the background
 

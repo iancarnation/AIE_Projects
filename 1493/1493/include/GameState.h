@@ -27,7 +27,7 @@ class GameState
 		// handles responses to inputs
 		virtual void HandleEvents(GameEngine* a_opGame) = 0;
 		// occurs each frame
-		virtual void Update(GameEngine* a_opGame) = 0;
+		virtual void Update(GameEngine* a_opGame,double dt) = 0;
 		// renders things to the screen
 		virtual void Draw(GameEngine* a_opGame) = 0;
 

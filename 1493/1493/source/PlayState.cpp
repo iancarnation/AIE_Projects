@@ -22,12 +22,12 @@ void PlayState::Init()
 {
 
 	// load environment objects
-	EnvironmentObj oBGimage("Background", SCREEN_X, SCREEN_Y * 8, Vector2D(SCREEN_X/2, SCREEN_Y), Vector2D(0, 0.1), 0, true, "./images/bgImage.png");
+	EnvironmentObj oBGimage("Background", SCREEN_X, SCREEN_Y * 8, Vector2D(SCREEN_X/2, SCREEN_Y), Vector2D(0, 0.1), Vector2D(), 20, 0, true, "./images/bgImage.png");
 	//MoveSprite(oBGimage.GetSpriteId(), 1024>>1, 768>>1);
 	m_EnvironList.push_back(oBGimage);
 
 	// load player object(s)
-	Player oPlayer("Player", 30, 90, Vector2D(400, 500), ZERO_VELOCITY, 1, true, "./images/Player.png");
+	Player oPlayer("Player", 30, 90, Vector2D(400, 500), ZERO_VELOCITY, Vector2D(), 20, 550, true, "./images/Player.png");
 	//MoveSprite(oPlayer.GetSpriteId(), 1024>>1, 768>>1);
 	m_PlayerList.push_back(oPlayer);
 
@@ -87,7 +87,7 @@ void PlayState::HandleEvents(GameEngine* a_opGame)
 	// look for player input for movement control
 }
 
-void PlayState::Update(GameEngine* a_opGame)
+void PlayState::Update(GameEngine* a_opGame,double dt)
 {
 	// check for enemy spawn trigger point
 	EnemySpawnCheck();
@@ -101,7 +101,7 @@ void PlayState::Update(GameEngine* a_opGame)
 	// update Player Objects
 	for (vector<Player>::iterator it = m_PlayerList.begin(); it != m_PlayerList.end(); it++)
 	{
-		it->Update();
+		it->Update(dt);
 	}
 
 	// update Enemy objects
@@ -158,7 +158,7 @@ void PlayState::InitEnemies()
 	// Enemy Type A Group 1
 	for (int i=0; i<5; i++)
 	{
-		Enemy oEnemyA1("EnemyA1", 40, 70, HOLDING_AREA, ZERO_VELOCITY, 1.75, false, "./images/EnemyA.png");
+		Enemy oEnemyA1("EnemyA1", 40, 70, HOLDING_AREA, ZERO_VELOCITY, Vector2D(), 20, 1.75, false, "./images/EnemyA.png");
 		m_EnemyA1List.push_back(oEnemyA1);
 	}
 
@@ -167,7 +167,7 @@ void PlayState::InitEnemies()
 	// Enemy Type A Group 2
 	for (int i=0; i<5; i++)
 	{
-		Enemy oEnemyA2("EnemyA2", 40, 70, HOLDING_AREA, ZERO_VELOCITY, 1.75, false, "./images/EnemyA.png");
+		Enemy oEnemyA2("EnemyA2", 40, 70, HOLDING_AREA, ZERO_VELOCITY, Vector2D(), 20, 1.75, false, "./images/EnemyA.png");
 		m_EnemyA2List.push_back(oEnemyA2);
 	}
 
@@ -176,7 +176,7 @@ void PlayState::InitEnemies()
 	// Enemy Type A Group 3
 	for (int i=0; i<7; i++)
 	{
-		Enemy oEnemyA3("EnemyA3", 40, 70, HOLDING_AREA, ZERO_VELOCITY, 2, false, "./images/EnemyA.png");
+		Enemy oEnemyA3("EnemyA3", 40, 70, HOLDING_AREA, ZERO_VELOCITY, Vector2D(), 20, 2, false, "./images/EnemyA.png");
 		m_EnemyA3List.push_back(oEnemyA3);
 	}
 
@@ -302,7 +302,7 @@ void PlayState::CollisionChecks()
 			for (list<Enemy>::iterator it = mapIt->second.begin(); it != mapIt->second.end(); it++)
 			{	
 				// if the enemy object is colliding with the current projectile:
-				if (it->IsCollidingWith(&orCurrentPlayer))
+				if (it->IsCollidingWith(&orCurrentPlayer) && it->IsAlive())
 				{
 					it->Die();						// kill enemy
 					orCurrentPlayer.SetHealth(-1);	// damage Player

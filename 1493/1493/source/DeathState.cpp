@@ -24,7 +24,7 @@ DeathState DeathState::m_DeathState; // **has to do with singleton?**
 void DeathState::Init()
 {
 	// load intro sprite
-	Sprite deathImage("TestImage", SCREEN_X, SCREEN_Y, SCREEN_CENTER, ZERO_VELOCITY, 0, true, "./images/DeathState.png");
+	Sprite deathImage("TestImage", SCREEN_X, SCREEN_Y, SCREEN_CENTER, ZERO_VELOCITY, Vector2D(), 20, 0, true, "./images/DeathState.png");
 	m_iBG = deathImage.GetSpriteId();
 	MoveSprite(m_iBG, 1024>>1, 768>>1);
 	// do something to make a "fade"
@@ -68,7 +68,7 @@ void DeathState::HandleEvents(GameEngine* a_opGame)
 		}
 }
 
-void DeathState::Update(GameEngine* a_opGame)
+void DeathState::Update(GameEngine* a_opGame,double dt)
 {
 	// decrement the alpha of the fader covering the background
 

@@ -85,10 +85,10 @@ void GameEngine::HandleEvents()
 }
 
 // occurs each frame
-void GameEngine::Update()
+void GameEngine::Update(double dt)
 {
 	// let the state update the game
-	v_oStateStack.back()->Update(this);
+	v_oStateStack.back()->Update(this,dt);
 }
 
 // renders things to the screen

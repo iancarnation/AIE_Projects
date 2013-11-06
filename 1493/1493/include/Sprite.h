@@ -26,7 +26,7 @@ class Sprite
 		Sprite();					// default constructor
 		Sprite(char *a_cNewType);	// default constructor with type name provided
 		Sprite(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Position, 
-			   Vector2D a_Velocity, float a_fMoveFactor, bool a_bAlive, const char* a_cpTextureName);	// constructor with **something** provided?
+			   Vector2D a_Velocity, Vector2D a_Force, float a_fMass, float a_fMovementForce, bool a_bAlive, const char* a_cpTextureName);	// constructor with **something** provided?
 		virtual ~ Sprite();					// destructor
 
 		virtual void Update();		// run functions for changing state of objects
@@ -60,7 +60,9 @@ class Sprite
 		bool m_bAlive;
 		Vector2D m_oPosition;
 		Vector2D m_oVelocity;
-		float m_fMoveFactor;
+		Vector2D m_oForce;
+		float m_fMass;
+		float m_fMovementForce;
 		const char* m_cpTextureName;
 
 		float m_fTop, m_fBottom, m_fLeft, m_fRight;

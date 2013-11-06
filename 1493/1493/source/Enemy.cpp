@@ -15,8 +15,8 @@ Enemy::Enemy()
 
 // constructor with parameters
 Enemy::Enemy(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Position, 
-			   Vector2D a_Velocity, float a_fMoveFactor, bool a_bAlive, const char* a_cpTextureName)
-			 : Sprite (a_cNewType, a_fWidth, a_fHeight, a_Position, a_Velocity, a_fMoveFactor, 
+			   Vector2D a_Velocity, Vector2D a_Force, float a_fMass, float a_fMovementForce, bool a_bAlive, const char* a_cpTextureName)
+			 : Sprite (a_cNewType, a_fWidth, a_fHeight, a_Position, a_Velocity, a_Force, a_fMass, a_fMovementForce, 
 					   a_bAlive, a_cpTextureName)
 {
 	m_bFiring = false;
@@ -25,7 +25,7 @@ Enemy::Enemy(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Posit
 
 	for (int i=0; i<20; i++)
 	{
-		m_aProjectiles[i] = Projectile("Projectile", 10, 10, HOLDING_AREA, ZERO_VELOCITY, -1, false, "./images/cannonBall.png");
+		m_aProjectiles[i] = Projectile("Projectile", 10, 10, HOLDING_AREA, ZERO_VELOCITY, Vector2D(), 20, -1, false, "./images/cannonBall.png");
 	}
 }
 
@@ -60,7 +60,7 @@ void Enemy::Draw()
 // enemy movement logic
 void Enemy::Movement()
 {
-	m_oPosition += m_oVelocity * m_fMoveFactor;
+	m_oPosition += m_oVelocity * m_fMovementForce;
 }
 
 // weapons control / logic
@@ -118,7 +118,7 @@ void Enemy::UpdateProjectiles()
 	for (int i=0; i<20; i++)
 	{
 		if (m_aProjectiles[i].IsAlive())
-			m_aProjectiles[i].Update();
+			m_aProjectiles[i].Update(dTime);
 	}
 }
 

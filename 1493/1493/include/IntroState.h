@@ -25,7 +25,7 @@ class IntroState : public GameState
 		// handles responses to inputs
 		void HandleEvents(GameEngine* a_opGame);
 		// occurs each frame
-		void Update(GameEngine* a_opGame);
+		void Update(GameEngine* a_opGame,double dt);
 		// renders things to the screen
 		void Draw(GameEngine* a_opGame);
 

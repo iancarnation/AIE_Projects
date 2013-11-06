@@ -37,7 +37,7 @@ class GameEngine
 		// handles responses to inputs
 		void HandleEvents();
 		// occurs each frame
-		void Update();
+		void Update(double dt);
 		// renders things to the screen
 		void Draw();
 

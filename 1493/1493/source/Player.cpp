@@ -16,8 +16,8 @@ Player::Player()
 
 // constructor with parameters
 Player::Player(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Position, 
-			   Vector2D a_Velocity, float a_fMoveFactor, bool a_bAlive, const char* a_cpTextureName)
-			 : Sprite (a_cNewType, a_fWidth, a_fHeight, a_Position, a_Velocity, a_fMoveFactor, 
+			   Vector2D a_Velocity, Vector2D a_Force, float a_fMass, float a_fMovementForce, bool a_bAlive, const char* a_cpTextureName)
+			 : Sprite (a_cNewType, a_fWidth, a_fHeight, a_Position, a_Velocity, a_Force, a_fMass, a_fMovementForce, 
 					   a_bAlive, a_cpTextureName)
 {
 	m_bFiring = false;
@@ -26,7 +26,7 @@ Player::Player(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Pos
 
 	for (int i=0; i<20; i++)
 	{
-		m_aProjectiles[i] = Projectile("Projectile", 10, 10, HOLDING_AREA, ZERO_VELOCITY, 1, false, "./images/cannonBall.png");
+		m_aProjectiles[i] = Projectile("Projectile", 10, 10, HOLDING_AREA, ZERO_VELOCITY, Vector2D(), 200, 1, false, "./images/cannonBall.png");
 	}
 }
 
@@ -40,12 +40,16 @@ Player::~Player()
 void Player::Input()
 {
 	Movement();
-	Abilities(GetDeltaTime());
+	Abilities();
 }
 
-void Player::Update()
+void Player::Update(double dt)
 {
+	dTime = dt;
 	Input();
+	//physics calculation
+	Physics();
+
 	UpdateEdges();
 	Sprite::Update();
 	UpdateProjectiles();
@@ -82,24 +86,24 @@ void Player::Movement()
 	// player movement: gets the relevant position value and adjusts it by its "MovementFactor"
 	if (IsKeyDown('W') || IsKeyDown(GLFW_KEY_UP))
 	{
-		m_oPosition.m_fY -= m_fMoveFactor;
+		m_oForce.m_fY -= m_fMovementForce;
 	}
 	if (IsKeyDown('S') || IsKeyDown(GLFW_KEY_DOWN))
 	{
-		m_oPosition.m_fY += m_fMoveFactor;
+		m_oPosition.m_fY += m_fMovementForce * dTime;
 	}
 	if (IsKeyDown('A') || IsKeyDown(GLFW_KEY_LEFT))
 	{
-		m_oPosition.m_fX -= m_fMoveFactor;
+		m_oPosition.m_fX -= m_fMovementForce * dTime;
 	}
 	if (IsKeyDown('D') || IsKeyDown(GLFW_KEY_RIGHT))
 	{
-		m_oPosition.m_fX += m_fMoveFactor;
+		m_oPosition.m_fX += m_fMovementForce * dTime;
 	}
 }
 
 // check for fire input / firing timing control 
-void Player::Abilities(double a_dDeltaTime)
+void Player::Abilities()
 {
 	// set minimum waiting time between shots (while button held down)
 	double threshold = 0.1;
@@ -123,7 +127,7 @@ void Player::Abilities(double a_dDeltaTime)
 	if (m_bFiring)
 	{
 		// add the delta time to the total time since the last shot
-		m_dTimeWaited += a_dDeltaTime;
+		m_dTimeWaited += dTime;
 
 		// if the time since the last shot is greater than the threshold
 		if (m_dTimeWaited >= threshold)
@@ -152,7 +156,7 @@ void Player::UpdateProjectiles()
 	for (int i=0; i<20; i++)
 	{
 		if (m_aProjectiles[i].IsAlive())
-			m_aProjectiles[i].Update();
+			m_aProjectiles[i].Update(dTime);
 	}
 }
 
@@ -164,4 +168,13 @@ void Player::DrawProjectiles()
 		if (m_aProjectiles[i].IsAlive())
 			m_aProjectiles[i].Draw();
 	}
+}
+
+// physics calculation / limit checks
+void Player::Physics()
+{
+	m_oPosition += m_oVelocity * dTime;
+	m_oVelocity += (m_oForce / m_fMass) * dTime;
+
+	m_oVelocity.Truncate(3);
 }

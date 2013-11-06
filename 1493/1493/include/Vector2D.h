@@ -23,9 +23,11 @@ class Vector2D
 		Vector2D operator - (float a_fS);		// subtracts a scalar from a vector, returns new vector
 		Vector2D operator + (float a_fS);		// adds a scalar to a vector, returns new vector
 		Vector2D operator * (float a_fS);		// multiplies a vector by a scalar, returns new vector
+		Vector2D operator / (float a_fS);		// divides a vector by a scalar, returns new vector
 		void operator -= (float a_fS);			// sets a vector equal to itself minus a scalar
 		void operator += (float a_fS);			// sets a vector equal to itself plus a scalar
 		void operator *= (float a_fS);			// sets a vector equal to itself multiplied by a scalar
+		void operator /= (float a_fS);			// sets a vector equal to itself divided by a scalar
 		Vector2D operator - (const Vector2D& a_rV2);	// subtracts one vector from another, returns new vector
 		Vector2D operator + (const Vector2D& a_rV2);	// adds one vector to another, returns new vector
 		void operator -= (Vector2D& a_rV2);		// sets a vector equal to itself minus another vector
@@ -38,6 +40,7 @@ class Vector2D
 		float GetDistance(const Vector2D a_rV2) const;	// calculates distance bethween two vectors
 		float Dot(const Vector2D& a_rV2) const;		// dot product of 2 vectors
 		float GetAngle(const Vector2D& a_rV2) const;	// calculates angle between two vectors
+		void Truncate(float max);		// truncates a vector
 			
 		float m_fX, m_fY;	// coordinate variables
 		float m_fThreshold;	// float comparison threshold

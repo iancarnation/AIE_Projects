@@ -23,7 +23,7 @@ MenuState MenuState::m_MenuState; // **has to do with singleton?**
 void MenuState::Init()
 {
 	// load menu sprite(s)
-	Sprite menuImage("TestImage", SCREEN_X, SCREEN_Y, SCREEN_CENTER, ZERO_VELOCITY, 0, true, "./images/MenuState.png");
+	Sprite menuImage("TestImage", SCREEN_X, SCREEN_Y, SCREEN_CENTER, ZERO_VELOCITY, Vector2D(), 20, 0, true, "./images/MenuState.png");
 	m_iBG = menuImage.GetSpriteId();
 	MoveSprite(m_iBG, 1024>>1, 768>>1);
 	// reference calls bg = SDL_DisplayFormat(temp);
@@ -70,7 +70,7 @@ void MenuState::HandleEvents(GameEngine* a_opGame)
 		}
 }
 
-void MenuState::Update(GameEngine* a_opGame)
+void MenuState::Update(GameEngine* a_opGame,double dt)
 {
 
 }

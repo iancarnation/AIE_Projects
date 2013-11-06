@@ -24,8 +24,10 @@ int main( int argc, char* argv[] )
 	// main loop
 	do
 	{
+		dTime = GetDeltaTime();
+
 		oGame.HandleEvents();
-		oGame.Update();
+		oGame.Update(dTime);
 		oGame.Draw();
 	}
 	while (oGame.Running() && FrameworkUpdate() == false);
