@@ -67,7 +67,7 @@ void Enemy::Movement()
 void Enemy::Abilities(double a_dDeltaTime, Vector2D& a_oPlayerPos)
 {
 	// set minimum waiting time between shots (while button held down)
-	int iTickThreshold = 500; 
+	int iTickThreshold = 1000; 
 
 	if (!m_bFiring && IsOnScreen())
 	{
@@ -80,7 +80,7 @@ void Enemy::Abilities(double a_dDeltaTime, Vector2D& a_oPlayerPos)
 		m_iAmmoSlot += 1;
 		//reset = true;
 	}
-	
+
 	// firing delay logic
 	if (m_bFiring)
 	{

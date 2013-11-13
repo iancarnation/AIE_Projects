@@ -203,12 +203,28 @@ float Vector2D::GetAngle(const Vector2D& a_rV2) const
 }
 
 // truncates a vector
-void Vector2D::Truncate(float max)
-{
-	float i = max / GetMagnitude();
-	if (i < 1.0)
-		i = 1.0;
+//void Vector2D::Truncate(float max)
+//{
+//	float i = max / GetMagnitude();
+//	if (i < 1.0)
+//		i = 1.0;
+//
+//	m_fX *= i;
+//	m_fY *= i;
+//}
 
-	m_fX *= i;
-	m_fY *= i;
+void Vector2D::CapAtMax(float max)
+{
+	if (m_fX < 0)
+		if (m_fX < -max)
+			m_fX = -max;
+	if (m_fX > 0)
+		if (m_fX > max)
+			m_fX = max;
+	if (m_fY < 0)
+		if (m_fY < -max)
+			m_fY = -max;
+	if (m_fY > 0)
+		if (m_fY > max)
+			m_fY = max;
 }

@@ -22,11 +22,11 @@ Player::Player(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Pos
 {
 	m_bFiring = false;
 	m_dTimeWaited = 0;
-	m_iHealth = 5;
+	m_iHealth = 100;
 
 	for (int i=0; i<20; i++)
 	{
-		m_aProjectiles[i] = Projectile("Projectile", 10, 10, HOLDING_AREA, ZERO_VELOCITY, Vector2D(), 200, 1, false, "./images/cannonBall.png");
+		m_aProjectiles[i] = Projectile("Arrow", 5, 30, HOLDING_AREA, ZERO_VELOCITY, Vector2D(), 200, 1, false, "./images/arrow.png");
 	}
 }
 
@@ -49,16 +49,24 @@ void Player::Update(double dt)
 	Input();
 	//physics calculation
 	Physics();
-
 	UpdateEdges();
+	ScreenCollision();
 	Sprite::Update();
 	UpdateProjectiles();
+
 }
 
 void Player::Draw()
 {
 	Sprite::Draw();
 	DrawProjectiles();
+
+	// draw player velocity
+	static char c_PlayerVel[4] = {'\n'};
+	//// load string
+	sprintf(c_PlayerVel, "Velocity: %f, %f", GetVelocity().m_fX, GetVelocity().m_fY);
+	//// draw the string
+	DrawString(c_PlayerVel, 80, 700, SColour(0,0,0,255));
 }
 
 // returns player health
@@ -88,18 +96,28 @@ void Player::Movement()
 	{
 		m_oForce.m_fY -= m_fMovementForce;
 	}
+	/*if (glfwGetKey('W') == GLFW_RELEASE)
+		m_oForce.m_fY = 0;
+*/
 	if (IsKeyDown('S') || IsKeyDown(GLFW_KEY_DOWN))
 	{
-		m_oPosition.m_fY += m_fMovementForce * dTime;
+		m_oForce.m_fY += m_fMovementForce;
 	}
 	if (IsKeyDown('A') || IsKeyDown(GLFW_KEY_LEFT))
 	{
-		m_oPosition.m_fX -= m_fMovementForce * dTime;
+		m_oForce.m_fX -= m_fMovementForce;
+		SetSpriteUVCoordinates(m_iSpriteId, 0, 0, 0.33, 1);
 	}
+	else if (glfwGetKey('A') == GLFW_RELEASE)
+		SetSpriteUVCoordinates(m_iSpriteId, 0.33, 0, 0.66, 1);
+
 	if (IsKeyDown('D') || IsKeyDown(GLFW_KEY_RIGHT))
 	{
-		m_oPosition.m_fX += m_fMovementForce * dTime;
+		m_oForce.m_fX += m_fMovementForce;
+		SetSpriteUVCoordinates(m_iSpriteId, 0.66, 0, 1, 1);
 	}
+	/*else if (glfwGetKey('D') == GLFW_RELEASE)
+		SetSpriteUVCoordinates(m_iSpriteId, 0.33, 0, 0.66, 1);	*/// doesn't work in conjunction with the 'A' release check ??
 }
 
 // check for fire input / firing timing control 
@@ -175,6 +193,38 @@ void Player::Physics()
 {
 	m_oPosition += m_oVelocity * dTime;
 	m_oVelocity += (m_oForce / m_fMass) * dTime;
+	m_oVelocity *= DRAG;
+	m_oForce *= DRAG;
+	m_oForce.CapAtMax(15 * m_fMovementForce);
 
-	m_oVelocity.Truncate(3);
+//	m_oVelocity.Truncate(2);
+}
+
+// checks for screen edge collision, keep player on screen
+void Player::ScreenCollision()
+{
+	if (m_fTop < 0)
+	{
+		m_oForce.m_fY = 0;
+		m_oVelocity.m_fY = 0;
+		m_oPosition.m_fY = m_fHeight / 2;
+	}
+	if (m_fBottom > SCREEN_Y)
+	{
+		m_oForce.m_fY = 0;
+		m_oVelocity.m_fY = 0;
+		m_oPosition.m_fY = SCREEN_Y - m_fHeight / 2;
+	}
+	if (m_fLeft < 0)
+	{
+		m_oForce.m_fX = 0;
+		m_oVelocity.m_fX = 0;
+		m_oPosition.m_fX = m_fWidth / 2;
+	}
+	if (m_fRight > SCREEN_X)
+	{
+		m_oForce.m_fX = 0;
+		m_oVelocity.m_fX = 0;
+		m_oPosition.m_fX = SCREEN_X - m_fWidth / 2;
+	}
 }

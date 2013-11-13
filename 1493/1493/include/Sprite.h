@@ -15,8 +15,7 @@
 #include "StaticConstants.h"
 #include <string>
 #include <math.h>
-
-//#include <GL/glfw.h>
+#include <GL/glfw.h>
 
 using namespace std;
 

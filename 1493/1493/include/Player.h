@@ -39,6 +39,7 @@ class Player: public Sprite
 		void UpdateProjectiles();
 		void DrawProjectiles();
 		void Physics();
+		void ScreenCollision();	// checks for screen edge collision, keep player on screen
 
 		bool m_bFiring;
 		double m_dTimeWaited;

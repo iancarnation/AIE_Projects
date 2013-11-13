@@ -20,5 +20,6 @@
 	enum Boundary { TOP, BOTTOM, LEFT, RIGHT };
 
 	static double dTime;
+	static const float DRAG = .995;
 
 #endif
