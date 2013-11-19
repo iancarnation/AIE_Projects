@@ -110,7 +110,7 @@
     <ClCompile Include="source\1493main.cpp" />
     <ClCompile Include="source\DeathState.cpp" />
     <ClCompile Include="source\Enemy.cpp" />
-    <ClCompile Include="source\Environment.cpp" />
+    <ClCompile Include="source\EnvironmentObj.cpp" />
     <ClCompile Include="source\GameEngine.cpp" />
     <ClCompile Include="source\IntroState.cpp" />
     <ClCompile Include="source\MenuState.cpp" />
@@ -118,6 +118,7 @@
     <ClCompile Include="source\Projectile.cpp" />
     <ClCompile Include="source\Sprite.cpp" />
     <ClCompile Include="source\PlayState.cpp" />
+    <ClCompile Include="source\UV.cpp" />
     <ClCompile Include="source\Vector2D.cpp" />
     <ClCompile Include="source\Vector3.cpp" />
   </ItemGroup>
@@ -135,6 +136,7 @@
     <ClInclude Include="include\Sprite.h" />
     <ClInclude Include="include\PlayState.h" />
     <ClInclude Include="include\StaticConstants.h" />
+    <ClInclude Include="include\UV.h" />
     <ClInclude Include="include\Vector2D.h" />
     <ClInclude Include="include\AIE.h" />
     <ClInclude Include="include\KeyCodes.h" />

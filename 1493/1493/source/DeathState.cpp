@@ -24,7 +24,7 @@ DeathState DeathState::m_DeathState; // **has to do with singleton?**
 void DeathState::Init()
 {
 	// load intro sprite
-	Sprite deathImage("TestImage", SCREEN_X, SCREEN_Y, SCREEN_CENTER, ZERO_VELOCITY, Vector2D(), 20, 0, true, "./images/DeathState.png");
+	Sprite deathImage("TestImage", SCREEN_X, SCREEN_Y, SCREEN_CENTER, ZERO_VELOCITY, Vector2D(), 20, 0, true, "./images/DeathState.png", 1);
 	m_iBG = deathImage.GetSpriteId();
 	MoveSprite(m_iBG, 1024>>1, 768>>1);
 	// do something to make a "fade"

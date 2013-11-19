@@ -22,14 +22,13 @@ void PlayState::Init()
 {
 
 	// load environment objects
-	EnvironmentObj oBGimage("Background", SCREEN_X, SCREEN_Y * 8, Vector2D(SCREEN_X/2, SCREEN_Y), Vector2D(0, 0.1), Vector2D(), 0, 0, true, "./images/bgImage.png");
+	EnvironmentObj oBGimage("Background", SCREEN_X, SCREEN_Y * 8, Vector2D(SCREEN_X/2, SCREEN_Y), Vector2D(0, 0.1), Vector2D(), 0, 0, true, "./images/bgImage.png", 1);
 	//MoveSprite(oBGimage.GetSpriteId(), 1024>>1, 768>>1);
 	m_EnvironList.push_back(oBGimage);
 
 	// load player object(s)
-	Player oPlayer("Player", 30, 90, Vector2D(400, 500), ZERO_VELOCITY, Vector2D(), 10, 800, true, "./images/PlayerSheet.png");
-	// Set UV Coordinates
-	SetSpriteUVCoordinates(oPlayer.GetSpriteId(), 0.33, 0, 0.66, 1);
+	Player oPlayer("Player", 30, 90, Vector2D(400, 500), ZERO_VELOCITY, Vector2D(), 10, 800, true, "./images/PlayerSheet.png", 3);
+	oPlayer.SetUV(1);
 	//MoveSprite(oPlayer.GetSpriteId(), 1024>>1, 768>>1);
 	m_PlayerList.push_back(oPlayer);
 
@@ -159,7 +158,8 @@ void PlayState::InitEnemies()
 	// Enemy Type A Group 1
 	for (int i=0; i<5; i++)
 	{
-		Enemy oEnemyA1("EnemyA1", 40, 70, HOLDING_AREA, ZERO_VELOCITY, Vector2D(), 20, 0.5, false, "./images/EnemyA.png");
+		Enemy oEnemyA1("EnemyA1", 40, 70, HOLDING_AREA, ZERO_VELOCITY, Vector2D(), 20, 0.5, false, "./images/EnemySheet.png", 4);
+		oEnemyA1.SetUV(0);
 		m_EnemyA1List.push_back(oEnemyA1);
 	}
 
@@ -168,7 +168,8 @@ void PlayState::InitEnemies()
 	// Enemy Type A Group 2
 	for (int i=0; i<5; i++)
 	{
-		Enemy oEnemyA2("EnemyA2", 40, 70, HOLDING_AREA, ZERO_VELOCITY, Vector2D(), 20, 0.5, false, "./images/EnemyA.png");
+		Enemy oEnemyA2("EnemyA2", 40, 70, HOLDING_AREA, ZERO_VELOCITY, Vector2D(), 20, 0.5, false, "./images/EnemySheet.png", 4);
+		oEnemyA2.SetUV(0);
 		m_EnemyA2List.push_back(oEnemyA2);
 	}
 
@@ -177,7 +178,8 @@ void PlayState::InitEnemies()
 	// Enemy Type A Group 3
 	for (int i=0; i<7; i++)
 	{
-		Enemy oEnemyA3("EnemyA3", 40, 70, HOLDING_AREA, ZERO_VELOCITY, Vector2D(), 20, 0.75, false, "./images/EnemyA.png");
+		Enemy oEnemyA3("EnemyA3", 40, 70, HOLDING_AREA, ZERO_VELOCITY, Vector2D(), 20, 0.75, false, "./images/EnemySheet.png", 4);
+		oEnemyA3.SetUV(0);
 		m_EnemyA3List.push_back(oEnemyA3);
 	}
 
@@ -260,7 +262,9 @@ void PlayState::CollisionChecks()
 						if (it->IsCollidingWith(&orCurrentProj))
 						{
 							orCurrentProj.Die();	// kill projectile
+													// play death animation
 							it->Die();				// kill enemy
+						
 						}
 					}
 				}
@@ -305,7 +309,9 @@ void PlayState::CollisionChecks()
 				// if the enemy object is colliding with the current projectile:
 				if (it->IsCollidingWith(&orCurrentPlayer) && it->IsAlive())
 				{
-					it->Die();						// kill enemy
+											// play death animation
+					it->Die();				// kill enemy
+	
 					orCurrentPlayer.SetHealth(-1);	// damage Player
 				}
 			}

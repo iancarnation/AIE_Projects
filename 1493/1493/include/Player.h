@@ -19,7 +19,7 @@ class Player: public Sprite
 	public:
 		Player();		// default consructor
 		Player(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Position, 
-			   Vector2D a_Velocity, Vector2D a_Force, float a_fMass, float a_fMovementForce, bool a_bAlive, const char* a_cpTextureName);		// constructor with parameters 
+			   Vector2D a_Velocity, Vector2D a_Force, float a_fMass, float a_fMovementForce, bool a_bAlive, const char* a_cpTextureName, float a_fSheetSlices);		// constructor with parameters 
 		~ Player();		// destructor
 		
 		// checks for input from user and initiates appropriate action

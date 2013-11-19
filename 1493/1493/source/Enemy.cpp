@@ -15,9 +15,9 @@ Enemy::Enemy()
 
 // constructor with parameters
 Enemy::Enemy(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Position, 
-			   Vector2D a_Velocity, Vector2D a_Force, float a_fMass, float a_fMovementForce, bool a_bAlive, const char* a_cpTextureName)
+			   Vector2D a_Velocity, Vector2D a_Force, float a_fMass, float a_fMovementForce, bool a_bAlive, const char* a_cpTextureName, float a_fSheetSlices)
 			 : Sprite (a_cNewType, a_fWidth, a_fHeight, a_Position, a_Velocity, a_Force, a_fMass, a_fMovementForce, 
-					   a_bAlive, a_cpTextureName)
+					   a_bAlive, a_cpTextureName, a_fSheetSlices)
 {
 	m_bFiring = false;
 	m_dTimeWaited = 0;
@@ -25,7 +25,7 @@ Enemy::Enemy(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Posit
 
 	for (int i=0; i<20; i++)
 	{
-		m_aProjectiles[i] = Projectile("Projectile", 10, 10, HOLDING_AREA, ZERO_VELOCITY, Vector2D(), 20, -1, false, "./images/cannonBall.png");
+		m_aProjectiles[i] = Projectile("Projectile", 10, 10, HOLDING_AREA, ZERO_VELOCITY, Vector2D(), 20, -1, false, "./images/cannonBall.png", 1);
 	}
 }
 
@@ -139,3 +139,26 @@ void Enemy::ScreenCollision()
 		if(!IsOnScreen())
 			Die();
 }
+
+//// death animation
+//void Enemy::DeathAnim()
+//{
+//	double timer = 0;
+//	double gapSize = 100000000;
+//
+//	SetSpriteUVCoordinates(GetSpriteId(), 0.25, 0, 0.5, 1);
+//
+//	while (true)
+//	{
+//		timer ++;
+//			
+//		if (timer == gapSize *2)
+//			SetSpriteUVCoordinates(GetSpriteId(), 0.5, 0, 0.75, 1);
+//
+//		if (timer == gapSize * 3)
+//			SetSpriteUVCoordinates(GetSpriteId(), 0.75, 0, 1, 1);
+//
+//		if (timer== gapSize * 4)
+//			break;
+//	}
+//}

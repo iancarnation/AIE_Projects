@@ -1,19 +1,25 @@
 1943 TODO - CLASS
 
-- delta time!
-- animation
+
+- player-dependent level scrolling?
+- more animation
 - make level class
 
 
+
+
+- enhance enemy behaviors / movements
+- try different control scheme, thrust forward/back, rotate with l/r
+
+
+
+- make physics engine?
+- optimize code organization..organizational comments, rearrange a bit
 - collision optimisation (grid hashing, etc..)
 - make movement manager
 - make Projectile and Enemy classes abstract (to create different types later)?
 - remove singleton pattern from GameEngine and GameStates?
 - data-driven level design/scripting (xml??)
-
-HOME---------------------------------------------------------------
-
--clean up movement code, etc. by changing to protected
 
 
 
@@ -34,3 +40,7 @@ DONE----------------------------------------------------------------
 11/5
 - made vector x,y public, removed get/set functions, updated code
 - added Vector3 class and adjusted math functions&operators
+11/12
+- delta time - seems to be working?
+- added simulated drag force
+- basic UV coord. animation added to player

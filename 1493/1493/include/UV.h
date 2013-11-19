@@ -1,0 +1,22 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// File:			UV.h
+// Author:			Ian Rich
+// Date Created:	October 2013
+// Brief:			UV Coordinate Class Prototype
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//guards
+#ifndef _UV_H_
+#define _UV_H_
+
+class UV
+{
+	public:
+		UV();		// default constructor
+		UV(float a_fXmin, float a_fYmin, float a_fXmax, float a_fYmax);  // const. with values
+		~UV();		// destructor
+
+		float m_fXmin, m_fYmin, m_fXmax, m_fYmax;
+};
+
+#endif

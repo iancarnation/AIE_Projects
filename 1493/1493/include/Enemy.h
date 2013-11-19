@@ -17,7 +17,7 @@ class Enemy: public Sprite
 	public:
 		Enemy();		// default consructor
 		Enemy(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Position, 
-			   Vector2D a_Velocity, Vector2D a_Force, float a_fMass, float a_fMovementForce, bool a_bAlive, const char* a_cpTextureName);		// constructor with parameters 
+			   Vector2D a_Velocity, Vector2D a_Force, float a_fMass, float a_fMovementForce, bool a_bAlive, const char* a_cpTextureName, float a_fSheetSlices);		// constructor with parameters 
 		~ Enemy();		// destructor
 		
 		// controls enemy movement and attack behavior

@@ -12,8 +12,10 @@
 #include "AIE.h"
 #include "KeyCodes.h"
 #include "Vector2D.h"
+#include "UV.h"
 #include "StaticConstants.h"
 #include <string>
+#include <vector>
 #include <math.h>
 #include <GL/glfw.h>
 
@@ -25,7 +27,7 @@ class Sprite
 		Sprite();					// default constructor
 		Sprite(char *a_cNewType);	// default constructor with type name provided
 		Sprite(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Position, 
-			   Vector2D a_Velocity, Vector2D a_Force, float a_fMass, float a_fMovementForce, bool a_bAlive, const char* a_cpTextureName);	// constructor with **something** provided?
+			   Vector2D a_Velocity, Vector2D a_Force, float a_fMass, float a_fMovementForce, bool a_bAlive, const char* a_cpTextureName, float a_fSheetSlices);	// constructor with **something** provided?
 		virtual ~ Sprite();					// destructor
 
 		virtual void Update();		// run functions for changing state of objects
@@ -50,6 +52,8 @@ class Sprite
 		bool IsOnScreen();			// is object on the screen?
 		bool IsCollidingWith(Sprite* a_sprite2);	// sprite collision
 		void Die();		// "kills" projectile and returns it to holding area
+		void UVSetup();		// sets up UV corrdinates of spite
+		void SetUV(int a_iSheet);	// sets UV coordinates of sprite's sheet
 
 	protected:
 		char m_cType[20];
@@ -63,8 +67,10 @@ class Sprite
 		float m_fMass;
 		float m_fMovementForce;
 		const char* m_cpTextureName;
+		float m_fSheetSlices;
 
 		float m_fTop, m_fBottom, m_fLeft, m_fRight;
+		vector<UV> m_vSpriteSheet;
 
 		double m_dDeltaTime;
 };

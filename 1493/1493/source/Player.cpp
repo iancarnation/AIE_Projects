@@ -16,9 +16,9 @@ Player::Player()
 
 // constructor with parameters
 Player::Player(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Position, 
-			   Vector2D a_Velocity, Vector2D a_Force, float a_fMass, float a_fMovementForce, bool a_bAlive, const char* a_cpTextureName)
+			   Vector2D a_Velocity, Vector2D a_Force, float a_fMass, float a_fMovementForce, bool a_bAlive, const char* a_cpTextureName, float a_fSheetSlices)
 			 : Sprite (a_cNewType, a_fWidth, a_fHeight, a_Position, a_Velocity, a_Force, a_fMass, a_fMovementForce, 
-					   a_bAlive, a_cpTextureName)
+					   a_bAlive, a_cpTextureName, a_fSheetSlices)
 {
 	m_bFiring = false;
 	m_dTimeWaited = 0;
@@ -26,7 +26,7 @@ Player::Player(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Pos
 
 	for (int i=0; i<20; i++)
 	{
-		m_aProjectiles[i] = Projectile("Arrow", 5, 30, HOLDING_AREA, ZERO_VELOCITY, Vector2D(), 200, 1, false, "./images/arrow.png");
+		m_aProjectiles[i] = Projectile("Arrow", 5, 30, HOLDING_AREA, ZERO_VELOCITY, Vector2D(), 200, 1, false, "./images/arrow.png", 1);
 	}
 }
 
@@ -96,9 +96,7 @@ void Player::Movement()
 	{
 		m_oForce.m_fY -= m_fMovementForce;
 	}
-	/*if (glfwGetKey('W') == GLFW_RELEASE)
-		m_oForce.m_fY = 0;
-*/
+
 	if (IsKeyDown('S') || IsKeyDown(GLFW_KEY_DOWN))
 	{
 		m_oForce.m_fY += m_fMovementForce;
@@ -106,18 +104,22 @@ void Player::Movement()
 	if (IsKeyDown('A') || IsKeyDown(GLFW_KEY_LEFT))
 	{
 		m_oForce.m_fX -= m_fMovementForce;
-		SetSpriteUVCoordinates(m_iSpriteId, 0, 0, 0.33, 1);
+		SetUV(0);
 	}
 	else if (glfwGetKey('A') == GLFW_RELEASE)
-		SetSpriteUVCoordinates(m_iSpriteId, 0.33, 0, 0.66, 1);
+		SetUV(1);
 
 	if (IsKeyDown('D') || IsKeyDown(GLFW_KEY_RIGHT))
 	{
 		m_oForce.m_fX += m_fMovementForce;
-		SetSpriteUVCoordinates(m_iSpriteId, 0.66, 0, 1, 1);
+		SetUV(2);
 	}
 	/*else if (glfwGetKey('D') == GLFW_RELEASE)
 		SetSpriteUVCoordinates(m_iSpriteId, 0.33, 0, 0.66, 1);	*/// doesn't work in conjunction with the 'A' release check ??
+
+
+	///  -------------------  Test Control Scheme 2 -------------------------------------------
+
 }
 
 // check for fire input / firing timing control 

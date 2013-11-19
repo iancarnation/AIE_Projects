@@ -45,7 +45,8 @@ Sprite::Sprite(char *a_cNewType)
 	m_iAmmoSlot = 0;
 	m_bAlive = false;
 	m_cpTextureName = "";
-	m_dDeltaTime = GetDeltaTime();
+	m_fSheetSlices = 0;
+	//m_dDeltaTime = GetDeltaTime();
 
 	m_fTop = m_oPosition.m_fY - (m_fHeight / 2);
 	m_fBottom = m_oPosition.m_fY + (m_fHeight / 2);
@@ -56,7 +57,7 @@ Sprite::Sprite(char *a_cNewType)
 }
 // constructor that takes in values
 Sprite::Sprite(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Position, 
-			   Vector2D a_Velocity, Vector2D a_Force, float a_fMass, float a_fMovementForce, bool a_bAlive, const char* a_cpTextureName)
+			   Vector2D a_Velocity, Vector2D a_Force, float a_fMass, float a_fMovementForce, bool a_bAlive, const char* a_cpTextureName, float a_fSheetSlices)
 {
 	SetType(a_cNewType);
 	m_fWidth = a_fWidth;
@@ -70,7 +71,11 @@ Sprite::Sprite(char *a_cNewType, float a_fWidth, float a_fHeight, Vector2D a_Pos
 	m_iAmmoSlot = 0;
 	m_bAlive = a_bAlive;
 	m_cpTextureName = a_cpTextureName;
-	m_dDeltaTime = GetDeltaTime();
+	m_fSheetSlices = a_fSheetSlices;
+	//m_dDeltaTime = GetDeltaTime();
+
+	// set UV Coordinates
+	UVSetup();
 
 	m_fTop = m_oPosition.m_fY - (m_fHeight / 2);
 	m_fBottom = m_oPosition.m_fY + (m_fHeight / 2);
@@ -239,4 +244,36 @@ void Sprite::Die()
 	SetAlive(false);
 	m_oVelocity = ZERO_VELOCITY;
 	m_oPosition = HOLDING_AREA;
+}
+
+// set UV Coordinates
+void Sprite::UVSetup()
+{
+	float fStepSize = 1/m_fSheetSlices;			// X distance between slices
+	float fMin = 0;								// current top-left corner of slice
+	float fMax = fStepSize;						// current bottom-right corner of slice
+	// for each slice of the sprite sheet
+	for (int i=0; i<int(m_fSheetSlices); i++)
+	{
+		// construct UV coordinate set (Xmin, Ymin, Xmax, Ymax)
+		UV Slice(fMin, 0, fMax, 1);
+		// add to sprite sheet vector
+		m_vSpriteSheet.push_back(Slice);
+		// increment min and max cursors
+		fMin += fStepSize;
+		fMax += fStepSize;
+	}
+	// set initial slice
+}
+
+// sets UV coordinates of sprite's sheet
+void Sprite::SetUV(int a_iSheet)
+{
+	float tempXmin, tempYmin, tempXmax, tempYmax;
+	tempXmin = m_vSpriteSheet[a_iSheet].m_fXmin;
+	tempYmin = m_vSpriteSheet[a_iSheet].m_fYmin;
+	tempXmax = m_vSpriteSheet[a_iSheet].m_fXmax;
+	tempYmax = m_vSpriteSheet[a_iSheet].m_fYmax;
+
+	SetSpriteUVCoordinates(m_iSpriteId, tempXmin, tempYmin, tempXmax, tempYmax);
 }
