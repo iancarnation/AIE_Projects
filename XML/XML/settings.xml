@@ -1,0 +1,34 @@
+<?xml version=1.0 encoding=utf-8?>
+
+<Settings>
+
+	<GameDifficulty difficulty="0"/>
+	
+	<Display
+		width="1080"
+		height="720"
+		fullscreen="false"/>
+	
+	<Sound>
+		<masterVolume>80</masterVolume>
+		<soundEffects>60</soundEffects>
+		<music>60</music>
+		<voice>50</voice>
+		<micLevel>50</micLevel>
+	</Sound>
+	
+	<MouseSettings>
+		<Xsense>50</Xsense>
+		<Ysense>50</Ysense>
+		<inversed>false</inversed>
+	</MouseSettings>
+	
+	<KeySettings>
+		<forward>'W'</forward>
+		<backward>'S'</backward>
+		<left>'A'</left>
+		<right>'D'</right>
+		<fire>','</fire>
+	</KeySettings>
+	
+</Settings>

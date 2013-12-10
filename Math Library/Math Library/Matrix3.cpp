@@ -144,14 +144,21 @@ void Matrix3::TransformVector(Vector3& a_rV, float a_fAngle, float a_fScale)
 	Vector3 TempVec;
 	Matrix3 TM = CreateRotation(a_fAngle);		// create rotation matrix
 	TM.SetScale(a_fScale);						// multiply rotation matrix by scale matrix
+
+	/*	Transformed vector = Translation Matrix (TM) * referenced vector (a_rV)
+
+		[x]	  [11][12][13]   [x]
+		[y]	= [21][22][23] * [y]
+		[z]	  [31][32][33]   [z]   */
 	
 	TempVec.m_fX = TM.m11*a_rV.m_fX + TM.m12*a_rV.m_fY + TM.m13*a_rV.m_fZ;
 	TempVec.m_fY = TM.m21*a_rV.m_fX + TM.m22*a_rV.m_fY + TM.m23*a_rV.m_fZ;
 	TempVec.m_fZ = TM.m31*a_rV.m_fX + TM.m32*a_rV.m_fY + TM.m33*a_rV.m_fZ;
-
-	Vector3.m_fX = TempVec.m_fX;
-	Vector3.m_fY = TempVec.m_fY;
-	Vector3.m_fZ = TempVec.m_fZ;
+	
+	// change referenced vector
+	a_rV.m_fX = TempVec.m_fX;
+	a_rV.m_fY = TempVec.m_fY;
+	a_rV.m_fZ = TempVec.m_fZ;
 }
 
 //// rotate, scale and translate a point  **not done!!*****

@@ -17,7 +17,7 @@ class Matrix3
 		Matrix3();										// default constructor
 		Matrix3(float a11, float a12, float a13,
 				float a21, float a22, float a23,
-				float a31, float a32, float a33);	// const. with values
+				float a31, float a32, float a33);		// const. with values
 		~Matrix3();										// destructor
 		
 		Matrix3 operator * (const Matrix3& a_rM2) const;						// multiplies two matrices
@@ -29,7 +29,7 @@ class Matrix3
 		void SetTranslation(Vector3 a_TransVector);					// sets translation of the matrix (replaces curr. translation)
 		void SetRotation(float a_fAngle);							// sets the rotation of the matrix (replaces curr. rotation)
 		void SetScale(float a_fScale);								// sets scale of the matrix (replaces curr. matrix)
-		void TransformVector(Vector3 a_vector, float a_fAngle, float a_fScale);		// rotate and scales a directional vector
+		void TransformVector(Vector3& a_rV, float a_fAngle, float a_fScale);		// rotate and scales a directional vector
 		//void TransformPoint(float a_fAngle, float a_fScale);		// rotate, scale and translate a point
 
 		void Print();				// cout matrix
