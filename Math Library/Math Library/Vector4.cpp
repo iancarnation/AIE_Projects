@@ -74,3 +74,14 @@ Vector4 Vector4::ReturnNormalized() const
 	return vec;
 }
 
+// converts hex code to rgb floats and returns vector4 with alpha as well
+Vector4 Vector4::HexToRGB(int a_iHexCode, int a_iAlpha)
+{
+	Vector4 TempVector;
+	TempVector.m_fX = ((a_iHexCode >> 16) & 0xFF) / 255;
+	TempVector.m_fY = ((a_iHexCode >> 8) & 0xFF) / 255;
+	TempVector.m_fZ = (a_iHexCode & 0xFF) / 255;
+	TempVector.m_fW = a_iAlpha;
+
+	return TempVector;
+}

@@ -22,6 +22,7 @@ class XML
 		TiXmlDocument Load(const char* filename);	// load file for TinyXML
 		void Read(TiXmlDocument doc, Settings& a_rSettings);		// read data and plug into variables
 		void Write();		// save variable data into file
+		void Print(const Settings& a_rSettings);
 		~XML();
 };
 

@@ -9,26 +9,23 @@
 		height="720"
 		fullscreen="false"/>
 	
-	<Sound>
-		<masterVolume>80</masterVolume>
-		<soundEffects>60</soundEffects>
-		<music>60</music>
-		<voice>50</voice>
-		<micLevel>50</micLevel>
-	</Sound>
+	<Sound
+		masterVolume="80"
+		soundEffects="60"
+		music="50"
+		voice="60"
+		micLevel="50"/>
 	
-	<MouseSettings>
-		<Xsense>50</Xsense>
-		<Ysense>50</Ysense>
-		<inversed>false</inversed>
-	</MouseSettings>
+	<MouseSettings
+		Xsense="50"
+		Ysense="50"
+		inversed="false"/>
 	
-	<KeySettings>
-		<forward>'W'</forward>
-		<backward>'S'</backward>
-		<left>'A'</left>
-		<right>'D'</right>
-		<fire>','</fire>
-	</KeySettings>
+	<KeySettings
+		forward="W"
+		backward="S"
+		left="A"
+		right="D"
+		fire=","/>
 	
 </Settings>

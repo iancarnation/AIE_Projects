@@ -19,11 +19,11 @@ class Vector4
 		Vector4(float a_fX, float a_fY, float a_fZ, float a_fW);	// constructor that takes in x and y values
 		~ Vector4();												// destructor
 		
-		
 		float GetMagnitude() const; 			// returns magnitude of vector
 		void Normalize();						// normalize a vector
 		Vector4 ReturnNormalized() const;		// returns a normalized copy of vector	
-		
+		Vector4 HexToRGB(int a_iHexCode, int a_iAlpha);		// converts hex code to rgb floats and returns vector4 with alpha as well
+
 		float m_fX, m_fY, m_fZ, m_fW;			// coordinate variables
 };
 
