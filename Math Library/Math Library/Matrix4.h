@@ -10,6 +10,7 @@
 #define _UV_H_
 
 #include "Vector4.h"
+#include "Static Constants.h"
 
 class Matrix4
 {
@@ -31,7 +32,7 @@ class Matrix4
 		void SetRotation(float a_fAngle, char a_cAxis);				// sets the rotation of the matrix (replaces curr. rotation)
 		void SetScale(float a_fScale);								// sets scale of the matrix (replaces curr. matrix)
 		void TransformVector(Vector4& a_rV, float a_fAngle, char a_cAxis, float a_fScale);		// rotate and scales a directional vector
-		//void TransformPoint(float a_fAngle, float a_fScale);		// rotate, scale and translate a point
+		void TransformPoint(Vector4& a_rV, float a_fAngle, char a_cAxis, float a_fScale, Vector4 a_TlateMatrix);		// rotate, scale and translate a point
 
 		void Print();				// cout matrix
 
@@ -40,9 +41,13 @@ class Matrix4
 			  m31, m32, m33, m34,
 			  m41, m42, m43, m44;		// 3x3 matrix stored as individual floats
 	private:
-		Matrix4 CreateIdentity() const;							// creates the appropriate identity matrix
-		Matrix4 CreateRotation(float a_fAngle, char a_cAxis) const;				// creates new rotation matrix with 0,0 translation
-		Matrix4 CreateTranslation(Vector4 a_TransVector) const;	// creates new translation matrix with 0 rotation
+		Matrix4 CreateIdentity();								// creates the appropriate identity matrix
+		Matrix4 CreateRotation(float a_fAngle, char a_cAxis);	// creates new rotation matrix with 0,0 translation
+		Matrix4 CreateScale(float a_fScale);					// creates new scale matrix
+		Matrix4 CreateTranslation(Vector4 a_TransVector);		// creates new translation matrix with 0 rotation
+		Matrix4 CreateOrthoProj(plane3D PLANE);					// creates new orthographic projection matrix for projecting onto given plane
 };
 
 #endif
+
+// need to remove vector4 usage when vector3 would work**

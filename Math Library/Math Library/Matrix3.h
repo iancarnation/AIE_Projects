@@ -30,7 +30,7 @@ class Matrix3
 		void SetRotation(float a_fAngle);							// sets the rotation of the matrix (replaces curr. rotation)
 		void SetScale(float a_fScale);								// sets scale of the matrix (replaces curr. matrix)
 		void TransformVector(Vector3& a_rV, float a_fAngle, float a_fScale);		// rotate and scales a directional vector
-		//void TransformPoint(float a_fAngle, float a_fScale);		// rotate, scale and translate a point
+		void TransformPoint(float a_fAngle, float a_fScale, Vector3 a_TransVector);		// rotate, scale and translate a point
 
 		void Print();				// cout matrix
 
@@ -38,9 +38,11 @@ class Matrix3
 			  m21, m22, m23,
 			  m31, m32, m33;		// 3x3 matrix stored as individual floats
 	private:
-		Matrix3 CreateIdentity() const;							// creates the appropriate identity matrix
-		Matrix3 CreateRotation(float a_fAngle) const;				// creates new rotation matrix with 0,0 translation
-		Matrix3 CreateTranslation(Vector3 a_TransVector) const;	// creates new translation matrix with 0 rotation
+		Matrix3 CreateIdentity();							// creates the appropriate identity matrix
+		Matrix3 CreateRotation(float a_fAngle);			// creates new rotation matrix with 0,0 translation
+		Matrix3 CreateScale(float a_fScale);				// creates new scale matrix
+		Matrix3 CreateTranslation(Vector3 a_TransVector);	// creates new translation matrix with 0 rotation
+		Matrix3 CreateOrthoProj(char a_axis);				// creates orthographic projection matrix for given axis
 };
 
 #endif

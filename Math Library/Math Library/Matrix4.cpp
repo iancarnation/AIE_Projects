@@ -84,7 +84,7 @@ Matrix4 Matrix4::operator * (const float a_fScalar) const
 	return r;
 }
 
-Matrix4 Matrix4::CreateIdentity() const
+Matrix4 Matrix4::CreateIdentity()
 {
 	return Matrix4(1,0,0,0,
 				   0,1,0,0,
@@ -93,7 +93,7 @@ Matrix4 Matrix4::CreateIdentity() const
 }
 
 // creates new rotation matrix with 0,0 translation around given cardinal axis
-Matrix4 Matrix4::CreateRotation(float a_fAngle, char a_cAxis) const
+Matrix4 Matrix4::CreateRotation(float a_fAngle, char a_cAxis)
 {
 	float C = cos(a_fAngle);
 	float S = sin(a_fAngle);
@@ -123,13 +123,45 @@ Matrix4 Matrix4::CreateRotation(float a_fAngle, char a_cAxis) const
 	};
 }
 
+// creates new scale matrix
+Matrix4 Matrix4::CreateScale(float a_fScale)
+{
+	return Matrix4(a_fScale, 0		 , 0       , 0,
+				   0	   , a_fScale, 0       , 0,
+				   0	   , 0		 , a_fScale, 0,
+				   0       , 0       , 0       , 1);
+}
+
 // creates new translation matrix with 0 rotation
-Matrix4 Matrix4::CreateTranslation(Vector4 a_TransVector) const
+Matrix4 Matrix4::CreateTranslation(Vector4 a_TransVector)
 {
 	return Matrix4(1,0,0,a_TransVector.m_fX,
 				   0,1,0,a_TransVector.m_fY,
 				   0,0,1,a_TransVector.m_fZ,
 				   0,0,0,a_TransVector.m_fW);
+}
+
+// creates new orthographic projection matrix for projecting onto given plane
+Matrix4 Matrix4::CreateOrthoProj(plane3D PLANE)
+{
+	switch(PLANE)
+	{
+	case XY:
+		return Matrix4(1,0,0,0,
+					   0,1,0,0,
+					   0,0,0,0,
+					   0,0,0,1); break;
+	case XZ:
+		return Matrix4(1,0,0,0,
+					   0,0,0,0,
+					   0,0,1,0,
+					   0,0,0,1); break;
+	case YZ:
+		return Matrix4(0,0,0,0,
+					   0,1,0,0,
+					   0,0,1,0,
+					   0,0,0,1); break;
+	};
 }
 
 // returns the translation of the matrix as a vector
@@ -173,10 +205,7 @@ void Matrix4::SetRotation(float a_fAngle, char a_cAxis)
 // sets scale of the matrix (replaces curr. matrix)
 void Matrix4::SetScale(float a_fScale)
 {
-	Matrix4 ScaleMatrix(a_fScale, 0		  , 0       , 0,
-						0		, a_fScale, 0       , 0,
-						0		, 0		  , a_fScale, 0,
-						0       , 0       , 0       , 1);
+	Matrix4 ScaleMatrix = CreateScale(a_fScale);
 
 	*this = *this * ScaleMatrix;
 }
@@ -186,7 +215,7 @@ void Matrix4::TransformVector(Vector4& a_rV, float a_fAngle, char a_cAxis, float
 {
 	Vector4 TempVec;
 	Matrix4 TM = CreateRotation(a_fAngle, a_cAxis);		// create rotation matrix
-	TM.SetScale(a_fScale);						// multiply rotation matrix by scale matrix
+	TM.SetScale(a_fScale);								// multiply rotation matrix by scale matrix
 	
 	TempVec.m_fX = TM.m11*a_rV.m_fX + TM.m12*a_rV.m_fY + TM.m13*a_rV.m_fZ + TM.m13*a_rV.m_fW;
 	TempVec.m_fY = TM.m21*a_rV.m_fX + TM.m22*a_rV.m_fY + TM.m23*a_rV.m_fZ + TM.m23*a_rV.m_fW;
@@ -199,18 +228,31 @@ void Matrix4::TransformVector(Vector4& a_rV, float a_fAngle, char a_cAxis, float
 	a_rV.m_fW = TempVec.m_fW;
 }
 
-//// rotate, scale and translate a point  **not done!!*****
-//void Matrix4::TransformPoint(float a_fAngle, float a_fScale)
-//{
-//	Matrix4 RotMatrix = CreateRotation(a_fAngle);
-//	Matrix4 ScaleMatrix(a_fScale, 0		  , 0,
-//						0		, a_fScale, 0,
-//						0		, 0		  , 1);
-//
-//	Matrix4 TransformMatrix = RotMatrix * ScaleMatrix;
-//
-//	*this = *this * TransformMatrix;
-//}
+// rotate, scale and translate a point
+void Matrix4::TransformPoint(Vector4& a_rV, float a_fAngle, char a_cAxis, float a_fScale, Vector4 a_TransVector)
+{
+	Vector4 TempVec;
+	Matrix4 TM =  CreateRotation(a_fAngle, a_cAxis);	// create rotation matrix
+	TM.SetScale(a_fScale);								// multiply rotation matrix by scale matrix
+	TM.SetTranslation(a_TransVector);					// multiply transformation matrix by translation matrix
+
+	TempVec.m_fX = TM.m11*a_rV.m_fX + TM.m12*a_rV.m_fY + TM.m13*a_rV.m_fZ + TM.m13*a_rV.m_fW;
+	TempVec.m_fY = TM.m21*a_rV.m_fX + TM.m22*a_rV.m_fY + TM.m23*a_rV.m_fZ + TM.m23*a_rV.m_fW;
+	TempVec.m_fZ = TM.m31*a_rV.m_fX + TM.m32*a_rV.m_fY + TM.m33*a_rV.m_fZ + TM.m33*a_rV.m_fW;
+	TempVec.m_fW = TM.m41*a_rV.m_fX + TM.m42*a_rV.m_fY + TM.m43*a_rV.m_fZ + TM.m43*a_rV.m_fW;
+
+	if (TempVec.m_fW !=1 && TempVec.m_fW !=0)
+	{
+		TempVec.m_fX = TempVec.m_fX / TempVec.m_fW;
+		TempVec.m_fY = TempVec.m_fY / TempVec.m_fW;
+		TempVec.m_fZ = TempVec.m_fZ / TempVec.m_fW;
+	}
+
+	a_rV.m_fX = TempVec.m_fX;
+	a_rV.m_fY = TempVec.m_fY;
+	a_rV.m_fZ = TempVec.m_fZ;
+	a_rV.m_fW = TempVec.m_fW;
+}
 
 // cout matrix
 void Matrix4::Print()

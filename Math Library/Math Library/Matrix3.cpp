@@ -79,7 +79,7 @@ Matrix3 Matrix3::operator * (const float a_fScalar) const
 	return r;
 }
 
-Matrix3 Matrix3::CreateIdentity() const
+Matrix3 Matrix3::CreateIdentity()
 {
 	return Matrix3(1,0,0,
 				   0,1,0,
@@ -87,19 +87,43 @@ Matrix3 Matrix3::CreateIdentity() const
 }
 
 // creates new rotation matrix with 0,0 translation
-Matrix3 Matrix3::CreateRotation(float a_fAngle) const
+Matrix3 Matrix3::CreateRotation(float a_fAngle)
 {
 	return Matrix3(cos(a_fAngle),-sin(a_fAngle),0,
 				   sin(a_fAngle),cos(a_fAngle),0,
 				   0			,0			  ,1);	
 }
 
+// creates new scale matrix
+Matrix3 Matrix3::CreateScale(float a_fScale)
+{
+	return Matrix3(a_fScale, 0		 , 0,
+				   0	   , a_fScale, 0,
+				   0	   , 0		 , 1);
+}
+
 // creates new translation matrix with 0 rotation
-Matrix3 Matrix3::CreateTranslation(Vector3 a_TransVector) const
+Matrix3 Matrix3::CreateTranslation(Vector3 a_TransVector)
 {
 	return Matrix3(1,0,a_TransVector.m_fX,
 				   0,1,a_TransVector.m_fY,
 				   0,0,a_TransVector.m_fZ);
+}
+
+// creates orthographic projection matrix for given axis
+Matrix3 Matrix3::CreateOrthoProj(char a_axis)
+{
+	switch(a_axis)
+	{
+	case 'x':
+		return Matrix3(1,0,0,
+					   0,0,0,
+					   0,0,1); break;
+	case 'y':
+		return Matrix3(0,0,0,
+					   0,1,0,
+					   0,0,1); break;
+	};
 }
 
 // returns the translation of the matrix as a vector
@@ -131,9 +155,7 @@ void Matrix3::SetRotation(float a_fAngle)
 // sets scale of the matrix (replaces curr. matrix)
 void Matrix3::SetScale(float a_fScale)
 {
-	Matrix3 ScaleMatrix(a_fScale, 0		  , 0,
-						0		, a_fScale, 0,
-						0		, 0		  , 1);
+	Matrix3 ScaleMatrix = CreateScale(a_fScale);
 
 	*this = *this * ScaleMatrix;
 }
@@ -161,18 +183,17 @@ void Matrix3::TransformVector(Vector3& a_rV, float a_fAngle, float a_fScale)
 	a_rV.m_fZ = TempVec.m_fZ;
 }
 
-//// rotate, scale and translate a point  **not done!!*****
-//void Matrix3::TransformPoint(float a_fAngle, float a_fScale)
-//{
-//	Matrix3 RotMatrix = CreateRotation(a_fAngle);
-//	Matrix3 ScaleMatrix(a_fScale, 0		  , 0,
-//						0		, a_fScale, 0,
-//						0		, 0		  , 1);
-//
-//	Matrix3 TransformMatrix = RotMatrix * ScaleMatrix;
-//
-//	*this = *this * TransformMatrix;
-//}
+// rotate, scale and translate a point  **not done!!*****
+void Matrix3::TransformPoint(float a_fAngle, float a_fScale, Vector3 a_TransVector)
+{
+	Matrix3 RotMatrix = CreateRotation(a_fAngle);
+	Matrix3 ScaleMatrix = CreateScale(a_fScale);
+	Matrix3 TlateMatrix = CreateTranslation(a_TransVector);
+
+	Matrix3 TransformMatrix = RotMatrix * ScaleMatrix * TlateMatrix;
+
+	*this = *this * TransformMatrix;
+}
 
 // cout matrix
 void Matrix3::Print()

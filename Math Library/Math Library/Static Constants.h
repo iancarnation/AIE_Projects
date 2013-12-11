@@ -12,4 +12,6 @@
 static const float PI = 3.14159265359;
 static const float THRESHOLD = .0005;
 
+enum plane3D { XY, XZ, YZ; } PLANE;
+
 #endif
