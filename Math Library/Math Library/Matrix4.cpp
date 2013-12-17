@@ -22,9 +22,9 @@ Matrix4::Matrix4()
 
 // constructor with values, stores as 2D or 1D array, or as separate float variables
 Matrix4::Matrix4(float a11, float a12, float a13, float a14,
-				float a21, float a22, float a23, float a24,
-				float a31, float a32, float a33, float a34,
-				float a41, float a42, float a43, float a44)
+				 float a21, float a22, float a23, float a24,
+				 float a31, float a32, float a33, float a34,
+				 float a41, float a42, float a43, float a44)
 {
 	m11 = a11; m12 = a12; m13 = a13; m14 = a14; 
 	m21 = a21; m22 = a22; m23 = a23; m24 = a24; 

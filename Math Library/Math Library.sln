@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Math Library", "Math Library\Math Library.vcxproj", "{54D2921A-93E3-4558-9663-EFE298E7EBEE}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Unit Test", "Unit Test\Unit Test.vcxproj", "{676F1DDC-401B-42F0-9FBA-7E03CEDD3837}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +15,10 @@ Global
 		{54D2921A-93E3-4558-9663-EFE298E7EBEE}.Debug|Win32.Build.0 = Debug|Win32
 		{54D2921A-93E3-4558-9663-EFE298E7EBEE}.Release|Win32.ActiveCfg = Release|Win32
 		{54D2921A-93E3-4558-9663-EFE298E7EBEE}.Release|Win32.Build.0 = Release|Win32
+		{676F1DDC-401B-42F0-9FBA-7E03CEDD3837}.Debug|Win32.ActiveCfg = Debug|Win32
+		{676F1DDC-401B-42F0-9FBA-7E03CEDD3837}.Debug|Win32.Build.0 = Debug|Win32
+		{676F1DDC-401B-42F0-9FBA-7E03CEDD3837}.Release|Win32.ActiveCfg = Release|Win32
+		{676F1DDC-401B-42F0-9FBA-7E03CEDD3837}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

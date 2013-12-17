@@ -19,15 +19,17 @@ class Vector3
 		Vector3(float a_fX, float a_fY, float a_fZ);	// constructor that takes in x and y values
 		~ Vector3();						// destructor
 
-		Vector3 operator = (const Vector3& a_rVecSource); // sets one vector equal to another
 		Vector3 operator - (float a_fS);		// subtracts a scalar from a vector, returns new vector
 		Vector3 operator + (float a_fS);		// adds a scalar to a vector, returns new vector
 		Vector3 operator * (float a_fS);		// multiplies a vector by a scalar, returns new vector
+		Vector3 operator / (float a_fS);		// divides a vector by a scalar, returns new vector
 		void operator -= (float a_fS);			// sets a vector equal to itself minus a scalar
 		void operator += (float a_fS);			// sets a vector equal to itself plus a scalar
 		void operator *= (float a_fS);			// sets a vector equal to itself multiplied by a scalar
+		void operator /= (float a_fS);			// sets a vector equal to itself divided by a scalar
 		Vector3 operator - (const Vector3& a_rV2);	// subtracts one vector from another, returns new vector
 		Vector3 operator + (const Vector3& a_rV2);	// adds one vector to another, returns new vector
+		Vector3 operator = (const Vector3& a_rVecSource); // sets one vector equal to another
 		void operator -= (Vector3& a_rV2);		// sets a vector equal to itself minus another vector
 		void operator += (Vector3& a_rV2);		// sets a vector equal to itself plus another vector
 		bool operator == (const Vector3& a_rV2);	// tests vector equality

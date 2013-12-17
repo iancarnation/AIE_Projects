@@ -47,16 +47,6 @@ Vector3::~Vector3 ()
 
 //////////////////////////////-- MATHS --////////////////////////////////////////////////////////////
 
-// sets one vector equal to another
-Vector3 Vector3::operator = (const Vector3& a_rVecSource)
-{
-	m_fX = a_rVecSource.m_fX;
-	m_fY = a_rVecSource.m_fY;
-	m_fZ = a_rVecSource.m_fZ;
-
-	// return the existing object to allow for chaining
-	return *this;
-}
 // subtracts a scalar from a vector, returns new vector
 Vector3 Vector3::operator - (float a_fS)
 {
@@ -87,28 +77,29 @@ Vector3 Vector3::operator * (float a_fS)
 	return vTemp;
 }
 
-// sets a vector equal to itself minus a scalar
-void Vector3::operator -= (float a_fS)
+// divides a vector by a scalar, returns new vector
+Vector3 Vector3::operator / (float a_fS)
 {
-	m_fX -= a_fS;
-	m_fY -= a_fS;
-	m_fZ -= a_fS;
+	Vector3 vTemp;
+	vTemp.m_fX = this->m_fX / a_fS;
+	vTemp.m_fY = this->m_fY / a_fS;
+	vTemp.m_fZ = this->m_fZ / a_fS;
+	return vTemp;
 }
 
-// sets a vector equal to itself plus a scalar
-void Vector3::operator += (float a_fS)
-{
-	m_fX += a_fS;
-	m_fY += a_fS;
-	m_fZ += a_fS;
-}
-
-// sets a vector equal to itself multiplied by a scalar
 void Vector3::operator *= (float a_fS)
 {
 	m_fX *= a_fS;
 	m_fY *= a_fS;
 	m_fZ *= a_fS;
+}
+
+// sets a vector equal to itself divided by a scalar
+void Vector3::operator /= (float a_fS)
+{
+	m_fX /= a_fS;
+	m_fY /= a_fS;
+	m_fZ /= a_fS;
 }
 
 // subtracts one vector from another, returns new vector
@@ -129,6 +120,17 @@ Vector3 Vector3::operator + (const Vector3& a_rV2)
 	vTemp.m_fY += a_rV2.m_fY;
 	vTemp.m_fZ += a_rV2.m_fZ;
 	return vTemp;
+}
+
+// sets one vector equal to another
+Vector3 Vector3::operator = (const Vector3& a_rVecSource)
+{
+	m_fX = a_rVecSource.m_fX;
+	m_fY = a_rVecSource.m_fY;
+	m_fZ = a_rVecSource.m_fZ;
+
+	// return the existing object to allow for chaining
+	return *this;
 }
 
 // sets a vector equal to itself minus another vector
@@ -179,7 +181,7 @@ Vector3 Vector3::ReturnNormalized() const
 	return vec;
 }
 
-// gets distance bethween two points
+// gets distance between two points
 float Vector3::GetDistance(const Vector3 a_rV2) const
 {
 	return sqrt((a_rV2.m_fX - m_fX) * (a_rV2.m_fX - m_fX) + (a_rV2.m_fY - m_fY) * (a_rV2.m_fY - m_fY) + (a_rV2.m_fZ - m_fZ) * (a_rV2.m_fZ - m_fZ));

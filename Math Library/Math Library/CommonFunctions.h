@@ -14,6 +14,5 @@ float LerpScalar(float a_start, float a_end, float a_t);		// linear interpolatio
 float DegToRad(float a_angle);		// convert angle from degrees to radians
 float RadToDeg(float a_angle);		// convert angle from radians to degrees
 void NextPower2(int a_value);		// Testing scalar value for Power of Two (shift to nearest power of two)
-// bitwise operations
 
 #endif
