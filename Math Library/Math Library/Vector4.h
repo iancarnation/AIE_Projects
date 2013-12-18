@@ -19,6 +19,8 @@ class Vector4
 		Vector4(float a_fX, float a_fY, float a_fZ, float a_fW);	// constructor that takes in x and y values
 		~ Vector4();												// destructor
 		
+		bool operator == (const Vector4& a_rV2);	// tests vector equality
+
 		float GetMagnitude() const; 			// returns magnitude of vector
 		void Normalize();						// normalize a vector
 		Vector4 ReturnNormalized() const;		// returns a normalized copy of vector	

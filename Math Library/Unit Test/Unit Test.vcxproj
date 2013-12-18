@@ -36,7 +36,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <SourcePath>C:\Users\Student\Documents\Ian Rich Docs\Projects\Math Library\Math Library;$(SourcePath)</SourcePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -45,6 +47,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -66,12 +69,20 @@
     <ClInclude Include="UnitTestGroup.h" />
     <ClInclude Include="Vector3FuncUTests.h" />
     <ClInclude Include="Vector3OperatorUTests.h" />
+    <ClInclude Include="Vector4UTests.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UnitTest.cpp" />
     <ClCompile Include="UnitTestMain.cpp" />
     <ClCompile Include="Vector3OperatorUTests.cpp" />
     <ClCompile Include="Vector3FuncUTests.cpp" />
+    <ClCompile Include="Vector4UTests.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\Debug\Math Library.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

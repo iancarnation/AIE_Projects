@@ -1,0 +1,18 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// File:			UnitTestMainFunctions.h
+// Author:			Ian Rich
+// Date Created:	2013
+// Brief:			Functions for loading test data / init test objects
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#ifndef _UNITTESTMAINFUNCTIONS_H_
+#define _UNITTESTMAINFUNCTIONS_H_
+
+#include "UnitTest.h"
+#include "Vector3FuncUTests.h"
+#include "Vector3OperatorUTests.h"
+
+void SetupV3OperatorTest(UnitTester& a_rTester);
+
+
+#endif

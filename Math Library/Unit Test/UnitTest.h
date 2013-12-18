@@ -9,7 +9,7 @@
 #define _UNITTEST_H_
 
 #include <list>
-#include <memory>
+#include <iostream>
 using namespace std;
 
 // Unit Test base class
@@ -31,7 +31,7 @@ class UnitTestGroup
 
 		void AddUnitTest(UnitTest* a_opTest);	// add test to group list
 
-		list<UnitTest> m_olUnitTests;
+		list<UnitTest*> m_olUnitTests;
 };
 
 // Top level of Unit Testing Library, Contains list of UnitTestGroup instances

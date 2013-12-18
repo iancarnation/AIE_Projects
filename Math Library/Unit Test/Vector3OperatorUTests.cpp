@@ -6,6 +6,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "Vector3OperatorUTests.h"
+#include <iostream>
+
 
 // Subtract scalar from vector -------------------------------------------------------------
 void SubScalarTest::SetData(Vector3 a_oVector, float a_fScalar, Vector3 a_oExpResult)
@@ -18,6 +20,7 @@ void SubScalarTest::SetData(Vector3 a_oVector, float a_fScalar, Vector3 a_oExpRe
 bool SubScalarTest::DoTest()
 {
 	Vector3 Result = m_oVector - m_fScalar;
+	cout<< "\n---------------SubScalarTest---------------\n";
 	return (Result == m_oResult);
 }
 
@@ -32,6 +35,7 @@ void AddScalarTest::SetData(Vector3 a_oVector, float a_fScalar, Vector3 a_oExpRe
 bool AddScalarTest::DoTest()
 {
 	Vector3 Result = m_oVector + m_fScalar;
+	cout<< "\n---------------AddScalarTest---------------\n";
 	return (Result == m_oResult);
 }
 
@@ -46,6 +50,7 @@ void MultScalarTest::SetData(Vector3 a_oVector, float a_fScalar, Vector3 a_oExpR
 bool MultScalarTest::DoTest()
 {
 	Vector3 Result = m_oVector * m_fScalar;
+	cout<< "\n---------------MultScalarTest---------------\n";
 	return (Result == m_oResult);
 }
 
@@ -60,6 +65,7 @@ void DivScalarTest::SetData(Vector3 a_oVector, float a_fScalar, Vector3 a_oExpRe
 bool DivScalarTest::DoTest()
 {
 	Vector3 Result = m_oVector / m_fScalar;
+	cout<< "\n---------------DivScalarTest---------------\n";
 	return (Result == m_oResult);
 }
 
@@ -74,6 +80,7 @@ void SubEqualScalarTest::SetData(Vector3 a_oVector, float a_fScalar, Vector3 a_o
 bool SubEqualScalarTest::DoTest()
 {
 	m_oVector -= m_fScalar;
+	cout<< "\n---------------SubEqualScalarTest---------------\n";
 	return (m_oVector == m_oResult);
 }
 
@@ -88,6 +95,7 @@ void AddEqualScalarTest::SetData(Vector3 a_oVector, float a_fScalar, Vector3 a_o
 bool AddEqualScalarTest::DoTest()
 {
 	m_oVector += m_fScalar;
+	cout<< "\n---------------AddEqualScalarTest---------------\n";
 	return (m_oVector == m_oResult);
 }
 
@@ -102,6 +110,7 @@ void MultEqualScalarTest::SetData(Vector3 a_oVector, float a_fScalar, Vector3 a_
 bool MultEqualScalarTest::DoTest()
 {
 	m_oVector *= m_fScalar;
+	cout<< "\n---------------MultEqualScalarTest---------------\n";
 	return (m_oVector == m_oResult);
 }
 
@@ -116,6 +125,7 @@ void DivEqualScalarTest::SetData(Vector3 a_oVector, float a_fScalar, Vector3 a_o
 bool DivEqualScalarTest::DoTest()
 {
 	m_oVector /= m_fScalar;
+	cout<< "\n---------------DivEqualScalarTest---------------\n";
 	return (m_oVector == m_oResult);
 }
 
@@ -130,6 +140,7 @@ void VecSubTest::SetData(Vector3 a_oV1, Vector3 a_oV2, Vector3 a_oExpResult)
 bool VecSubTest::DoTest()
 {
 	Vector3 Result = m_oVector1 - m_oVector2;
+	cout<< "\n---------------VecSubTest---------------\n";
 	return (Result == m_oResult);
 }
 
@@ -144,6 +155,7 @@ void VecAddTest::SetData(Vector3 a_oV1, Vector3 a_oV2, Vector3 a_oExpResult)
 bool VecAddTest::DoTest()
 {
 	Vector3 Result = m_oVector1 + m_oVector2;
+	cout<< "\n---------------VecAddTest---------------\n";
 	return (Result == m_oResult);
 }
 
@@ -158,6 +170,7 @@ void VecSetEqualTest::SetData(Vector3 a_oV1, Vector3 a_oV2, Vector3 a_oExpResult
 bool VecSetEqualTest::DoTest()
 {
 	m_oVector1 = m_oVector2;
+	cout<< "\n---------------VecSetEqualTest---------------\n";
 	return (m_oVector1 == m_oResult);
 }
 
@@ -173,6 +186,7 @@ void VecSubEqualTest::SetData(Vector3 a_oV1, Vector3 a_oV2, Vector3 a_oExpResult
 bool VecSubEqualTest::DoTest()
 {
 	m_oVector1 -= m_oVector2;
+	cout<< "\n---------------VecSubEqualTest---------------\n";
 	return (m_oVector1 == m_oResult);
 }
 
@@ -187,6 +201,7 @@ void VecAddEqualTest::SetData(Vector3 a_oV1, Vector3 a_oV2, Vector3 a_oExpResult
 bool VecAddEqualTest::DoTest()
 {
 	m_oVector1 += m_oVector2;
+	cout<< "\n---------------VecAddEqualTest---------------\n";
 	return (m_oVector1 == m_oResult);
 }
 
@@ -201,5 +216,6 @@ void VecEqualTest::SetData(Vector3 a_oV1, Vector3 a_oV2, bool a_bExpResult)
 bool VecEqualTest::DoTest()
 {
 	bool Result = (m_oVector1 == m_oVector2);
+	cout<< "\n---------------VecEqualTest---------------\n";
 	return (Result == m_bResult);
 }

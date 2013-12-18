@@ -18,7 +18,7 @@ Vector3::Vector3 ()
 {
 	m_fX = 0;
 	m_fY = 0;
-	m_fZ = 1;
+	m_fZ = 0;
 	//cout<< "Default Vector Constructed!\n";
 }
 
@@ -87,6 +87,30 @@ Vector3 Vector3::operator / (float a_fS)
 	return vTemp;
 }
 
+// sets a vector equal to itself minus a scalar
+void Vector3::operator -= (float a_fS)
+{
+	m_fX -= a_fS;
+	m_fY -= a_fS;
+	m_fZ -= a_fS;
+}
+
+// sets a vector equal to itself plus a scalar
+void Vector3::operator += (float a_fS)
+{
+	m_fX += a_fS;
+	m_fY += a_fS;
+	m_fZ += a_fS;
+
+	/*
+
+	(*this) = (*this) + a_fS;
+	return (*this);
+
+	*/
+}
+
+// sets a vector equal to itself multiplied by a scalar
 void Vector3::operator *= (float a_fS)
 {
 	m_fX *= a_fS;
@@ -106,9 +130,9 @@ void Vector3::operator /= (float a_fS)
 Vector3 Vector3::operator - (const Vector3& a_rV2)
 {
 	Vector3 vTemp;
-	vTemp.m_fX -= a_rV2.m_fX;
-	vTemp.m_fY -= a_rV2.m_fY;
-	vTemp.m_fZ -= a_rV2.m_fZ;
+	vTemp.m_fX = this->m_fX - a_rV2.m_fX;
+	vTemp.m_fY = this->m_fY - a_rV2.m_fY;
+	vTemp.m_fZ = this->m_fZ - a_rV2.m_fZ;
 	return vTemp;
 }
 
@@ -116,9 +140,9 @@ Vector3 Vector3::operator - (const Vector3& a_rV2)
 Vector3 Vector3::operator + (const Vector3& a_rV2)
 {
 	Vector3 vTemp;
-	vTemp.m_fX += a_rV2.m_fX;
-	vTemp.m_fY += a_rV2.m_fY;
-	vTemp.m_fZ += a_rV2.m_fZ;
+	vTemp.m_fX = this->m_fX + a_rV2.m_fX;
+	vTemp.m_fY = this->m_fY + a_rV2.m_fY;
+	vTemp.m_fZ = this->m_fZ + a_rV2.m_fZ;
 	return vTemp;
 }
 
@@ -152,7 +176,7 @@ void Vector3::operator += (Vector3& a_rV2)
 // tests vector equality, returns bool
 bool Vector3::operator == (const Vector3& a_rV2)
 {
-	if ((this->m_fX - a_rV2.m_fX < THRESHOLD) && (this->m_fY - a_rV2.m_fY < THRESHOLD) && (this->m_fZ - a_rV2.m_fZ < THRESHOLD))
+	if ((abs(abs(this->m_fX) - abs(a_rV2.m_fX)) < THRESHOLD) && (abs(abs(this->m_fY) - abs(a_rV2.m_fY)) < THRESHOLD) && (abs(abs(this->m_fZ) - abs(a_rV2.m_fZ)) < THRESHOLD))
 		return true;
 	else
 		return false;
@@ -184,7 +208,7 @@ Vector3 Vector3::ReturnNormalized() const
 // gets distance between two points
 float Vector3::GetDistance(const Vector3 a_rV2) const
 {
-	return sqrt((a_rV2.m_fX - m_fX) * (a_rV2.m_fX - m_fX) + (a_rV2.m_fY - m_fY) * (a_rV2.m_fY - m_fY) + (a_rV2.m_fZ - m_fZ) * (a_rV2.m_fZ - m_fZ));
+	return sqrt((m_fX - a_rV2.m_fX) * (m_fX - a_rV2.m_fX) + (m_fY - a_rV2.m_fY) * (m_fY - a_rV2.m_fY) + (m_fZ - a_rV2.m_fZ) * (m_fZ - a_rV2.m_fZ));
 }
 
 // dot product of 2 vectors

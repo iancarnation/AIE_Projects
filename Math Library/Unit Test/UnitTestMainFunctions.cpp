@@ -1,17 +1,15 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// File:			StaticConstants.h
+// File:			UnitTestMainFunctions.cpp
 // Author:			Ian Rich
 // Date Created:	2013
-// Brief:			Static variables for math library
+// Brief:			Functions for loading test data / init test objects
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//guards
-#ifndef _STATICCONSTANTS_H_
-#define _STATICCONSTANTS_H_
+#include "UnitTestMainFunctions.h"
 
-static const float PI = 3.14159265359;
-static const float THRESHOLD = .005;
+void SetupV3OperatorTest(UnitTester& a_orTester)
+{
 
-enum plane3D { XY, XZ, YZ };
 
-#endif
+	
+	}

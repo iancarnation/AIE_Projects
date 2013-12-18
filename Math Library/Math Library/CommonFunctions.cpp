@@ -42,5 +42,14 @@ void NextPower2(int a_value)
 		a_value |= a_value >> 16;
 		a_value ++;
 	}
-
 }
+
+// tests float equality
+bool AreEqual(const float a_F1, const float a_F2)
+{
+	if (( abs( abs(a_F1) - abs(a_F2) ) < THRESHOLD ))
+		return true;
+	else
+		return false;
+}
+

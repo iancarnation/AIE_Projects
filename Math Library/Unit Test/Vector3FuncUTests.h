@@ -11,6 +11,7 @@
 
 #include "UnitTest.h"
 #include "Vector3.h"
+#include "CommonFunctions.h"
 
 // returns magnitude of vector -------------------------------------------------------------
 class MagnitudeTest : public UnitTest
@@ -24,6 +25,17 @@ class MagnitudeTest : public UnitTest
 		float m_fResult;
 };
 
+// normalize a vector -------------------------------------------------------------
+class NormalizeTest : public UnitTest
+{
+	public:
+		void SetData(Vector3 a_oVector, float a_fExpResult);
+		virtual bool DoTest(); 
+	
+	private:
+		Vector3 m_oVector;
+		float m_fResult;
+};
 
 // returns a normalized version of vector -------------------------------------------------------------
 class RetNormalizedTest : public UnitTest

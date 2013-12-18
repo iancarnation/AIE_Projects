@@ -50,6 +50,15 @@ Vector4::~Vector4 ()
 
 //////////////////////////////-- MATHS --////////////////////////////////////////////////////////////
 
+// tests vector equality, returns bool
+bool Vector4::operator == (const Vector4& a_rV2)
+{
+	if ((abs(abs(this->m_fX) - abs(a_rV2.m_fX)) < THRESHOLD) && (abs(abs(this->m_fY) - abs(a_rV2.m_fY)) < THRESHOLD) && (abs(abs(this->m_fZ) - abs(a_rV2.m_fZ)) < THRESHOLD) && (abs(abs(this->m_fW) - abs(a_rV2.m_fW)) < THRESHOLD))
+		return true;
+	else
+		return false;
+}
+
 // returns magnitude of vector
 float Vector4::GetMagnitude() const
 {
