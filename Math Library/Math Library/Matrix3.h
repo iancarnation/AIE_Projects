@@ -10,6 +10,7 @@
 #define _UV_H_
 
 #include "Vector3.h"
+#include "CommonFunctions.h"
 
 class Matrix3
 {
@@ -20,10 +21,11 @@ class Matrix3
 				float a31, float a32, float a33);		// const. with values
 		~Matrix3();										// destructor
 		
-		Matrix3 operator * (const Matrix3& a_rM2) const;						// multiplies two matrices
-		Vector3 operator * (const Vector3& a_rV2) const;						// matrix * vector = vector
-		Matrix3 operator * (const float a_fScalar) const;						// multiplies matrix by scalar
-		
+		Matrix3 operator * (const Matrix3& a_rM2) const;	// multiplies two matrices
+		Vector3 operator * (const Vector3& a_rV2) const;	// matrix * vector = vector
+		Matrix3 operator * (const float a_fScalar) const;	// multiplies matrix by scalar
+		bool operator == (const Matrix3& a_rM2) const;		// tests matrix equality
+
 		Vector3 GetTranslations();									// returns the translation of the matrix as a vector
 		float GetRotation();										// returns rotation of the matrix
 		void SetTranslation(Vector3 a_TransVector);					// sets translation of the matrix (replaces curr. translation)
@@ -39,7 +41,7 @@ class Matrix3
 			  m31, m32, m33;		// 3x3 matrix stored as individual floats
 	private:
 		Matrix3 CreateIdentity();							// creates the appropriate identity matrix
-		Matrix3 CreateRotation(float a_fAngle);			// creates new rotation matrix with 0,0 translation
+		Matrix3 CreateRotation(float a_fAngle);				// creates new rotation matrix with 0,0 translation
 		Matrix3 CreateScale(float a_fScale);				// creates new scale matrix
 		Matrix3 CreateTranslation(Vector3 a_TransVector);	// creates new translation matrix with 0 rotation
 		Matrix3 CreateOrthoProj(char a_axis);				// creates orthographic projection matrix for given axis

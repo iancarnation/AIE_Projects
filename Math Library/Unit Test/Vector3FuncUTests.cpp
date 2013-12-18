@@ -21,6 +21,20 @@ bool MagnitudeTest::DoTest()
 	return AreEqual(Result, m_fResult);
 }
 
+// normalize a vector -------------------------------------------------------------
+void NormalizeTest::SetData(Vector3 a_oVector, Vector3 a_oExpResult)
+{
+	m_oVector = a_oVector;
+	m_oResult = a_oExpResult;
+}
+
+bool NormalizeTest::DoTest()
+{
+	m_oVector.Normalize();
+	cout<< "\n---------------NormalizeTest---------------\n";
+	return (m_oVector == m_oResult);
+}
+
 // returns a normalized version of vector -------------------------------------------------------------
 void RetNormalizedTest::SetData(Vector3 a_oVector, Vector3 a_oExpResult)
 {

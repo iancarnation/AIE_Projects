@@ -29,12 +29,12 @@ class MagnitudeTest : public UnitTest
 class NormalizeTest : public UnitTest
 {
 	public:
-		void SetData(Vector3 a_oVector, float a_fExpResult);
+		void SetData(Vector3 a_oVector, Vector3 a_oExpResult);
 		virtual bool DoTest(); 
 	
 	private:
 		Vector3 m_oVector;
-		float m_fResult;
+		Vector3 m_oResult;
 };
 
 // returns a normalized version of vector -------------------------------------------------------------

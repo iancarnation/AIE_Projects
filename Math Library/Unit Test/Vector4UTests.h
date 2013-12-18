@@ -14,7 +14,7 @@
 #include "CommonFunctions.h"
 
 // tests vector equality, returns bool -------------------------------------------------------------
-class VecEqualTest : public UnitTest
+class Vec4EqualTest : public UnitTest
 {
 	public:
 		void SetData(Vector4 a_oV1, Vector4 a_oV2, bool a_bExpResult);		
@@ -28,7 +28,7 @@ class VecEqualTest : public UnitTest
 
 
 // returns magnitude of vector -------------------------------------------------------------
-class MagnitudeTest : public UnitTest
+class V4MagnitudeTest : public UnitTest
 {
 	public:
 		void SetData(Vector4 a_oVector, float a_fExpResult);
@@ -39,8 +39,8 @@ class MagnitudeTest : public UnitTest
 		float m_fResult;
 };
 
-// returns a normalized version of vector -------------------------------------------------------------
-class RetNormalizedTest : public UnitTest
+// normalize a vector -------------------------------------------------------------
+class V4NormalizeTest : public UnitTest
 {
 	public:
 		void SetData(Vector4 a_oVector, Vector4 a_oExpResult);
@@ -51,6 +51,28 @@ class RetNormalizedTest : public UnitTest
 		Vector4 m_oResult;
 };
 
+// returns a normalized version of vector -------------------------------------------------------------
+class V4RetNormalizedTest : public UnitTest
+{
+	public:
+		void SetData(Vector4 a_oVector, Vector4 a_oExpResult);
+		virtual bool DoTest(); 
+	
+	private:
+		Vector4 m_oVector;
+		Vector4 m_oResult;
+};
 
+// converts hex code to rgb floats and returns vector4 with alpha as well -------------------------------------------------------------
+class V4HexToRGBTest : public UnitTest
+{
+	public:
+		void SetData(Vector4 a_oVector, Vector4 a_oExpResult);
+		virtual bool DoTest(); 
+	
+	private:
+		Vector4 m_oVector;
+		Vector4 m_oResult;
+};
 
 #endif

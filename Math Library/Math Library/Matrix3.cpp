@@ -79,6 +79,14 @@ Matrix3 Matrix3::operator * (const float a_fScalar) const
 	return r;
 }
 
+// tests matrix equality
+bool Matrix3::operator == (const Matrix3& a_rM2) const
+{
+	return (AreEqual(m11,a_rM2.m11) && AreEqual(m12,a_rM2.m12) && AreEqual(m13,a_rM2.m13) && 
+			AreEqual(m12,a_rM2.m12) && AreEqual(m22,a_rM2.m22) && AreEqual(m23,a_rM2.m23) && 
+			AreEqual(m13,a_rM2.m13) && AreEqual(m32,a_rM2.m32) && AreEqual(m33,a_rM2.m33));
+}
+
 Matrix3 Matrix3::CreateIdentity()
 {
 	return Matrix3(1,0,0,

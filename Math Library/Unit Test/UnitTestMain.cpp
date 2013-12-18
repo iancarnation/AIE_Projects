@@ -5,7 +5,10 @@
 // Brief:			Unit Test Main
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "UnitTestMainFunctions.h"
+#include "UnitTest.h"
+#include "Vector3FuncUTests.h"
+#include "Vector3OperatorUTests.h"
+#include "Vector4UTests.h"
 
 int main(int argc, char* argv[])
 {
@@ -261,6 +264,22 @@ int main(int argc, char* argv[])
 	oMagnitudeTests.AddUnitTest(&oMagnitudeTestFour);
 	oTester.AddUnitTestGroup(oMagnitudeTests);
 
+	// normalize a vector -------------------------------------------------------------
+	UnitTestGroup oNormalizeTests;
+
+	NormalizeTest oNormalizeTestOne, oNormalizeTestTwo, oNormalizeTestThree, oNormalizeTestFour;
+
+	oNormalizeTestOne.SetData(Vector3(1,1,1), Vector3(0.5773,0.5773,0.5773));
+	oNormalizeTestTwo.SetData(TestVector2, Vector3(0.2230,0.8719,0.4359));
+	oNormalizeTestThree.SetData(TestVector3, Vector3(0.1690,0.5071,0.8452));
+	oNormalizeTestFour.SetData(TestVector4, Vector3(-0.3204,0.5628,-0.762));
+
+	oNormalizeTests.AddUnitTest(&oNormalizeTestOne);
+	oNormalizeTests.AddUnitTest(&oNormalizeTestTwo);
+	oNormalizeTests.AddUnitTest(&oNormalizeTestThree);
+	oNormalizeTests.AddUnitTest(&oNormalizeTestFour);
+	oTester.AddUnitTestGroup(oNormalizeTests);
+
 	// returns a normalized version of vector -------------------------------------------------------------
 	UnitTestGroup oRetNormalizedTests;
 
@@ -357,8 +376,80 @@ int main(int argc, char* argv[])
 	oLerpTests.AddUnitTest(&oLerpTestFour);
 	oTester.AddUnitTestGroup(oLerpTests);
 
+	//######################## Vector4 Tests ###############################################
 
-	
+	Vector4 TestVector4A, 
+			TestVector4B(2.2,8.6,4.3,1), 
+			TestVector4C(1.1,3.3,5.5,1),
+			TestVector4D(-3.7,6.5,-8.8,1); // default constructor (values are zero) and argued constructors
+
+	// tests vector equality, returns bool -------------------------------------------------------------
+	UnitTestGroup oVec4EqualTests;
+
+	Vec4EqualTest oVec4EqualTestOne, oVec4EqualTestTwo, oVec4EqualTestThree, oVec4EqualTestFour;
+
+	oVec4EqualTestOne.SetData(TestVector4A, TestVector4B, false);
+	oVec4EqualTestTwo.SetData(TestVector4A, Vector4(0,0,0,0),true);
+	oVec4EqualTestThree.SetData(TestVector4B, TestVector4C, false);
+	oVec4EqualTestFour.SetData(TestVector4B, Vector4(2.2,8.6,4.3,1),true);
+
+	oVec4EqualTests.AddUnitTest(&oVec4EqualTestOne);
+	oVec4EqualTests.AddUnitTest(&oVec4EqualTestTwo);
+	oVec4EqualTests.AddUnitTest(&oVec4EqualTestThree);
+	oVec4EqualTests.AddUnitTest(&oVec4EqualTestFour);
+	oTester.AddUnitTestGroup(oVec4EqualTests);
+
+	// normalize a vector -------------------------------------------------------------
+	UnitTestGroup oV4NormalizeTests;
+
+	V4NormalizeTest oV4NormalizeTestOne, oV4NormalizeTestTwo, oV4NormalizeTestThree, oV4NormalizeTestFour;
+
+	oV4NormalizeTestOne.SetData(Vector4(1,1,1,1), Vector4(0.5,0.5,0.5,0.5));
+	oV4NormalizeTestTwo.SetData(TestVector4B, Vector4(0.2219, 0.8674, 0.4337, 0.1009));
+	oV4NormalizeTestThree.SetData(TestVector4C, Vector4(0.1670, 0.5012, 0.8353, 0.1519));
+	oV4NormalizeTestFour.SetData(TestVector4D, Vector4(-0.3192, 0.5607, -0.7591, 0.08626));
+
+	oV4NormalizeTests.AddUnitTest(&oV4NormalizeTestOne);
+	oV4NormalizeTests.AddUnitTest(&oV4NormalizeTestTwo);
+	oV4NormalizeTests.AddUnitTest(&oV4NormalizeTestThree);
+	oV4NormalizeTests.AddUnitTest(&oV4NormalizeTestFour);
+	oTester.AddUnitTestGroup(oV4NormalizeTests);
+
+	// normalize a vector -------------------------------------------------------------
+	UnitTestGroup oV4RetNormalizedTests;
+
+	V4RetNormalizedTest oV4RetNormalizedTestOne, oV4RetNormalizedTestTwo, oV4RetNormalizedTestThree, oV4RetNormalizedTestFour;
+
+	oV4RetNormalizedTestOne.SetData(Vector4(1,1,1,1), Vector4(0.5,0.5,0.5,0.5));
+	oV4RetNormalizedTestTwo.SetData(TestVector4B, Vector4(0.2219, 0.8674, 0.4337, 0.1009));
+	oV4RetNormalizedTestThree.SetData(TestVector4C, Vector4(0.1670, 0.5012, 0.8353, 0.1519));
+	oV4RetNormalizedTestFour.SetData(TestVector4D, Vector4(-0.3192, 0.5607, -0.7591, 0.08626));
+
+	oV4RetNormalizedTests.AddUnitTest(&oV4RetNormalizedTestOne);
+	oV4RetNormalizedTests.AddUnitTest(&oV4RetNormalizedTestTwo);
+	oV4RetNormalizedTests.AddUnitTest(&oV4RetNormalizedTestThree);
+	oV4RetNormalizedTests.AddUnitTest(&oV4RetNormalizedTestFour);
+	oTester.AddUnitTestGroup(oV4RetNormalizedTests);
+
+	//// converts hex code to rgb floats and returns vector4 with alpha as well -------------------------------------------------------------
+	//UnitTestGroup oV4HexToRGBTests;
+
+	//V4HexToRGBTest oV4HexToRGBTestOne, oV4HexToRGBTestTwo, oV4HexToRGBTestThree, oV4HexToRGBTestFour;
+
+	//oV4HexToRGBTestOne.SetData(Vector4(FF,FF,FF,1), Vector4(1,1,1,1));
+	//oV4HexToRGBTestTwo.SetData(Vector4(33,33,CC,0.5), Vector4(0.2,0.2,0.8,0.5));
+	//oV4HexToRGBTestThree.SetData(Vector4(7F,FF,D4,0.3), Vector4(0.4980,1.0,0.8314,0.3));
+	//oV4HexToRGBTestFour.SetData(Vector4(00,64,00,0.643), Vector4(0,0.3922,0,0.643));
+
+	//oV4HexToRGBTests.AddUnitTest(&oV4HexToRGBTestOne);
+	//oV4HexToRGBTests.AddUnitTest(&oV4HexToRGBTestTwo);
+	//oV4HexToRGBTests.AddUnitTest(&oV4HexToRGBTestThree);
+	//oV4HexToRGBTests.AddUnitTest(&oV4HexToRGBTestFour);
+	//oTester.AddUnitTestGroup(oV4HexToRGBTests);
+
+
+
+
 	bool AllTestsSucceed = oTester.DoTests();
 	char satisfaction;
 

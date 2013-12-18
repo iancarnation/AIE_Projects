@@ -19,7 +19,7 @@ Vector4::Vector4 ()
 	m_fX = 0;
 	m_fY = 0;
 	m_fZ = 0;
-	m_fW = 1;
+	m_fW = 0;
 	//cout<< "Default Vector Constructed!\n";
 }
 
