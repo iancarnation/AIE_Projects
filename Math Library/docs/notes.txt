@@ -1,0 +1,1 @@
+revert matrix creator functions back to private after testing

@@ -9,6 +9,8 @@
 #include "Vector3FuncUTests.h"
 #include "Vector3OperatorUTests.h"
 #include "Vector4UTests.h"
+#include "Matrix3UTests.h"
+
 
 int main(int argc, char* argv[])
 {
@@ -384,20 +386,20 @@ int main(int argc, char* argv[])
 			TestVector4D(-3.7,6.5,-8.8,1); // default constructor (values are zero) and argued constructors
 
 	// tests vector equality, returns bool -------------------------------------------------------------
-	UnitTestGroup oVec4EqualTests;
+	UnitTestGroup oV4EqualTests;
 
-	Vec4EqualTest oVec4EqualTestOne, oVec4EqualTestTwo, oVec4EqualTestThree, oVec4EqualTestFour;
+	V4EqualTest oV4EqualTestOne, oV4EqualTestTwo, oV4EqualTestThree, oV4EqualTestFour;
 
-	oVec4EqualTestOne.SetData(TestVector4A, TestVector4B, false);
-	oVec4EqualTestTwo.SetData(TestVector4A, Vector4(0,0,0,0),true);
-	oVec4EqualTestThree.SetData(TestVector4B, TestVector4C, false);
-	oVec4EqualTestFour.SetData(TestVector4B, Vector4(2.2,8.6,4.3,1),true);
+	oV4EqualTestOne.SetData(TestVector4A, TestVector4B, false);
+	oV4EqualTestTwo.SetData(TestVector4A, Vector4(0,0,0,0),true);
+	oV4EqualTestThree.SetData(TestVector4B, TestVector4C, false);
+	oV4EqualTestFour.SetData(TestVector4B, Vector4(2.2,8.6,4.3,1),true);
 
-	oVec4EqualTests.AddUnitTest(&oVec4EqualTestOne);
-	oVec4EqualTests.AddUnitTest(&oVec4EqualTestTwo);
-	oVec4EqualTests.AddUnitTest(&oVec4EqualTestThree);
-	oVec4EqualTests.AddUnitTest(&oVec4EqualTestFour);
-	oTester.AddUnitTestGroup(oVec4EqualTests);
+	oV4EqualTests.AddUnitTest(&oV4EqualTestOne);
+	oV4EqualTests.AddUnitTest(&oV4EqualTestTwo);
+	oV4EqualTests.AddUnitTest(&oV4EqualTestThree);
+	oV4EqualTests.AddUnitTest(&oV4EqualTestFour);
+	oTester.AddUnitTestGroup(oV4EqualTests);
 
 	// normalize a vector -------------------------------------------------------------
 	UnitTestGroup oV4NormalizeTests;
@@ -436,10 +438,10 @@ int main(int argc, char* argv[])
 
 	//V4HexToRGBTest oV4HexToRGBTestOne, oV4HexToRGBTestTwo, oV4HexToRGBTestThree, oV4HexToRGBTestFour;
 
-	//oV4HexToRGBTestOne.SetData(Vector4(FF,FF,FF,1), Vector4(1,1,1,1));
-	//oV4HexToRGBTestTwo.SetData(Vector4(33,33,CC,0.5), Vector4(0.2,0.2,0.8,0.5));
-	//oV4HexToRGBTestThree.SetData(Vector4(7F,FF,D4,0.3), Vector4(0.4980,1.0,0.8314,0.3));
-	//oV4HexToRGBTestFour.SetData(Vector4(00,64,00,0.643), Vector4(0,0.3922,0,0.643));
+	//oV4HexToRGBTestOne.SetData("0xFFFFFF", 1, Vector4(1,1,1,1));
+	//oV4HexToRGBTestTwo.SetData("0x3333CC", 0.5, Vector4(0.2,0.2,0.8,0.5));
+	//oV4HexToRGBTestThree.SetData("0x7FFFD4", 0.3, Vector4(0.4980,1.0,0.8314,0.3));
+	//oV4HexToRGBTestFour.SetData("0x006400", 0.643, Vector4(0,0.3922,0,0.643));
 
 	//oV4HexToRGBTests.AddUnitTest(&oV4HexToRGBTestOne);
 	//oV4HexToRGBTests.AddUnitTest(&oV4HexToRGBTestTwo);
@@ -447,9 +449,51 @@ int main(int argc, char* argv[])
 	//oV4HexToRGBTests.AddUnitTest(&oV4HexToRGBTestFour);
 	//oTester.AddUnitTestGroup(oV4HexToRGBTests);
 
+	//######################## Matrix3 Operator Tests ###############################################
+
+	Matrix3 TestMatrix3A(1,1,0,2,3,2,0,0,1), 
+			TestMatrix3B(2,2,0,1,1,1,0,0,1),
+			TestMatrix3C(-2,3,1,0,-1,2,0,0,2),
+			TestMatrix3D(0,3,5,-2,1,6,0,0,1);
+
+	Vector3 M3TestVector(3,6,1);
+
+
+	// multiplies two matrices -------------------------------------------------------------
+	UnitTestGroup oM3MultTests;
+
+	M3MultTest oM3MultTestOne, oM3MultTestTwo, oM3MultTestThree, oM3MultTestFour;
+
+	oM3MultTestOne.SetData(TestMatrix3A, TestMatrix3B, Matrix3(3,3,1,7,7,5,0,0,1));
+	oM3MultTestTwo.SetData(TestMatrix3A, TestMatrix3C, Matrix3(-2,2,3,-4,3,12,0,0,2));
+	oM3MultTestThree.SetData(TestMatrix3B, TestMatrix3C, Matrix3(-4,4,6,-2,2,5,0,0,2));
+	oM3MultTestFour.SetData(TestMatrix3B, TestMatrix3D, Matrix3(-4,8,22,-2,4,12,0,0,1));
+
+	oM3MultTests.AddUnitTest(&oM3MultTestOne);
+	oM3MultTests.AddUnitTest(&oM3MultTestTwo);
+	oM3MultTests.AddUnitTest(&oM3MultTestThree);
+	oM3MultTests.AddUnitTest(&oM3MultTestFour);
+	oTester.AddUnitTestGroup(oM3MultTests);
+
+	// matrix * vector = vector -------------------------------------------------------------
+	UnitTestGroup oM3MultVectorTests;
+
+	M3MultVectorTest oM3MultVectorTestOne, oM3MultVectorTestTwo, oM3MultVectorTestThree, oM3MultVectorTestFour;
+
+	oM3MultVectorTestOne.SetData(TestMatrix3A, M3TestVector, Vector3(9,26,1));
+	oM3MultVectorTestTwo.SetData(TestMatrix3B, M3TestVector, Vector3(18,10,1));
+	oM3MultVectorTestThree.SetData(TestMatrix3C, M3TestVector, Vector3(13,-4,2));
+	oM3MultVectorTestFour.SetData(TestMatrix3D, M3TestVector, Vector3(23,6,1));
+
+	oM3MultVectorTests.AddUnitTest(&oM3MultVectorTestOne);
+	oM3MultVectorTests.AddUnitTest(&oM3MultVectorTestTwo);
+	oM3MultVectorTests.AddUnitTest(&oM3MultVectorTestThree);
+	oM3MultVectorTests.AddUnitTest(&oM3MultVectorTestFour);
+	oTester.AddUnitTestGroup(oM3MultVectorTests);
 
 
 
+	
 	bool AllTestsSucceed = oTester.DoTests();
 	char satisfaction;
 

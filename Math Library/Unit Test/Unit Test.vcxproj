@@ -37,13 +37,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <SourcePath>C:\Users\Bilbo\Documents\GitHub\AIE_Projects\Math Library\Math Library;C:\Users\Student\Documents\Ian Rich Docs\Projects\Math Library\Math Library;$(SourcePath)</SourcePath>
+    <SourcePath>C:\Users\Student\Documents\Ian Rich Docs\Projects\Math Library\Math Library;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>C:\Users\Bilbo\Documents\GitHub\AIE_Projects\Math Library\Math Library;C:\Users\Student\Documents\Ian Rich Docs\Projects\Math Library\Math Library;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Student\Documents\Ian Rich Docs\Projects\Math Library\Math Library;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

@@ -118,8 +118,8 @@ Matrix3 Matrix3::CreateTranslation(Vector3 a_TransVector)
 				   0,0,a_TransVector.m_fZ);
 }
 
-// creates orthographic projection matrix for given axis
-Matrix3 Matrix3::CreateOrthoProj(char a_axis)
+// creates orthographic projection matrix for given cardinal axis
+Matrix3 Matrix3::CreateCardinalOrthoProj(char a_axis)
 {
 	switch(a_axis)
 	{
@@ -186,21 +186,30 @@ void Matrix3::TransformVector(Vector3& a_rV, float a_fAngle, float a_fScale)
 	TempVec.m_fZ = TM.m31*a_rV.m_fX + TM.m32*a_rV.m_fY + TM.m33*a_rV.m_fZ;
 	
 	// change referenced vector
-	a_rV.m_fX = TempVec.m_fX;
-	a_rV.m_fY = TempVec.m_fY;
-	a_rV.m_fZ = TempVec.m_fZ;
+	a_rV = TempVec;
 }
 
 // rotate, scale and translate a point  **not done!!*****
-void Matrix3::TransformPoint(float a_fAngle, float a_fScale, Vector3 a_TransVector)
+void Matrix3::Transform2DPoint(Vector3& a_rV, float a_fAngle, float a_fScale, Vector3 a_TransVector)
 {
 	Matrix3 RotMatrix = CreateRotation(a_fAngle);
 	Matrix3 ScaleMatrix = CreateScale(a_fScale);
 	Matrix3 TlateMatrix = CreateTranslation(a_TransVector);
 
-	Matrix3 TransformMatrix = RotMatrix * ScaleMatrix * TlateMatrix;
+	Matrix3 TM = RotMatrix * ScaleMatrix * TlateMatrix;
 
-	*this = *this * TransformMatrix;
+	Vector3 TempVec;
+
+	TempVec.m_fX = TM.m11*a_rV.m_fX + TM.m12*a_rV.m_fY;
+	TempVec.m_fY = TM.m21*a_rV.m_fX + TM.m22*a_rV.m_fY;
+
+	if (TempVec.m_fZ != 1 && TempVec.m_fZ != 0)
+	{
+		TempVec.m_fX /= TempVec.m_fZ;
+		TempVec.m_fY /= TempVec.m_fZ;
+	}
+
+	a_rV = TempVec;
 }
 
 // cout matrix

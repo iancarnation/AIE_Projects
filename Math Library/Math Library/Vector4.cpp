@@ -7,7 +7,6 @@
 
 #include "Vector4.h"
 #include "Static Constants.h"
-#include <string>
 #include <iostream>
 using namespace std;
 
@@ -81,16 +80,4 @@ Vector4 Vector4::ReturnNormalized() const
 	float fMag = GetMagnitude();
 	Vector4 vec(m_fX / fMag, m_fY / fMag, m_fZ / fMag, m_fW / fMag);
 	return vec;
-}
-
-// converts hex code to rgb floats and returns vector4 with alpha as well
-Vector4 Vector4::HexToRGB(int a_iHexCode, int a_iAlpha)
-{
-	Vector4 TempVector;
-	TempVector.m_fX = ((a_iHexCode >> 16) & 0xFF) / 255;
-	TempVector.m_fY = ((a_iHexCode >> 8) & 0xFF) / 255;
-	TempVector.m_fZ = (a_iHexCode & 0xFF) / 255;
-	TempVector.m_fW = a_iAlpha;
-
-	return TempVector;
 }

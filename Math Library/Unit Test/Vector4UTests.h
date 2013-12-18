@@ -14,7 +14,7 @@
 #include "CommonFunctions.h"
 
 // tests vector equality, returns bool -------------------------------------------------------------
-class Vec4EqualTest : public UnitTest
+class V4EqualTest : public UnitTest
 {
 	public:
 		void SetData(Vector4 a_oV1, Vector4 a_oV2, bool a_bExpResult);		
@@ -67,12 +67,15 @@ class V4RetNormalizedTest : public UnitTest
 class V4HexToRGBTest : public UnitTest
 {
 	public:
-		void SetData(Vector4 a_oVector, Vector4 a_oExpResult);
+		void SetData(string a_sHex, float a_fAlpha, Vector4 a_oExpResult);
 		virtual bool DoTest(); 
 	
 	private:
-		Vector4 m_oVector;
+		string m_sHex;
+		float m_fAlpha;
 		Vector4 m_oResult;
 };
+
+
 
 #endif
