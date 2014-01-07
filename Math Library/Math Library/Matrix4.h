@@ -6,11 +6,12 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //guards
-#ifndef _UV_H_
-#define _UV_H_
+#ifndef _MATRIX4_H_
+#define _MATRIX4_H_
 
 #include "Vector4.h"
 #include "Static Constants.h"
+#include "CommonFunctions.h"
 
 class Matrix4
 {
@@ -25,6 +26,7 @@ class Matrix4
 		Matrix4 operator * (const Matrix4& a_rM2) const;			// multiplies two matrices
 		Vector4 operator * (const Vector4& a_rV2) const;			// matrix * vector = vector
 		Matrix4 operator * (const float a_fScalar) const;			// multiplies matrix by scalar
+		bool operator == (const Matrix4& a_rM2) const;		// tests matrix equality
 		
 		Vector4 GetTranslations();									// returns the translation of the matrix as a vector
 		float GetRotation(char a_cAxis);							// returns rotation of the matrix
@@ -40,7 +42,7 @@ class Matrix4
 			  m21, m22, m23, m24,
 			  m31, m32, m33, m34,
 			  m41, m42, m43, m44;		// 3x3 matrix stored as individual floats
-	private:
+	//private:
 		Matrix4 CreateIdentity();								// creates the appropriate identity matrix
 		Matrix4 CreateRotation(float a_fAngle, char a_cAxis);	// creates new rotation matrix with 0,0 translation
 		Matrix4 CreateScale(float a_fScale);					// creates new scale matrix

@@ -17,6 +17,5 @@ float DegToRad(float a_angle);		// convert angle from degrees to radians
 float RadToDeg(float a_angle);		// convert angle from radians to degrees
 void NextPower2(int a_value);		// Testing scalar value for Power of Two (shift to nearest power of two)
 bool AreEqual(const float a_F1, const float a_F2);	// tests float equality
-Vector4 HexToRGB(string a_sHexCode, float a_fAlpha);		// converts hex code to rgb floats and returns vector4 with alpha as well
 
 #endif

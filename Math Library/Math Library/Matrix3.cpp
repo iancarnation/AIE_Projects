@@ -189,7 +189,7 @@ void Matrix3::TransformVector(Vector3& a_rV, float a_fAngle, float a_fScale)
 	a_rV = TempVec;
 }
 
-// rotate, scale and translate a point  **not done!!*****
+// rotate, scale and translate a point **not sure about **
 void Matrix3::Transform2DPoint(Vector3& a_rV, float a_fAngle, float a_fScale, Vector3 a_TransVector)
 {
 	Matrix3 RotMatrix = CreateRotation(a_fAngle);
@@ -200,13 +200,15 @@ void Matrix3::Transform2DPoint(Vector3& a_rV, float a_fAngle, float a_fScale, Ve
 
 	Vector3 TempVec;
 
-	TempVec.m_fX = TM.m11*a_rV.m_fX + TM.m12*a_rV.m_fY;
-	TempVec.m_fY = TM.m21*a_rV.m_fX + TM.m22*a_rV.m_fY;
+	TempVec.m_fX = TM.m11*a_rV.m_fX + TM.m12*a_rV.m_fY + TM.m13*a_rV.m_fZ; // supposed to just add last element? http://www.scratchapixel.com/lessons/3d-basic-lessons/lesson-4-geometry/transforming-points-and-vectors/
+	TempVec.m_fY = TM.m21*a_rV.m_fX + TM.m22*a_rV.m_fY + TM.m23*a_rV.m_fZ;
+	TempVec.m_fZ = TM.m31*a_rV.m_fX + TM.m32*a_rV.m_fY + TM.m33*a_rV.m_fZ;
 
 	if (TempVec.m_fZ != 1 && TempVec.m_fZ != 0)
 	{
 		TempVec.m_fX /= TempVec.m_fZ;
 		TempVec.m_fY /= TempVec.m_fZ;
+		TempVec.m_fZ /= TempVec.m_fZ;
 	}
 
 	a_rV = TempVec;

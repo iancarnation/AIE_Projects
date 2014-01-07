@@ -155,7 +155,7 @@ class M3Transform2DPointTest : public UnitTest
 		Vector3 m_oResult;
 };
 
-// creates the appropriate identity matrix -------------------------------------------------------------
+// creates an identity matrix -------------------------------------------------------------
 class M3CreateIdentityTest : public UnitTest
 {
 	public:

@@ -43,17 +43,25 @@ Matrix4 Matrix4::operator * (const Matrix4& a_rM2) const
 {
 	Matrix4 r;  // result
 
-	r.m11 = m11*a_rM2.m11 + m12*a_rM2.m21 + m13*a_rM2.m31;
-	r.m12 = m11*a_rM2.m12 + m12*a_rM2.m22 + m13*a_rM2.m32;
-	r.m13 = m11*a_rM2.m13 + m12*a_rM2.m23 + m13*a_rM2.m33;
+	r.m11 = m11*a_rM2.m11 + m12*a_rM2.m21 + m13*a_rM2.m31 + m14*a_rM2.m41;
+	r.m12 = m11*a_rM2.m12 + m12*a_rM2.m22 + m13*a_rM2.m32 + m14*a_rM2.m42;
+	r.m13 = m11*a_rM2.m13 + m12*a_rM2.m23 + m13*a_rM2.m33 + m14*a_rM2.m43;
+	r.m14 = m11*a_rM2.m14 + m12*a_rM2.m24 + m13*a_rM2.m34 + m14*a_rM2.m44;
 
-	r.m21 = m21*a_rM2.m11 + m22*a_rM2.m21 + m23*a_rM2.m31;
-	r.m22 = m21*a_rM2.m12 + m22*a_rM2.m22 + m23*a_rM2.m32;
-	r.m23 = m21*a_rM2.m13 + m22*a_rM2.m23 + m23*a_rM2.m33;
+	r.m21 = m21*a_rM2.m11 + m22*a_rM2.m21 + m23*a_rM2.m31 + m24*a_rM2.m41;
+	r.m22 = m21*a_rM2.m12 + m22*a_rM2.m22 + m23*a_rM2.m32 + m24*a_rM2.m42;
+	r.m23 = m21*a_rM2.m13 + m22*a_rM2.m23 + m23*a_rM2.m33 + m24*a_rM2.m43;
+	r.m24 = m21*a_rM2.m14 + m22*a_rM2.m24 + m23*a_rM2.m34 + m24*a_rM2.m44;
 
-	r.m31 = m31*a_rM2.m11 + m32*a_rM2.m21 + m33*a_rM2.m31;
-	r.m32 = m31*a_rM2.m12 + m32*a_rM2.m22 + m33*a_rM2.m32;
-	r.m33 = m31*a_rM2.m13 + m32*a_rM2.m23 + m33*a_rM2.m33;
+	r.m31 = m31*a_rM2.m11 + m32*a_rM2.m21 + m33*a_rM2.m31 + m34*a_rM2.m41;
+	r.m32 = m31*a_rM2.m12 + m32*a_rM2.m22 + m33*a_rM2.m32 + m34*a_rM2.m42;
+	r.m33 = m31*a_rM2.m13 + m32*a_rM2.m23 + m33*a_rM2.m33 + m34*a_rM2.m43;
+	r.m34 = m31*a_rM2.m14 + m32*a_rM2.m24 + m33*a_rM2.m34 + m34*a_rM2.m44;
+
+	r.m41 = m41*a_rM2.m11 + m42*a_rM2.m21 + m43*a_rM2.m31 + m44*a_rM2.m41;
+	r.m42 = m41*a_rM2.m12 + m42*a_rM2.m22 + m43*a_rM2.m32 + m44*a_rM2.m42;
+	r.m43 = m41*a_rM2.m13 + m42*a_rM2.m23 + m43*a_rM2.m33 + m44*a_rM2.m43;
+	r.m44 = m41*a_rM2.m14 + m42*a_rM2.m24 + m43*a_rM2.m34 + m44*a_rM2.m44;
 
 	return r;
 }
@@ -82,6 +90,15 @@ Matrix4 Matrix4::operator * (const float a_fScalar) const
 	r.m41 = m41 * a_fScalar; r.m42 = m42 * a_fScalar; r.m43 = m43 * a_fScalar; r.m44 = m44 * a_fScalar;
 
 	return r;
+}
+
+// tests matrix equality
+bool Matrix4::operator == (const Matrix4& a_rM2) const
+{
+	return (AreEqual(m11,a_rM2.m11) && AreEqual(m12,a_rM2.m12) && AreEqual(m13,a_rM2.m13) && AreEqual(m14,a_rM2.m14) && 
+			AreEqual(m12,a_rM2.m12) && AreEqual(m22,a_rM2.m22) && AreEqual(m23,a_rM2.m23) && AreEqual(m24,a_rM2.m24) && 
+			AreEqual(m13,a_rM2.m13) && AreEqual(m32,a_rM2.m32) && AreEqual(m33,a_rM2.m33) && AreEqual(m34,a_rM2.m34) &&
+			AreEqual(m14,a_rM2.m14) && AreEqual(m42,a_rM2.m42) && AreEqual(m43,a_rM2.m43) && AreEqual(m44,a_rM2.m44));
 }
 
 Matrix4 Matrix4::CreateIdentity()
@@ -167,10 +184,10 @@ Matrix4 Matrix4::CreateOrthoProj(plane3D PLANE)
 // returns the translation of the matrix as a vector
 Vector4 Matrix4::GetTranslations()
 {
-	return Vector4(m13, m23, m33, m43);
+	return Vector4(m14, m24, m34, m44);
 }
 
-// returns rotation of the matrix relative to given cardinal axis
+// returns rotation of the matrix relative to given cardinal axis ** not sure if this is correct...probably have to decompose with assumption of transformation order... **
 float Matrix4::GetRotation(char a_cAxis)
 {
 	switch(a_cAxis)

@@ -65,6 +65,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Matrix3UTests.h" />
+    <ClInclude Include="Matrix4UTests.h" />
     <ClInclude Include="UnitTest.h" />
     <ClInclude Include="UnitTester.h" />
     <ClInclude Include="UnitTestGroup.h" />
@@ -74,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Matrix3UTests.cpp" />
+    <ClCompile Include="Matrix4UTests.cpp" />
     <ClCompile Include="UnitTest.cpp" />
     <ClCompile Include="UnitTestMain.cpp" />
     <ClCompile Include="Vector3OperatorUTests.cpp" />

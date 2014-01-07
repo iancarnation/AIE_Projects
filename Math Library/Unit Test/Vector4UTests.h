@@ -62,19 +62,19 @@ class V4RetNormalizedTest : public UnitTest
 		Vector4 m_oVector;
 		Vector4 m_oResult;
 };
-
-// converts hex code to rgb floats and returns vector4 with alpha as well -------------------------------------------------------------
-class V4HexToRGBTest : public UnitTest
-{
-	public:
-		void SetData(string a_sHex, float a_fAlpha, Vector4 a_oExpResult);
-		virtual bool DoTest(); 
-	
-	private:
-		string m_sHex;
-		float m_fAlpha;
-		Vector4 m_oResult;
-};
+//
+//// converts hex code to rgb floats and returns vector4 with alpha as well -------------------------------------------------------------
+//class V4HexToRGBTest : public UnitTest
+//{
+//	public:
+//		void SetData(string a_sHex, float a_fAlpha, Vector4 a_oExpResult);
+//		virtual bool DoTest(); 
+//	
+//	private:
+//		string m_sHex;
+//		float m_fAlpha;
+//		Vector4 m_oResult;
+//};
 
 
 
