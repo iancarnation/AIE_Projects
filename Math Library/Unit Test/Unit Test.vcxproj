@@ -64,6 +64,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CommonFunctionUTests.h" />
     <ClInclude Include="Matrix3UTests.h" />
     <ClInclude Include="Matrix4UTests.h" />
     <ClInclude Include="UnitTest.h" />
@@ -74,6 +75,7 @@
     <ClInclude Include="Vector4UTests.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CommonFunctionUTests.cpp" />
     <ClCompile Include="Matrix3UTests.cpp" />
     <ClCompile Include="Matrix4UTests.cpp" />
     <ClCompile Include="UnitTest.cpp" />

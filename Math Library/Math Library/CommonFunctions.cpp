@@ -26,21 +26,21 @@ float RadToDeg(float a_angle)
 }
 
 // Testing scalar value for Power of Two (shift to nearest power of two)
-void NextPower2(int a_value)
+void NextPower2(int& a_irValue)
 {
 	bool b;
 
-	b = (a_value & (a_value-1)) == 0;		// determines whether value is a power of 2
+	b = (a_irValue & (a_irValue-1)) == 0;		// determines whether value is a power of 2
 
 	if (!b)									// if not, shifts to the next highest power of 2
 	{
-		a_value --;
-		a_value |= a_value >> 1;
-		a_value |= a_value >> 2;
-		a_value |= a_value >> 4;
-		a_value |= a_value >> 8;
-		a_value |= a_value >> 16;
-		a_value ++;
+		a_irValue --;
+		a_irValue |= a_irValue >> 1;
+		a_irValue |= a_irValue >> 2;
+		a_irValue |= a_irValue >> 4;
+		a_irValue |= a_irValue >> 8;
+		a_irValue |= a_irValue >> 16;
+		a_irValue ++;
 	}
 }
 

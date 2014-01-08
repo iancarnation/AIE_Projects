@@ -82,18 +82,24 @@ Vector4 Vector4::ReturnNormalized() const
 	return vec;
 }
 
-// converts hex code to rgb floats and returns vector4 with alpha as well
-Vector4 HexToRGB(string a_sHexCode, float a_fAlpha)
+// converts hex code to rgb floats and returns vector4 with alpha as well, expects ARGB *not tested*
+Vector4 Vector4::HexToRGB(int a_iHexCode)
 {
-	int iHexCode = 0;
+	m_fW = ((a_iHexCode >> 24) & 0xFF) / 255;
+	m_fX = ((a_iHexCode >> 16) & 0xFF) / 255;
+	m_fY = ((a_iHexCode >> 8) & 0xFF) / 255;
+	m_fZ = (a_iHexCode & 0xFF) / 255;
 
-	sscanf(a_sHexCode.c_str(), "%x", &iHexCode);
+	return (*this);
+}
 
-	Vector4 TempVector;
-	TempVector.m_fX = ((iHexCode >> 16) & 0xFF) / 255;
-	TempVector.m_fY = ((iHexCode >> 8) & 0xFF) / 255;
-	TempVector.m_fZ = (iHexCode & 0xFF) / 255;
-	TempVector.m_fW = a_fAlpha;
+// converts rgb values to values ranging from 0 to 1
+Vector4 Vector4::RGBToFloat()
+{
+	m_fW /= 255;
+	m_fX /= 255;
+	m_fY /= 255;
+	m_fZ /= 255;
 
-	return TempVector;
+	return (*this);
 }

@@ -64,18 +64,16 @@ bool V4RetNormalizedTest::DoTest()
 	return (TempVec == m_oResult);
 }
 
-//// converts hex code to rgb floats and returns vector4 with alpha as well -------------------------------------------------------------
-//void V4HexToRGBTest::SetData(string a_sHex, float a_fAlpha, Vector4 a_oExpResult)
-//{
-//	m_sHex = a_sHex;
-//	m_fAlpha = a_fAlpha;
-//	m_oResult = a_oExpResult;
-//}
-//
-//bool V4HexToRGBTest::DoTest()
-//{
-//	Vector4 Dummy;
-//	Vector4 TempVec = Dummy.HexToRGB(m_sHex, m_fAlpha);
-//	cout<< "\n---------------V4HexToRGBTest---------------\n";
-//	return (TempVec == m_oResult);
-//}
+// converts rgb values to values ranging from 0 to 1 -------------------------------------------------------------
+void V4RGBToFloatTest::SetData(Vector4& a_rV, Vector4 a_oExpResult)
+{
+	m_oVec = a_rV;
+	m_oResult = a_oExpResult;
+}
+
+bool V4RGBToFloatTest::DoTest()
+{
+	m_oVec.RGBToFloat();
+	cout<< "\n---------------V4RGBToFloatTest---------------\n";
+	return (m_oVec == m_oResult);
+}

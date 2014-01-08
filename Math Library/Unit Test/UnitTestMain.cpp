@@ -11,6 +11,7 @@
 #include "Vector4UTests.h"
 #include "Matrix3UTests.h"
 #include "Matrix4UTests.h"
+#include "CommonFunctionUTests.h"
 
 
 int main(int argc, char* argv[])
@@ -434,21 +435,37 @@ int main(int argc, char* argv[])
 	oV4RetNormalizedTests.AddUnitTest(&oV4RetNormalizedTestFour);
 	oTester.AddUnitTestGroup(oV4RetNormalizedTests);
 
-	//// converts hex code to rgb floats and returns vector4 with alpha as well -------------------------------------------------------------
-	//UnitTestGroup oV4HexToRGBTests;
+	// converts rgb values to values ranging from 0 to 1 -------------------------------------------------------------
+	UnitTestGroup oV4RGBToFloatTests;
 
-	//V4HexToRGBTest oV4HexToRGBTestOne, oV4HexToRGBTestTwo, oV4HexToRGBTestThree, oV4HexToRGBTestFour;
+	V4RGBToFloatTest oV4RGBToFloatTestOne, oV4RGBToFloatTestTwo, oV4RGBToFloatTestThree, oV4RGBToFloatTestFour;
 
-	//oV4HexToRGBTestOne.SetData("0xFFFFFF", 1, Vector4(1,1,1,1));
-	//oV4HexToRGBTestTwo.SetData("0x3333CC", 0.5, Vector4(0.2,0.2,0.8,0.5));
-	//oV4HexToRGBTestThree.SetData("0x7FFFD4", 0.3, Vector4(0.4980,1.0,0.8314,0.3));
-	//oV4HexToRGBTestFour.SetData("0x006400", 0.643, Vector4(0,0.3922,0,0.643));
+	oV4RGBToFloatTestOne.SetData(Vector4(255,255,255,255), Vector4(1,1,1,1));
+	oV4RGBToFloatTestTwo.SetData(Vector4(100,100,100,100), Vector4(0.39,0.39,0.39,0.39));
+	oV4RGBToFloatTestThree.SetData(Vector4(0,0,0,0), Vector4(0,0,0,0));
+	oV4RGBToFloatTestFour.SetData(Vector4(125,200,240,12), Vector4(.49,0.7843,0.9412,0.047));
 
-	//oV4HexToRGBTests.AddUnitTest(&oV4HexToRGBTestOne);
-	//oV4HexToRGBTests.AddUnitTest(&oV4HexToRGBTestTwo);
-	//oV4HexToRGBTests.AddUnitTest(&oV4HexToRGBTestThree);
-	//oV4HexToRGBTests.AddUnitTest(&oV4HexToRGBTestFour);
-	//oTester.AddUnitTestGroup(oV4HexToRGBTests);
+	oV4RGBToFloatTests.AddUnitTest(&oV4RGBToFloatTestOne);
+	oV4RGBToFloatTests.AddUnitTest(&oV4RGBToFloatTestTwo);
+	oV4RGBToFloatTests.AddUnitTest(&oV4RGBToFloatTestThree);
+	oV4RGBToFloatTests.AddUnitTest(&oV4RGBToFloatTestFour);
+	oTester.AddUnitTestGroup(oV4RGBToFloatTests);
+
+	//// converts rgb values to values ranging from 0 to 1 -------------------------------------------------------------
+	//UnitTestGroup oV4RGBToFloatTests;
+
+	//V4RGBToFloatTest oV4RGBToFloatTestOne, oV4RGBToFloatTestTwo, oV4RGBToFloatTestThree, oV4RGBToFloatTestFour;
+
+	//oV4RGBToFloatTestOne.SetData("0xFFFFFF", 1, Vector4(1,1,1,1));
+	//oV4RGBToFloatTestTwo.SetData("0x3333CC", 0.5, Vector4(0.2,0.2,0.8,0.5));
+	//oV4RGBToFloatTestThree.SetData("0x7FFFD4", 0.3, Vector4(0.4980,1.0,0.8314,0.3));
+	//oV4RGBToFloatTestFour.SetData("0x006400", 0.643, Vector4(0,0.3922,0,0.643));
+
+	//oV4RGBToFloatTests.AddUnitTest(&oV4RGBToFloatTestOne);
+	//oV4RGBToFloatTests.AddUnitTest(&oV4RGBToFloatTestTwo);
+	//oV4RGBToFloatTests.AddUnitTest(&oV4RGBToFloatTestThree);
+	//oV4RGBToFloatTests.AddUnitTest(&oV4RGBToFloatTestFour);
+	//oTester.AddUnitTestGroup(oV4RGBToFloatTests);
 
 	//######################## Matrix3 Operator Tests ###############################################
 
@@ -998,6 +1015,75 @@ int main(int argc, char* argv[])
 	oM4CreateCardinalOrthoTests.AddUnitTest(&oM4CreateCardinalOrthoTestFour);
 	oTester.AddUnitTestGroup(oM4CreateCardinalOrthoTests);
 	
+
+	//######################## Common Function Tests ###############################################
+
+	// linear interpolation for scalar values -------------------------------------------------------------
+	UnitTestGroup oLerpScalarTests;
+
+	LerpScalarTest oLerpScalarTestOne, oLerpScalarTestTwo, oLerpScalarTestThree, oLerpScalarTestFour;
+
+	oLerpScalarTestOne.SetData(5,10,2,15);
+	oLerpScalarTestTwo.SetData(-3,10,2,23);
+	oLerpScalarTestThree.SetData(0,-50,3,-150);
+	oLerpScalarTestFour.SetData(6,620,0.5,313);
+
+	oLerpScalarTests.AddUnitTest(&oLerpScalarTestOne);
+	oLerpScalarTests.AddUnitTest(&oLerpScalarTestTwo);
+	oLerpScalarTests.AddUnitTest(&oLerpScalarTestThree);
+	oLerpScalarTests.AddUnitTest(&oLerpScalarTestFour);
+	oTester.AddUnitTestGroup(oLerpScalarTests);
+
+	// convert angle from degrees to radians -------------------------------------------------------------
+	UnitTestGroup oDegToRadTests;
+
+	DegToRadTest oDegToRadTestOne, oDegToRadTestTwo, oDegToRadTestThree, oDegToRadTestFour;
+
+	oDegToRadTestOne.SetData(90,PI/2);
+	oDegToRadTestTwo.SetData(120,2*PI/3);
+	oDegToRadTestThree.SetData(180,PI);
+	oDegToRadTestFour.SetData(240,4*PI/3);
+
+	oDegToRadTests.AddUnitTest(&oDegToRadTestOne);
+	oDegToRadTests.AddUnitTest(&oDegToRadTestTwo);
+	oDegToRadTests.AddUnitTest(&oDegToRadTestThree);
+	oDegToRadTests.AddUnitTest(&oDegToRadTestFour);
+	oTester.AddUnitTestGroup(oDegToRadTests);
+
+	// convert angle from radians to degrees -------------------------------------------------------------
+	UnitTestGroup oRadToDegTests;
+
+	RadToDegTest oRadToDegTestOne, oRadToDegTestTwo, oRadToDegTestThree, oRadToDegTestFour;
+
+	oRadToDegTestOne.SetData(PI/2,90);
+	oRadToDegTestTwo.SetData(2*PI/3,120);
+	oRadToDegTestThree.SetData(PI,180);
+	oRadToDegTestFour.SetData(4*PI/3,240);
+
+	oRadToDegTests.AddUnitTest(&oRadToDegTestOne);
+	oRadToDegTests.AddUnitTest(&oRadToDegTestTwo);
+	oRadToDegTests.AddUnitTest(&oRadToDegTestThree);
+	oRadToDegTests.AddUnitTest(&oRadToDegTestFour);
+	oTester.AddUnitTestGroup(oRadToDegTests);
+
+	// Testing scalar value for Power of Two (shift to nearest power of two) -------------------------------------------------------------
+	UnitTestGroup oNextPower2Tests;
+
+	NextPower2Test oNextPower2TestOne, oNextPower2TestTwo, oNextPower2TestThree, oNextPower2TestFour;
+
+	oNextPower2TestOne.SetData(5,8);
+	oNextPower2TestTwo.SetData(8,8);
+	oNextPower2TestThree.SetData(255,256);
+	oNextPower2TestFour.SetData(257,512);
+
+	oNextPower2Tests.AddUnitTest(&oNextPower2TestOne);
+	oNextPower2Tests.AddUnitTest(&oNextPower2TestTwo);
+	oNextPower2Tests.AddUnitTest(&oNextPower2TestThree);
+	oNextPower2Tests.AddUnitTest(&oNextPower2TestFour);
+	oTester.AddUnitTestGroup(oNextPower2Tests);
+
+
+
 	bool AllTestsSucceed = oTester.DoTests();
 	char satisfaction;
 

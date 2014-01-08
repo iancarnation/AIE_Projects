@@ -26,8 +26,8 @@ class Vector4
 		float GetMagnitude() const; 			// returns magnitude of vector
 		void Normalize();						// normalize a vector
 		Vector4 ReturnNormalized() const;		// returns a normalized copy of vector	
-		Vector4 HexToRGB(string a_sHexCode, float a_fAlpha);		// converts hex code to rgb floats and returns vector4 with alpha as well
-
+		Vector4 HexToRGB(int a_iHexCode);		// converts hex code to rgb floats and returns vector4 with alpha as well, expects ARGB
+		Vector4 RGBToFloat();						// converts rgb values to values ranging from 0 to 1
 
 		float m_fX, m_fY, m_fZ, m_fW;			// coordinate variables
 };
