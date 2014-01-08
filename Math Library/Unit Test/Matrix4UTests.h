@@ -104,20 +104,21 @@ class M4SetTranslationTest : public UnitTest
 		Matrix4 m_oResult;
 };
 
-// sets the rotation of the matrix (replaces curr. rotation) -------------------------------------------------------------
-class M4SetRotationTest : public UnitTest
-{
-	public:
-		void SetData(Matrix4 a_oM, float a_fA, Matrix4 a_oExpResult);		
-		virtual bool DoTest(); 
-	
-	private:
-		Matrix4 m_oMatrix;
-		float m_fAngle;
-		Matrix4 m_oResult;
-};
+//*** To be added when actually attempting 3D stuff ***
+//// sets the rotation of the matrix (replaces curr. rotation) -------------------------------------------------------------
+//class M4SetRotationTest : public UnitTest
+//{
+//	public:
+//		void SetData(Matrix4 a_oM, float a_fA, Matrix4 a_oExpResult);		
+//		virtual bool DoTest(); 
+//	
+//	private:
+//		Matrix4 m_oMatrix;
+//		float m_fAngle;
+//		Matrix4 m_oResult;
+//};
 
-// sets scale of the matrix (replaces curr. matrix) -------------------------------------------------------------
+// scales the matrix (replaces curr. matrix) -------------------------------------------------------------
 class M4SetScaleTest : public UnitTest
 {
 	public:
@@ -134,12 +135,13 @@ class M4SetScaleTest : public UnitTest
 class M4TransformVectorTest : public UnitTest
 {
 	public:
-		void SetData(Vector4 a_oV, float a_fA, float a_fS, Vector4 a_oExpResult);		
+		void SetData(Vector4 a_oV, float a_fA, float a_fS, char a_cAxis, Vector4 a_oExpResult);		
 		virtual bool DoTest(); 
 	
 	private:
 		Vector4 m_oVector;
 		float m_fAngle, m_fScale;
+		char m_cAxis;
 		Vector4 m_oResult;
 };
 
@@ -147,12 +149,13 @@ class M4TransformVectorTest : public UnitTest
 class M4TransformPointTest : public UnitTest
 {
 	public:
-		void SetData(Vector4 a_oV, float a_fA, float a_fS, Vector4 a_oTrV, Vector4 a_oExpResult);		
+		void SetData(Vector4 a_oV, float a_fA, float a_fS, char a_cAxis, Vector4 a_oTrV, Vector4 a_oExpResult);		
 		virtual bool DoTest(); 
 	
 	private:
 		Vector4 m_oVector, m_oTransVector;
 		float m_fAngle, m_fScale;
+		char m_cAxis;
 		Vector4 m_oResult;
 };
 
@@ -172,12 +175,13 @@ class M4CreateIdentityTest : public UnitTest
 class M4CreateRotationTest : public UnitTest
 {
 	public:
-		void SetData(Matrix4 a_oM, float a_fA, Matrix4 a_oExpResult);		
+		void SetData(Matrix4 a_oM, float a_fA, char a_cAxis, Matrix4 a_oExpResult);		
 		virtual bool DoTest(); 
 	
 	private:
 		Matrix4 m_oMatrix;
 		float m_fAngle;
+		char m_cAxis;
 		Matrix4 m_oResult;
 };
 
@@ -211,12 +215,12 @@ class M4CreateTranslationTest : public UnitTest
 class M4CreateCardinalOrthoTest : public UnitTest
 {
 	public:
-		void SetData(Matrix4 a_oM, char a_cAxis, Matrix4 a_oExpResult);		
+		void SetData(Matrix4 a_oM, plane3D a_PLANE, Matrix4 a_oExpResult);		
 		virtual bool DoTest(); 
 	
 	private:
 		Matrix4 m_oMatrix;
-		char m_cAxis;
+		plane3D m_plane;
 		Matrix4 m_oResult;
 };
 

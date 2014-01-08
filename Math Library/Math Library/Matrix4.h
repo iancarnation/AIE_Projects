@@ -32,9 +32,9 @@ class Matrix4
 		float GetRotation(char a_cAxis);							// returns rotation of the matrix
 		void SetTranslation(Vector4 a_TransVector);					// sets translation of the matrix (replaces curr. translation)
 		void SetRotation(float a_fAngle, char a_cAxis);				// sets the rotation of the matrix (replaces curr. rotation)
-		void SetScale(float a_fScale);								// sets scale of the matrix (replaces curr. matrix)
+		void SetScale(float a_fScale);								// scales the matrix (replaces curr. matrix)
 		void TransformVector(Vector4& a_rV, float a_fAngle, char a_cAxis, float a_fScale);		// rotate and scales a directional vector
-		void TransformPoint(Vector4& a_rV, float a_fAngle, char a_cAxis, float a_fScale, Vector4 a_TlateMatrix);		// rotate, scale and translate a point
+		void TransformPoint(Vector4& a_rV, float a_fAngle, float a_fScale, char a_cAxis, Vector4 a_TlateMatrix);		// rotate, scale and translate a point
 
 		void Print();				// cout matrix
 
@@ -47,7 +47,7 @@ class Matrix4
 		Matrix4 CreateRotation(float a_fAngle, char a_cAxis);	// creates new rotation matrix with 0,0 translation
 		Matrix4 CreateScale(float a_fScale);					// creates new scale matrix
 		Matrix4 CreateTranslation(Vector4 a_TransVector);		// creates new translation matrix with 0 rotation
-		Matrix4 CreateOrthoProj(plane3D PLANE);					// creates new orthographic projection matrix for projecting onto given plane
+		Matrix4 CreateCardinalOrthoProj(plane3D PLANE);					// creates new orthographic projection matrix for projecting onto given plane
 };
 
 #endif

@@ -159,7 +159,7 @@ Matrix4 Matrix4::CreateTranslation(Vector4 a_TransVector)
 }
 
 // creates new orthographic projection matrix for projecting onto given plane
-Matrix4 Matrix4::CreateOrthoProj(plane3D PLANE)
+Matrix4 Matrix4::CreateCardinalOrthoProj(plane3D PLANE)
 {
 	switch(PLANE)
 	{
@@ -187,6 +187,7 @@ Vector4 Matrix4::GetTranslations()
 	return Vector4(m14, m24, m34, m44);
 }
 
+//*** To be implemented when actually attempting 3D stuff ***
 // returns rotation of the matrix relative to given cardinal axis ** not sure if this is correct...probably have to decompose with assumption of transformation order... **
 float Matrix4::GetRotation(char a_cAxis)
 {
@@ -209,17 +210,21 @@ float Matrix4::GetRotation(char a_cAxis)
 void Matrix4::SetTranslation(Vector4 a_TransVector)
 {
 	Matrix4 TranslationMatrix = CreateTranslation(a_TransVector);
-	*this = *this * TranslationMatrix;
+	m14 = a_TransVector.m_fX;
+	m24 = a_TransVector.m_fY;
+	m34 = a_TransVector.m_fZ;
+	m44 = a_TransVector.m_fW;
 }
 
-// sets the rotation of the matrix (replaces curr. rotation)
-void Matrix4::SetRotation(float a_fAngle, char a_cAxis)
-{
-	Matrix4 RotMatrix = CreateRotation(a_fAngle, a_cAxis);
-	*this = *this * RotMatrix;
-}
+//*** To be implemented when actually attempting 3D stuff ***
+//// sets the rotation of the matrix (replaces curr. rotation)
+//void Matrix4::SetRotation(float a_fAngle, char a_cAxis)
+//{
+//	Matrix4 RotMatrix = CreateRotation(a_fAngle, a_cAxis);
+//	*this = *this * RotMatrix; /// **wrong!**
+//}
 
-// sets scale of the matrix (replaces curr. matrix)
+// scales the matrix (replaces curr. matrix)
 void Matrix4::SetScale(float a_fScale)
 {
 	Matrix4 ScaleMatrix = CreateScale(a_fScale);
@@ -234,10 +239,10 @@ void Matrix4::TransformVector(Vector4& a_rV, float a_fAngle, char a_cAxis, float
 	Matrix4 TM = CreateRotation(a_fAngle, a_cAxis);		// create rotation matrix
 	TM.SetScale(a_fScale);								// multiply rotation matrix by scale matrix
 	
-	TempVec.m_fX = TM.m11*a_rV.m_fX + TM.m12*a_rV.m_fY + TM.m13*a_rV.m_fZ + TM.m13*a_rV.m_fW;
-	TempVec.m_fY = TM.m21*a_rV.m_fX + TM.m22*a_rV.m_fY + TM.m23*a_rV.m_fZ + TM.m23*a_rV.m_fW;
-	TempVec.m_fZ = TM.m31*a_rV.m_fX + TM.m32*a_rV.m_fY + TM.m33*a_rV.m_fZ + TM.m33*a_rV.m_fW;
-	TempVec.m_fW = TM.m41*a_rV.m_fX + TM.m42*a_rV.m_fY + TM.m43*a_rV.m_fZ + TM.m43*a_rV.m_fW;
+	TempVec.m_fX = TM.m11*a_rV.m_fX + TM.m12*a_rV.m_fY + TM.m13*a_rV.m_fZ + TM.m14*a_rV.m_fW;
+	TempVec.m_fY = TM.m21*a_rV.m_fX + TM.m22*a_rV.m_fY + TM.m23*a_rV.m_fZ + TM.m24*a_rV.m_fW;
+	TempVec.m_fZ = TM.m31*a_rV.m_fX + TM.m32*a_rV.m_fY + TM.m33*a_rV.m_fZ + TM.m34*a_rV.m_fW;
+	TempVec.m_fW = TM.m41*a_rV.m_fX + TM.m42*a_rV.m_fY + TM.m43*a_rV.m_fZ + TM.m44*a_rV.m_fW;
 
 	a_rV.m_fX = TempVec.m_fX;
 	a_rV.m_fY = TempVec.m_fY;
@@ -246,23 +251,27 @@ void Matrix4::TransformVector(Vector4& a_rV, float a_fAngle, char a_cAxis, float
 }
 
 // rotate, scale and translate a point
-void Matrix4::TransformPoint(Vector4& a_rV, float a_fAngle, char a_cAxis, float a_fScale, Vector4 a_TransVector)
+void Matrix4::TransformPoint(Vector4& a_rV, float a_fAngle, float a_fScale, char a_cAxis, Vector4 a_TransVector)
 {
 	Vector4 TempVec;
-	Matrix4 TM =  CreateRotation(a_fAngle, a_cAxis);	// create rotation matrix
-	TM.SetScale(a_fScale);								// multiply rotation matrix by scale matrix
-	TM.SetTranslation(a_TransVector);					// multiply transformation matrix by translation matrix
 
-	TempVec.m_fX = TM.m11*a_rV.m_fX + TM.m12*a_rV.m_fY + TM.m13*a_rV.m_fZ + TM.m13*a_rV.m_fW;
-	TempVec.m_fY = TM.m21*a_rV.m_fX + TM.m22*a_rV.m_fY + TM.m23*a_rV.m_fZ + TM.m23*a_rV.m_fW;
-	TempVec.m_fZ = TM.m31*a_rV.m_fX + TM.m32*a_rV.m_fY + TM.m33*a_rV.m_fZ + TM.m33*a_rV.m_fW;
-	TempVec.m_fW = TM.m41*a_rV.m_fX + TM.m42*a_rV.m_fY + TM.m43*a_rV.m_fZ + TM.m43*a_rV.m_fW;
+	Matrix4 RotMatrix = CreateRotation(a_fAngle, a_cAxis);
+	Matrix4 ScaleMatrix = CreateScale(a_fScale);
+	Matrix4 TlateMatrix = CreateTranslation(a_TransVector);
+
+	Matrix4 TM = RotMatrix * ScaleMatrix * TlateMatrix;
+
+	TempVec.m_fX = TM.m11*a_rV.m_fX + TM.m12*a_rV.m_fY + TM.m13*a_rV.m_fZ + TM.m14*a_rV.m_fW;
+	TempVec.m_fY = TM.m21*a_rV.m_fX + TM.m22*a_rV.m_fY + TM.m23*a_rV.m_fZ + TM.m24*a_rV.m_fW;
+	TempVec.m_fZ = TM.m31*a_rV.m_fX + TM.m32*a_rV.m_fY + TM.m33*a_rV.m_fZ + TM.m34*a_rV.m_fW;
+	TempVec.m_fW = TM.m41*a_rV.m_fX + TM.m42*a_rV.m_fY + TM.m43*a_rV.m_fZ + TM.m44*a_rV.m_fW;
 
 	if (TempVec.m_fW !=1 && TempVec.m_fW !=0)
 	{
 		TempVec.m_fX = TempVec.m_fX / TempVec.m_fW;
 		TempVec.m_fY = TempVec.m_fY / TempVec.m_fW;
 		TempVec.m_fZ = TempVec.m_fZ / TempVec.m_fW;
+		TempVec.m_fW = TempVec.m_fW / TempVec.m_fW;
 	}
 
 	a_rV.m_fX = TempVec.m_fX;

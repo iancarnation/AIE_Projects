@@ -842,10 +842,10 @@ int main(int argc, char* argv[])
 
 	M4SetTranslationTest oM4SetTranslationTestOne, oM4SetTranslationTestTwo, oM4SetTranslationTestThree, oM4SetTranslationTestFour;
 
-	oM4SetTranslationTestOne.SetData(TestMatrix4A, M4TestVectorA, Matrix4(1,1,9,2,3,26,0,0,1));
-	oM4SetTranslationTestTwo.SetData(TestMatrix4B, M4TestVectorA, Matrix4(2,2,18,1,1,10,0,0,1));
-	oM4SetTranslationTestThree.SetData(TestMatrix4C, M4TestVectorA, Matrix4(-2,3,13,0,-1,-4,0,0,2));
-	oM4SetTranslationTestFour.SetData(TestMatrix4D, M4TestVectorA, Matrix4(0,3,23,-2,1,6,0,0,1));
+	oM4SetTranslationTestOne.SetData(TestMatrix4A, M4TestVectorA, Matrix4(1,1,0,3,2,3,2,6,4,0,1,1,0,0,0,1));
+	oM4SetTranslationTestTwo.SetData(TestMatrix4B, M4TestVectorA, Matrix4(2,2,0,3,1,1,1,6,0,3,0,1,0,0,0,1));
+	oM4SetTranslationTestThree.SetData(TestMatrix4C, M4TestVectorA, Matrix4(-2,3,1,3,0,-1,2,6,1,-2,1,1,0,0,0,1));
+	oM4SetTranslationTestFour.SetData(TestMatrix4D, M4TestVectorA, Matrix4(0,3,5,3,-2,1,6,6,-3,2,-1,1,0,0,0,1));
 
 	oM4SetTranslationTests.AddUnitTest(&oM4SetTranslationTestOne);
 	oM4SetTranslationTests.AddUnitTest(&oM4SetTranslationTestTwo);
@@ -853,6 +853,7 @@ int main(int argc, char* argv[])
 	oM4SetTranslationTests.AddUnitTest(&oM4SetTranslationTestFour);
 	oTester.AddUnitTestGroup(oM4SetTranslationTests);
 
+	//*** To be added when actually attempting 3D stuff ***
 	//// sets rotation of the matrix (replaces curr. rotation) -------------------------------------------------------------
 	//UnitTestGroup oM4SetRotationTests;
 
@@ -869,140 +870,133 @@ int main(int argc, char* argv[])
 	//oM4SetRotationTests.AddUnitTest(&oM4SetRotationTestFour);
 	//oTester.AddUnitTestGroup(oM4SetRotationTests);
 
-	//// sets scale of the matrix (replaces curr. matrix) -------------------------------------------------------------
-	//UnitTestGroup oM4SetScaleTests;
+	// scales the matrix (replaces curr. matrix) -------------------------------------------------------------
+	UnitTestGroup oM4SetScaleTests;
 
-	//M4SetScaleTest oM4SetScaleTestOne, oM4SetScaleTestTwo, oM4SetScaleTestThree, oM4SetScaleTestFour;
+	M4SetScaleTest oM4SetScaleTestOne, oM4SetScaleTestTwo, oM4SetScaleTestThree, oM4SetScaleTestFour;
 
-	//oM4SetScaleTestOne.SetData(TestMatrix4A, 2, Matrix4(2,2,0,4,6,2,0,0,1));
-	//oM4SetScaleTestTwo.SetData(TestMatrix4B, 2, Matrix4(4,4,0,2,2,1,0,0,1));
-	//oM4SetScaleTestThree.SetData(TestMatrix4C, 2, Matrix4(-4,6,1,0,-2,2,0,0,2));
-	//oM4SetScaleTestFour.SetData(TestMatrix4D, 2, Matrix4(0,6,5,-4,2,6,0,0,1));
+	oM4SetScaleTestOne.SetData(TestMatrix4A, 2, Matrix4(2,2,0,1,4,6,4,0,8,0,2,2,0,0,0,1));
+	oM4SetScaleTestTwo.SetData(TestMatrix4B, 2, Matrix4(4,4,0,1,2,2,2,1,0,6,0,2,0,0,0,1));
+	oM4SetScaleTestThree.SetData(TestMatrix4C, 2, Matrix4(-4,6,2,2,0,-2,4,3,2,-4,2,2,0,0,0,2));
+	oM4SetScaleTestFour.SetData(TestMatrix4D, 2, Matrix4(0,6,10,4,-4,2,12,1,-6,4,-2,0,0,0,0,2));
 
-	//oM4SetScaleTests.AddUnitTest(&oM4SetScaleTestOne);
-	//oM4SetScaleTests.AddUnitTest(&oM4SetScaleTestTwo);
-	//oM4SetScaleTests.AddUnitTest(&oM4SetScaleTestThree);
-	//oM4SetScaleTests.AddUnitTest(&oM4SetScaleTestFour);
-	//oTester.AddUnitTestGroup(oM4SetScaleTests);
+	oM4SetScaleTests.AddUnitTest(&oM4SetScaleTestOne);
+	oM4SetScaleTests.AddUnitTest(&oM4SetScaleTestTwo);
+	oM4SetScaleTests.AddUnitTest(&oM4SetScaleTestThree);
+	oM4SetScaleTests.AddUnitTest(&oM4SetScaleTestFour);
+	oTester.AddUnitTestGroup(oM4SetScaleTests);
 
-	//// rotate and scales a directional vector -------------------------------------------------------------
-	//UnitTestGroup oM4TransformVectorTests;
+	// rotate and scales a directional vector -------------------------------------------------------------
+	UnitTestGroup oM4TransformVectorTests;
 
-	//M4TransformVectorTest oM4TransformVectorTestOne, oM4TransformVectorTestTwo, oM4TransformVectorTestThree, oM4TransformVectorTestFour;
+	M4TransformVectorTest oM4TransformVectorTestOne, oM4TransformVectorTestTwo, oM4TransformVectorTestThree, oM4TransformVectorTestFour;
 
-	//oM4TransformVectorTestOne.SetData(M4TestVectorA, PI/2, 4, Vector3(-24,12,1));
-	//oM4TransformVectorTestTwo.SetData(M4TestVectorB, PI/2, 4, Vector3(-12,4,0));
-	//oM4TransformVectorTestThree.SetData(M4TestVectorC, PI/2, 4, Vector3(0,8,2));
-	//oM4TransformVectorTestFour.SetData(M4TestVectorD, PI/2, 4, Vector3(-24,0,1));
+	oM4TransformVectorTestOne.SetData(M4TestVectorA, PI/2, 2, 'x', Vector4(6,2,-12,1));
+	oM4TransformVectorTestTwo.SetData(M4TestVectorB, PI/2, 2, 'x', Vector4(2,0,-6,0));
+	oM4TransformVectorTestThree.SetData(M4TestVectorC, PI/2, 2, 'y', Vector4(-4,0,4,2));
+	oM4TransformVectorTestFour.SetData(M4TestVectorD, PI/2, 2, 'z', Vector4(12,0,2,1));
 
-	//oM4TransformVectorTests.AddUnitTest(&oM4TransformVectorTestOne);
-	//oM4TransformVectorTests.AddUnitTest(&oM4TransformVectorTestTwo);
-	//oM4TransformVectorTests.AddUnitTest(&oM4TransformVectorTestThree);
-	//oM4TransformVectorTests.AddUnitTest(&oM4TransformVectorTestFour);
-	//oTester.AddUnitTestGroup(oM4TransformVectorTests);
+	oM4TransformVectorTests.AddUnitTest(&oM4TransformVectorTestOne);
+	oM4TransformVectorTests.AddUnitTest(&oM4TransformVectorTestTwo);
+	oM4TransformVectorTests.AddUnitTest(&oM4TransformVectorTestThree);
+	oM4TransformVectorTests.AddUnitTest(&oM4TransformVectorTestFour);
+	oTester.AddUnitTestGroup(oM4TransformVectorTests);
 
+	// rotate, scale and translate a point -------------------------------------------------------------
+	UnitTestGroup oM4TransformPointTests;
 
-	//// rotate, scale and translate a point -------------------------------------------------------------
-	//UnitTestGroup oM4Transform2DPointTests;
+	M4TransformPointTest oM4TransformPointTestOne, oM4TransformPointTestTwo, oM4TransformPointTestThree, oM4TransformPointTestFour;
 
-	//M4Transform2DPointTest oM4Transform2DPointTestOne, oM4Transform2DPointTestTwo, oM4Transform2DPointTestThree, oM4Transform2DPointTestFour;
+	oM4TransformPointTestOne.SetData(M4TestVectorA, PI/2, 2, 'x', M4TestVectorT, Vector4(7,3,-8,1));
+	oM4TransformPointTestTwo.SetData(M4TestVectorB, PI/2, 2, 'x', M4TestVectorT, Vector4(2,0,-6,0));
+	oM4TransformPointTestThree.SetData(M4TestVectorC, PI/2, 2, 'y', M4TestVectorT, Vector4(-3,2,5,1));
+	oM4TransformPointTestFour.SetData(M4TestVectorD, PI/2, 2, 'z', M4TestVectorT, Vector4(8,-4,3,1)); // go back & verify this one
 
-	//oM4Transform2DPointTestOne.SetData(M4TestVectorA, PI/2, 4, M4TestVectorT, Vector3(-16,14,1));
-	//oM4Transform2DPointTestTwo.SetData(M4TestVectorB, PI/2, 4, M4TestVectorT,  Vector3(-12,4,0));
-	//oM4Transform2DPointTestThree.SetData(M4TestVectorC, PI/2, 4, M4TestVectorT,  Vector3(-4,10,1));
-	//oM4Transform2DPointTestFour.SetData(M4TestVectorD, PI/2, 4, M4TestVectorT,  Vector3(-16,8,1));
+	oM4TransformPointTests.AddUnitTest(&oM4TransformPointTestOne);
+	oM4TransformPointTests.AddUnitTest(&oM4TransformPointTestTwo);
+	oM4TransformPointTests.AddUnitTest(&oM4TransformPointTestThree);
+	oM4TransformPointTests.AddUnitTest(&oM4TransformPointTestFour);
+	oTester.AddUnitTestGroup(oM4TransformPointTests);
 
-	//oM4Transform2DPointTests.AddUnitTest(&oM4Transform2DPointTestOne);
-	//oM4Transform2DPointTests.AddUnitTest(&oM4Transform2DPointTestTwo);
-	//oM4Transform2DPointTests.AddUnitTest(&oM4Transform2DPointTestThree);
-	//oM4Transform2DPointTests.AddUnitTest(&oM4Transform2DPointTestFour);
-	//oTester.AddUnitTestGroup(oM4Transform2DPointTests);
+	// creates an identity matrix -------------------------------------------------------------
+	UnitTestGroup oM4CreateIdentityTests;
 
-	//// creates an identity matrix -------------------------------------------------------------
-	//UnitTestGroup oM4CreateIdentityTests;
+	M4CreateIdentityTest oM4CreateIdentityTestOne, oM4CreateIdentityTestTwo, oM4CreateIdentityTestThree, oM4CreateIdentityTestFour;
 
-	//M4CreateIdentityTest oM4CreateIdentityTestOne, oM4CreateIdentityTestTwo, oM4CreateIdentityTestThree, oM4CreateIdentityTestFour;
+	oM4CreateIdentityTestOne.SetData(TestMatrix4A, Matrix4(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1));
+	oM4CreateIdentityTestTwo.SetData(TestMatrix4B, Matrix4(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1));
+	oM4CreateIdentityTestThree.SetData(TestMatrix4C, Matrix4(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1));
+	oM4CreateIdentityTestFour.SetData(TestMatrix4D, Matrix4(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1));
 
-	//oM4CreateIdentityTestOne.SetData(TestMatrix4A, Matrix4(1,0,0,0,1,0,0,0,1));
-	//oM4CreateIdentityTestTwo.SetData(TestMatrix4B, Matrix4(1,0,0,0,1,0,0,0,1));
-	//oM4CreateIdentityTestThree.SetData(TestMatrix4C, Matrix4(1,0,0,0,1,0,0,0,1));
-	//oM4CreateIdentityTestFour.SetData(TestMatrix4D, Matrix4(1,0,0,0,1,0,0,0,1));
+	oM4CreateIdentityTests.AddUnitTest(&oM4CreateIdentityTestOne);
+	oM4CreateIdentityTests.AddUnitTest(&oM4CreateIdentityTestTwo);
+	oM4CreateIdentityTests.AddUnitTest(&oM4CreateIdentityTestThree);
+	oM4CreateIdentityTests.AddUnitTest(&oM4CreateIdentityTestFour);
+	oTester.AddUnitTestGroup(oM4CreateIdentityTests);
 
-	//oM4CreateIdentityTests.AddUnitTest(&oM4CreateIdentityTestOne);
-	//oM4CreateIdentityTests.AddUnitTest(&oM4CreateIdentityTestTwo);
-	//oM4CreateIdentityTests.AddUnitTest(&oM4CreateIdentityTestThree);
-	//oM4CreateIdentityTests.AddUnitTest(&oM4CreateIdentityTestFour);
-	//oTester.AddUnitTestGroup(oM4CreateIdentityTests);
+	// creates new rotation matrix with 0,0 translation -------------------------------------------------------------
+	UnitTestGroup oM4CreateRotationTests;
 
-	//// creates new rotation matrix with 0,0 translation -------------------------------------------------------------
-	//UnitTestGroup oM4CreateRotationTests;
+	M4CreateRotationTest oM4CreateRotationTestOne, oM4CreateRotationTestTwo, oM4CreateRotationTestThree, oM4CreateRotationTestFour;
 
-	//M4CreateRotationTest oM4CreateRotationTestOne, oM4CreateRotationTestTwo, oM4CreateRotationTestThree, oM4CreateRotationTestFour;
+	oM4CreateRotationTestOne.SetData(TestMatrix4A, PI/2, 'x', Matrix4(1,0,0,0,0,0,1,0,0,-1,0,0,0,0,0,1));
+	oM4CreateRotationTestTwo.SetData(TestMatrix4B, PI/2, 'x', Matrix4(1,0,0,0,0,0,1,0,0,-1,0,0,0,0,0,1));
+	oM4CreateRotationTestThree.SetData(TestMatrix4C, PI/2, 'y', Matrix4(0,0,-1,0,0,1,0,0,1,0,0,0,0,0,0,1));
+	oM4CreateRotationTestFour.SetData(TestMatrix4D, PI/2, 'z', Matrix4(0,1,0,0,-1,0,0,0,0,0,1,0,0,0,0,1));
 
-	//oM4CreateRotationTestOne.SetData(TestMatrix4A, PI/2, Matrix4(0,-1,0,1,0,0,0,0,1));
-	//oM4CreateRotationTestTwo.SetData(TestMatrix4B, PI/2, Matrix4(0,-1,0,1,0,0,0,0,1));
-	//oM4CreateRotationTestThree.SetData(TestMatrix4C, PI/2, Matrix4(0,-1,0,1,0,0,0,0,1));
-	//oM4CreateRotationTestFour.SetData(TestMatrix4D, PI/2, Matrix4(0,-1,0,1,0,0,0,0,1));
+	oM4CreateRotationTests.AddUnitTest(&oM4CreateRotationTestOne);
+	oM4CreateRotationTests.AddUnitTest(&oM4CreateRotationTestTwo);
+	oM4CreateRotationTests.AddUnitTest(&oM4CreateRotationTestThree);
+	oM4CreateRotationTests.AddUnitTest(&oM4CreateRotationTestFour);
+	oTester.AddUnitTestGroup(oM4CreateRotationTests);
 
-	//oM4CreateRotationTests.AddUnitTest(&oM4CreateRotationTestOne);
-	//oM4CreateRotationTests.AddUnitTest(&oM4CreateRotationTestTwo);
-	//oM4CreateRotationTests.AddUnitTest(&oM4CreateRotationTestThree);
-	//oM4CreateRotationTests.AddUnitTest(&oM4CreateRotationTestFour);
-	//oTester.AddUnitTestGroup(oM4CreateRotationTests);
+	// creates new scale matrix -------------------------------------------------------------
+	UnitTestGroup oM4CreateScaleTests;
 
-	//// creates new scale matrix -------------------------------------------------------------
-	//UnitTestGroup oM4CreateScaleTests;
+	M4CreateScaleTest oM4CreateScaleTestOne, oM4CreateScaleTestTwo, oM4CreateScaleTestThree, oM4CreateScaleTestFour;
 
-	//M4CreateScaleTest oM4CreateScaleTestOne, oM4CreateScaleTestTwo, oM4CreateScaleTestThree, oM4CreateScaleTestFour;
+	oM4CreateScaleTestOne.SetData(TestMatrix4A, 2, Matrix4(2,0,0,0,0,2,0,0,0,0,2,0,0,0,0,1));
+	oM4CreateScaleTestTwo.SetData(TestMatrix4B, 3, Matrix4(3,0,0,0,0,3,0,0,0,0,3,0,0,0,0,1));
+	oM4CreateScaleTestThree.SetData(TestMatrix4C, 4, Matrix4(4,0,0,0,0,4,0,0,0,0,4,0,0,0,0,1));
+	oM4CreateScaleTestFour.SetData(TestMatrix4D, -2, Matrix4(-2,0,0,0,0,-2,0,0,0,0,-2,0,0,0,0,1));
 
-	//oM4CreateScaleTestOne.SetData(TestMatrix4A, 2, Matrix4(2,0,0,0,2,0,0,0,1));
-	//oM4CreateScaleTestTwo.SetData(TestMatrix4B, 3, Matrix4(3,0,0,0,3,0,0,0,1));
-	//oM4CreateScaleTestThree.SetData(TestMatrix4C, 4, Matrix4(4,0,0,0,4,0,0,0,1));
-	//oM4CreateScaleTestFour.SetData(TestMatrix4D, -2, Matrix4(-2,0,0,0,-2,0,0,0,1));
+	oM4CreateScaleTests.AddUnitTest(&oM4CreateScaleTestOne);
+	oM4CreateScaleTests.AddUnitTest(&oM4CreateScaleTestTwo);
+	oM4CreateScaleTests.AddUnitTest(&oM4CreateScaleTestThree);
+	oM4CreateScaleTests.AddUnitTest(&oM4CreateScaleTestFour);
+	oTester.AddUnitTestGroup(oM4CreateScaleTests);
 
-	//oM4CreateScaleTests.AddUnitTest(&oM4CreateScaleTestOne);
-	//oM4CreateScaleTests.AddUnitTest(&oM4CreateScaleTestTwo);
-	//oM4CreateScaleTests.AddUnitTest(&oM4CreateScaleTestThree);
-	//oM4CreateScaleTests.AddUnitTest(&oM4CreateScaleTestFour);
-	//oTester.AddUnitTestGroup(oM4CreateScaleTests);
+	// creates new translation matrix with 0 rotation -------------------------------------------------------------
+	UnitTestGroup oM4CreateTranslationTests;
 
-	//// creates new translation matrix with 0 rotation -------------------------------------------------------------
-	//UnitTestGroup oM4CreateTranslationTests;
+	M4CreateTranslationTest oM4CreateTranslationTestOne, oM4CreateTranslationTestTwo, oM4CreateTranslationTestThree, oM4CreateTranslationTestFour;
 
-	//M4CreateTranslationTest oM4CreateTranslationTestOne, oM4CreateTranslationTestTwo, oM4CreateTranslationTestThree, oM4CreateTranslationTestFour;
+	oM4CreateTranslationTestOne.SetData(TestMatrix4A, M4TestVectorA, Matrix4(1,0,0,3,0,1,0,6,0,0,1,1,0,0,0,1));
+	oM4CreateTranslationTestTwo.SetData(TestMatrix4B, M4TestVectorB, Matrix4(1,0,0,1,0,1,0,3,0,0,1,0,0,0,0,0));
+	oM4CreateTranslationTestThree.SetData(TestMatrix4C, M4TestVectorC, Matrix4(1,0,0,2,0,1,0,0,0,0,1,2,0,0,0,2));
+	oM4CreateTranslationTestFour.SetData(TestMatrix4D, M4TestVectorD, Matrix4(1,0,0,0,0,1,0,6,0,0,1,1,0,0,0,1));
 
-	//oM4CreateTranslationTestOne.SetData(TestMatrix4A, M4TestVectorA, Matrix4(1,0,3,0,1,6,0,0,1));
-	//oM4CreateTranslationTestTwo.SetData(TestMatrix4B, M4TestVectorB, Matrix4(1,0,1,0,1,3,0,0,0));
-	//oM4CreateTranslationTestThree.SetData(TestMatrix4C, M4TestVectorC, Matrix4(1,0,2,0,1,0,0,0,2));
-	//oM4CreateTranslationTestFour.SetData(TestMatrix4D, M4TestVectorD, Matrix4(1,0,0,0,1,6,0,0,1));
+	oM4CreateTranslationTests.AddUnitTest(&oM4CreateTranslationTestOne);
+	oM4CreateTranslationTests.AddUnitTest(&oM4CreateTranslationTestTwo);
+	oM4CreateTranslationTests.AddUnitTest(&oM4CreateTranslationTestThree);
+	oM4CreateTranslationTests.AddUnitTest(&oM4CreateTranslationTestFour);
+	oTester.AddUnitTestGroup(oM4CreateTranslationTests);
 
-	//oM4CreateTranslationTests.AddUnitTest(&oM4CreateTranslationTestOne);
-	//oM4CreateTranslationTests.AddUnitTest(&oM4CreateTranslationTestTwo);
-	//oM4CreateTranslationTests.AddUnitTest(&oM4CreateTranslationTestThree);
-	//oM4CreateTranslationTests.AddUnitTest(&oM4CreateTranslationTestFour);
-	//oTester.AddUnitTestGroup(oM4CreateTranslationTests);
+	// creates orthographic projection matrix for given cardinal axis -------------------------------------------------------------
+	UnitTestGroup oM4CreateCardinalOrthoTests;
 
-	//// creates orthographic projection matrix for given cardinal axis -------------------------------------------------------------
-	//UnitTestGroup oM4CreateCardinalOrthoTests;
+	M4CreateCardinalOrthoTest oM4CreateCardinalOrthoTestOne, oM4CreateCardinalOrthoTestTwo, oM4CreateCardinalOrthoTestThree, oM4CreateCardinalOrthoTestFour;
 
-	//M4CreateCardinalOrthoTest oM4CreateCardinalOrthoTestOne, oM4CreateCardinalOrthoTestTwo, oM4CreateCardinalOrthoTestThree, oM4CreateCardinalOrthoTestFour;
+	oM4CreateCardinalOrthoTestOne.SetData(TestMatrix4A, XY, Matrix4(1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1));
+	oM4CreateCardinalOrthoTestTwo.SetData(TestMatrix4B, XY, Matrix4(1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1));
+	oM4CreateCardinalOrthoTestThree.SetData(TestMatrix4C, XZ, Matrix4(1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1));
+	oM4CreateCardinalOrthoTestFour.SetData(TestMatrix4D, YZ, Matrix4(0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1));
 
-	//oM4CreateCardinalOrthoTestOne.SetData(TestMatrix4A, 'x', Matrix4(1,0,0,0,0,0,0,0,1));
-	//oM4CreateCardinalOrthoTestTwo.SetData(TestMatrix4B, 'y', Matrix4(0,0,0,0,1,0,0,0,1));
-	//oM4CreateCardinalOrthoTestThree.SetData(TestMatrix4C, 'x', Matrix4(1,0,0,0,0,0,0,0,1));
-	//oM4CreateCardinalOrthoTestFour.SetData(TestMatrix4D, 'y', Matrix4(0,0,0,0,1,0,0,0,1));
-
-	//oM4CreateCardinalOrthoTests.AddUnitTest(&oM4CreateCardinalOrthoTestOne);
-	//oM4CreateCardinalOrthoTests.AddUnitTest(&oM4CreateCardinalOrthoTestTwo);
-	//oM4CreateCardinalOrthoTests.AddUnitTest(&oM4CreateCardinalOrthoTestThree);
-	//oM4CreateCardinalOrthoTests.AddUnitTest(&oM4CreateCardinalOrthoTestFour);
-	//oTester.AddUnitTestGroup(oM4CreateCardinalOrthoTests);
-
-
-
-
-
-
+	oM4CreateCardinalOrthoTests.AddUnitTest(&oM4CreateCardinalOrthoTestOne);
+	oM4CreateCardinalOrthoTests.AddUnitTest(&oM4CreateCardinalOrthoTestTwo);
+	oM4CreateCardinalOrthoTests.AddUnitTest(&oM4CreateCardinalOrthoTestThree);
+	oM4CreateCardinalOrthoTests.AddUnitTest(&oM4CreateCardinalOrthoTestFour);
+	oTester.AddUnitTestGroup(oM4CreateCardinalOrthoTests);
 	
 	bool AllTestsSucceed = oTester.DoTests();
 	char satisfaction;

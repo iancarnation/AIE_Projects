@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "Static Constants.h"
 #include "Matrix3.h"
+#include "Matrix4.h"
 #include <iostream>
 using namespace std;
 
@@ -56,6 +57,12 @@ int main()
 	Morig.Print();
 	cout<< "\nSatisfied? ";
 	cin>> satisfaction;
+
+	Vector4 M4TestVectorA(3,6,1,1), M4TestVectorT(4,2,2,2);
+	Matrix4 TestMatrix4A(1,1,0,1,2,3,2,0,4,0,1,2,0,0,0,1);
+
+	Matrix4 Dummy;
+	Dummy.TransformPoint(M4TestVectorA, PI/2, 2, 'x', M4TestVectorT);
 
 	return 0;
 }
