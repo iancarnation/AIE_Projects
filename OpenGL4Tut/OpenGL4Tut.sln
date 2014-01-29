@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenGL4Tut", "OpenGL4Tut\OpenGL4Tut.vcxproj", "{519B13AB-8572-4B7D-A187-0B09FD4B5C3D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "isan", "isan\isan.vcxproj", "{65724A0A-3110-4974-B93D-F897A7AA14A0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{519B13AB-8572-4B7D-A187-0B09FD4B5C3D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{519B13AB-8572-4B7D-A187-0B09FD4B5C3D}.Debug|Win32.Build.0 = Debug|Win32
+		{519B13AB-8572-4B7D-A187-0B09FD4B5C3D}.Release|Win32.ActiveCfg = Release|Win32
+		{519B13AB-8572-4B7D-A187-0B09FD4B5C3D}.Release|Win32.Build.0 = Release|Win32
+		{65724A0A-3110-4974-B93D-F897A7AA14A0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{65724A0A-3110-4974-B93D-F897A7AA14A0}.Debug|Win32.Build.0 = Debug|Win32
+		{65724A0A-3110-4974-B93D-F897A7AA14A0}.Release|Win32.ActiveCfg = Release|Win32
+		{65724A0A-3110-4974-B93D-F897A7AA14A0}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
