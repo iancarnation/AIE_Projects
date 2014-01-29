@@ -1,8 +1,4 @@
-#define GL_LOG_FILE "gl.log"
-#ifndef __GLLOG_
-#define __GLLOG_
-#include<time.h>
-#include<fstream>
+#include "GLlog.h"
 
 bool restart_gl_log() 
 {
@@ -65,5 +61,3 @@ void printProgramInfoLog(GLuint obj)
 		free(infoLog);
 	}
 }
-
-#endif

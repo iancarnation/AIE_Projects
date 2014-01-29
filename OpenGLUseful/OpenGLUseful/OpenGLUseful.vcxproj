@@ -37,10 +37,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)\libs\glfw\include;$(ProjectDir)\libs\glew\include;$(ProjectDir)\libs\freeImage\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\libs\glfw\include;$(ProjectDir)\libs\glew\include;$(ProjectDir)\libs\freeImage\include;$(ProjectDir)\libs\MathLibrary\include;$(ProjectDir)\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>$(ProjectDir)\libs\glfw\lib-msvc110;$(ProjectDir)\libs\glew\lib;$(ProjectDir)\libs\freeImage\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(ProjectDir)\libs\glfw\lib-msvc110;$(ProjectDir)\libs\glew\lib;$(ProjectDir)\libs\freeImage\lib;$(ProjectDir)\libs\MathLibrary\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -49,7 +49,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3dll.lib;opengl32.lib;glew32.lib;FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3dll.lib;opengl32.lib;glew32.lib;FreeImage.lib;MathLibrary.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -66,13 +66,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Quad.cpp" />
+    <ClInclude Include="include\GLlog.h" />
+    <ClInclude Include="include\MathLibrary.h" />
+    <ClInclude Include="include\Quad.h" />
+    <ClInclude Include="include\randQuad.h" />
+    <ClInclude Include="include\Sprite.h" />
+    <ClInclude Include="include\TextFileReader.h" />
+    <ClInclude Include="include\Utilities.h" />
+    <ClInclude Include="include\Vertex.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="gllog.h" />
-    <ClInclude Include="include\TextFileReader.h" />
-    <ClInclude Include="Quad.h" />
+    <ClCompile Include="source\GLlog.cpp" />
+    <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\Quad.cpp" />
+    <ClCompile Include="source\randQuad.cpp" />
+    <ClCompile Include="source\Sprite.cpp" />
+    <ClCompile Include="source\Utilities.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FreeImage.dll" />
+    <None Include="gl.log" />
+    <None Include="glew32.dll" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
