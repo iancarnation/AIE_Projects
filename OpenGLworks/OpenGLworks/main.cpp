@@ -85,26 +85,18 @@ int main()
 	glEnable (GL_DEPTH_TEST); // enable depth-testing
 	glDepthFunc (GL_LESS); // depth-testing interprets a smaller value as "closer"
 
-
-	//Column Major Order 
-	float matrix[] =
-	{
-		1.0,0.0f,0.0f,0.0f, //first column
-		0.0,1.0f,0.0f,0.0f, //second column
-		0.0,0.0f,1.0f,0.0f, //third column
-		0.5,0.0f,0.0f,1.0f  //fourth column
-	};
-
 	float speed = 1.0f; // move at 1 unit per second
-float last_position = 0.0f;
+	float last_position = 0.0f;
 
-//Quad * tester = new Quad();
+	//Quad * tester = new Quad();
 
-Sprite * richard = new Sprite("../resources/simmons.png",384,324,Vector4(1,1,1,1),window); 
+	Sprite * richard = new Sprite("./resources/simmons.png",384,324,Vector4(1,1,1,1),window); 
 
-//int matrix_location = glGetUniformLocation (shaderProgram, "matrix");
-//glUniform1i(glGetUniformLocation(shaderProgram, "Texture"), 0);
+	//int matrix_location = glGetUniformLocation (shaderProgram, "matrix");
+	//glUniform1i(glGetUniformLocation(shaderProgram, "Texture"), 0);
 
+	Ortho = new Matrix4();
+	Orthographic(0, g_gl_width, g_gl_height, 0, 0, -1, Ortho);
 
 	while (!glfwWindowShouldClose (window)) {
 

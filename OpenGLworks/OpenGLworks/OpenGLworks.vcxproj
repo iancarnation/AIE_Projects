@@ -69,6 +69,7 @@
     <ClCompile Include="source\Quad.cpp" />
     <ClCompile Include="source\Sprite.cpp" />
     <ClCompile Include="source\TextFileReader.cpp" />
+    <ClCompile Include="source\Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GLlog.h" />
@@ -76,7 +77,12 @@
     <ClInclude Include="include\Quad.h" />
     <ClInclude Include="include\Sprite.h" />
     <ClInclude Include="include\TextFileReader.h" />
+    <ClInclude Include="include\Utilities.h" />
     <ClInclude Include="include\Vertex.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\resources\FragmentShader.glsl" />
+    <None Include="..\resources\VertexShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

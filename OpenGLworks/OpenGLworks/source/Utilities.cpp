@@ -1,71 +1,49 @@
 #include "Utilities.h"
 
-unsigned int LoadTexture(const char* a_szTexture, unsigned int a_uiFormat /* = 
-GL_RGBA */, unsigned int* a_uiWidth /* = nullptr */, unsigned int* a_uiHeight /* = 
-nullptr */, unsigned int* a_uiBPP /* = nullptr*/) 
-{ 
- FIBITMAP* pBitmap = nullptr; 
- 
- // check the file signature and deduce its format and load it 
- FREE_IMAGE_FORMAT fif = FreeImage_GetFileType(a_szTexture, 0); 
- if (fif != FIF_UNKNOWN && FreeImage_FIFSupportsReading(fif)) 
- { 
- pBitmap = FreeImage_Load(fif, a_szTexture); 
- } 
- 
- if (pBitmap == nullptr) 
- { 
- printf("Error: Failed to load image '%s'!\n", a_szTexture); 
- return 0; 
- } 
- 
- // optionally get the image width and height 
- if (a_uiWidth != nullptr) 
- *a_uiWidth = FreeImage_GetWidth(pBitmap); 
- if (a_uiHeight != nullptr) 
- *a_uiHeight = FreeImage_GetHeight(pBitmap); 
- 
- // force the image to RGBA 
- unsigned int bpp = FreeImage_GetBPP(pBitmap); 
- if( a_uiBPP != nullptr ) 
- *a_uiBPP = bpp/8; 
- 
- FREE_IMAGE_COLOR_TYPE fi_colourType = FreeImage_GetColorType(pBitmap); 
- if (fi_colourType != FIC_RGBALPHA ) 
- { 
- FIBITMAP* ndib = FreeImage_ConvertTo32Bits(pBitmap); 
- FreeImage_Unload(pBitmap); 
- pBitmap = ndib; 
- bpp = FreeImage_GetBPP(pBitmap); 
- fi_colourType = FreeImage_GetColorType(pBitmap); 
- } 
- 
- // get the pixel data 
- BYTE* pData = FreeImage_GetBits(pBitmap); 
- 
- // try to determine data type of file (bytes/floats) 
- FREE_IMAGE_TYPE fit = FreeImage_GetImageType(pBitmap); 
- GLenum eType = (fit == FIT_RGBF || fit == FIT_FLOAT) ?  GL_FLOAT:GL_UNSIGNED_BYTE; 
- 
- // create GL texture 
- GLuint textureID; 
- glGenTextures( 1, &textureID ); 
- glBindTexture( GL_TEXTURE_2D, textureID ); 
- glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, 
- FreeImage_GetWidth(pBitmap), 
-FreeImage_GetHeight(pBitmap), 0, 
-a_uiFormat, eType, pData); 
- 
- // specify default filtering and wrapping 
- glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); 
- glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); 
- glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE ); 
- glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE ); 
- // unbind texture 
- glBindTexture( GL_TEXTURE_2D, 0 ); 
- 
- // delete data 
- FreeImage_Unload(pBitmap); 
- 
- return textureID; 
+Matrix4 * Ortho;
+void Orthographic(float a_fLeft, float a_fRight, float a_fTop, float a_fBottom, 
+				  float a_fNear, float a_fFar, Matrix4 * mat)
+{
+	float deltaX = a_fRight - a_fLeft;
+	float deltaY = a_fTop - a_fBottom;
+	float deltaZ = a_fNear - a_fFar;
+
+/*  2/dx 0    0    lr
+	0    2/dy 0    bt
+	0    0    2/dz nf
+	0    0    0    1  */
+
+mat->m11 = 2.f / deltaX;
+mat->m21 = 0.f;
+mat->m31 = 0.f;
+mat->m41 = 0.f;
+mat->m12 = 0.f;
+mat->m22 = 2.f / deltaY;
+mat->m32 = 0.f;
+mat->m42 = 0.f;
+mat->m13 = 0.f;
+mat->m23 = 0.f;
+mat->m33 = 2.f / deltaZ;
+mat->m43 = 0.f;
+mat->m14 = ((a_fLeft + a_fRight)/(a_fLeft - a_fRight));
+mat->m24 = ((a_fBottom + a_fTop)/(a_fBottom - a_fTop));
+mat->m34 = (-(a_fNear + a_fFar)/(a_fFar - a_fNear));
+mat->m44 = 1.f;
+
+//mat->m11 = 2.f / deltaX;
+//mat->m12 = 0.f;
+//mat->m13 = 0.f;
+//mat->m14 = 0.f;
+//mat->m21 = 0.f;
+//mat->m22 = 2.f / deltaY;
+//mat->m23 = 0.f;
+//mat->m24 = 0.f;
+//mat->m31 = 0.f;
+//mat->m32 = 0.f;
+//mat->m33 = 2.f / deltaZ;
+//mat->m34 = 0.f;
+//mat->m41 = ((a_fLeft + a_fRight)/(a_fLeft - a_fRight));
+//mat->m42 = ((a_fBottom + a_fTop)/(a_fBottom - a_fTop));
+//mat->m43 = (-(a_fNear + a_fFar)/(a_fFar - a_fNear));
+//mat->m44 = 1.f;
 }
