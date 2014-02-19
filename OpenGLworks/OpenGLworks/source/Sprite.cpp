@@ -6,11 +6,13 @@ Sprite::Sprite()
 Sprite::~Sprite()
 {}
 
-Sprite::Sprite(const char* a_pTexture, int a_iWidth, int a_iHeight, Vector4 a_v4Color, GLFWwindow* window)
+Sprite::Sprite(const char* a_cpType, const char* a_cpTextureName, /*float a_fSheetSlices(won't need with XML sheet info?),*/ Vector3 a_v3Scale, Vector3 a_v3Position, 
+			   Vector3 a_v3Velocity, /*Vector3 a_v3Force(gone with new physics?),*/ float a_fMass, /*float a_fMovementPower(move to Entity child),*/ bool a_bAlive, Vector4 a_v4Color, GLFWwindow* window)
 {
 	GameWindow = window;
-	m_v3Scale = Vector3(a_iWidth, a_iHeight, 0);
-	m_v3Position = Vector3(0,0,0);
+
+	m_v3Scale = a_v3Scale;
+	m_v3Position = a_v3Position;
 
 	modelMatrix = new Matrix4();
 
@@ -39,10 +41,15 @@ Sprite::Sprite(const char* a_pTexture, int a_iWidth, int a_iHeight, Vector4 a_v4
 	m_aoVerts[2].Color = m_v4SpriteColor;
 	m_aoVerts[3].Color = m_v4SpriteColor;
 
-	m_aoVerts[0].UV[0] = 0.0f;m_aoVerts[0].UV[1] = 0.0f;
-	m_aoVerts[1].UV[0] = 1.0f;m_aoVerts[1].UV[1] = 0.0f;
-	m_aoVerts[2].UV[0] = 0.0f;m_aoVerts[2].UV[1] = 1.0f;
-	m_aoVerts[3].UV[0] = 1.0f;m_aoVerts[3].UV[1] = 1.0f;
+	m_aoVerts[0].UV = Vector3(0.0f, 0.0f, 1.0f);
+	m_aoVerts[1].UV = Vector3(1.0f, 0.0f, 1.0f);
+	m_aoVerts[2].UV = Vector3(0.0f, 1.0f, 1.0f);
+	m_aoVerts[3].UV = Vector3(1.0f, 1.0f, 1.0f);
+
+	//m_aoVerts[0].UV[0] = 0.0f;m_aoVerts[0].UV[1] = 0.0f;
+	//m_aoVerts[1].UV[0] = 1.0f;m_aoVerts[1].UV[1] = 0.0f;
+	//m_aoVerts[2].UV[0] = 0.0f;m_aoVerts[2].UV[1] = 1.0f;
+	//m_aoVerts[3].UV[0] = 1.0f;m_aoVerts[3].UV[1] = 1.0f;
 
 	GLuint elements[] = 
 	{
@@ -151,4 +158,28 @@ void Sprite::Input()
 
 	if (GLFW_PRESS == glfwGetKey(GameWindow, GLFW_KEY_K))
 		m_v3Scale *= 0.99f;
+}
+
+// setup UV Coordinates, creates a vector of 'Slices' of a sprite sheet
+void Sprite::UVSetup(float a_fSheetSlices)
+{
+	float fOffset = 1.0/a_fSheetSlices;			// X distance between slices
+	float fMin = 0.0f;							// current top-left corner of slice
+	float fMax = fOffset;						// current bottom-right corner of slice
+	// for each slice of the sprite sheet
+	for (int i=0; i<int(a_fSheetSlices); i++)
+	{
+		// construct UV coordinate set
+		UV Slice;
+		Slice.Umin = fMin;
+		Slice.Vmin = 0.0f;
+		Slice.Umax = fMax;
+		Slice.Vmax = 1.0f;
+		// add to sprite sheet vector
+		m_vSpriteSheet.push_back(Slice);
+		// increment min and max cursors
+		fMin += fOffset;
+		fMax += fOffset;
+	}
+
 }

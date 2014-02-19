@@ -78,7 +78,6 @@
     <ClInclude Include="include\Sprite.h" />
     <ClInclude Include="include\TextFileReader.h" />
     <ClInclude Include="include\Utilities.h" />
-    <ClInclude Include="include\Vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\resources\FragmentShader.glsl" />
