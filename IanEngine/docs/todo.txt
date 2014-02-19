@@ -1,0 +1,29 @@
+----------- Assesment Requirements -------------------------------------------
+
+- replace AIE functions with IanEngine functions
+
+- - Sprite class
+- - - Create
+- - - Draw
+- - - Input
+- - - Destroy
+- - Rendering
+
+- animation
+- - UV Setup
+- - UV adjustment
+- - XML animation info
+
+- text
+
+
+
+----------- Added -------------------------------------------
+
+- particle system
+- movement manager
+- sound
+- XML level parameters
+
+
+
