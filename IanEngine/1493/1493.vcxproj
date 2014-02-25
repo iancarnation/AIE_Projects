@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C0CBAA15-06C8-48CA-BD6C-63455AB752AD}</ProjectGuid>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ProjectName>1493</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IntDir>obj\</IntDir>
+    <OutDir>bin\</OutDir>
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+    <EmbedManifest>false</EmbedManifest>
+    <TargetName>$(ProjectName)_d</TargetName>
+    <IncludePath>C:\Users\student\Documents\Ian Rich Docs\Projects\1493\1493\include\GL;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\student\Documents\Ian Rich Docs\Projects\1493\1493\resources;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IntDir>obj\</IntDir>
+    <OutDir>bin\</OutDir>
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+    <EmbedManifest>false</EmbedManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>./;./include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <OutputFile>$(OutDir)$(ProjectName)_d.exe</OutputFile>
+      <ProgramDatabaseFile>$(OutDir)$(ProjectName)_d.pdb</ProgramDatabaseFile>
+      <SubSystem>NotSet</SubSystem>
+      <AdditionalLibraryDirectories>./libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>AIE_GL_Static_Framework_d.lib;kernel32.lib;glfw.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Manifest>
+      <OutputManifestFile>$(TargetPath).manifest</OutputManifestFile>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>./;./include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+      <ProgramDatabaseFile>$(OutDir)$(ProjectName).pdb</ProgramDatabaseFile>
+      <SubSystem>NotSet</SubSystem>
+      <AdditionalLibraryDirectories>./libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>AIE_GL_Static_Framework.lib;kernel32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>
+      </LinkTimeCodeGeneration>
+    </Link>
+    <Manifest>
+      <OutputManifestFile>$(TargetPath).manifest</OutputManifestFile>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ReadMe.txt" />
+    <None Include="resources\fonts\arial.fnt" />
+    <None Include="resources\shaders\StaticFW_Pixel.glsl" />
+    <None Include="resources\shaders\StaticFW_Vertex.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\1493main.cpp" />
+    <ClCompile Include="source\DeathState.cpp" />
+    <ClCompile Include="source\Enemy.cpp" />
+    <ClCompile Include="source\EnvironmentObj.cpp" />
+    <ClCompile Include="source\GameEngine.cpp" />
+    <ClCompile Include="source\IntroState.cpp" />
+    <ClCompile Include="source\MenuState.cpp" />
+    <ClCompile Include="source\Player.cpp" />
+    <ClCompile Include="source\Projectile.cpp" />
+    <ClCompile Include="source\Sprite.cpp" />
+    <ClCompile Include="source\PlayState.cpp" />
+    <ClCompile Include="source\UV.cpp" />
+    <ClCompile Include="source\Vector2D.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\DeathState.h" />
+    <ClInclude Include="include\Enemy.h" />
+    <ClInclude Include="include\EnvironmentObj.h" />
+    <ClInclude Include="include\GameEngine.h" />
+    <ClInclude Include="include\GameState.h" />
+    <ClInclude Include="include\gl\glfw.h" />
+    <ClInclude Include="include\IntroState.h" />
+    <ClInclude Include="include\MenuState.h" />
+    <ClInclude Include="include\Player.h" />
+    <ClInclude Include="include\Projectile.h" />
+    <ClInclude Include="include\Sprite.h" />
+    <ClInclude Include="include\PlayState.h" />
+    <ClInclude Include="include\StaticConstants.h" />
+    <ClInclude Include="include\UV.h" />
+    <ClInclude Include="include\Vector2D.h" />
+    <ClInclude Include="include\AIE.h" />
+    <ClInclude Include="include\KeyCodes.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

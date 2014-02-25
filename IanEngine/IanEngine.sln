@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenGLworks", "OpenGLworks\OpenGLworks.vcxproj", "{D7447FC5-4024-45DF-B3AD-6FA3C5BD1FBE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IanEngine", "IanEngine\IanEngine.vcxproj", "{D7447FC5-4024-45DF-B3AD-6FA3C5BD1FBE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1493", "1493\1493.vcxproj", "{C0CBAA15-06C8-48CA-BD6C-63455AB752AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +15,10 @@ Global
 		{D7447FC5-4024-45DF-B3AD-6FA3C5BD1FBE}.Debug|Win32.Build.0 = Debug|Win32
 		{D7447FC5-4024-45DF-B3AD-6FA3C5BD1FBE}.Release|Win32.ActiveCfg = Release|Win32
 		{D7447FC5-4024-45DF-B3AD-6FA3C5BD1FBE}.Release|Win32.Build.0 = Release|Win32
+		{C0CBAA15-06C8-48CA-BD6C-63455AB752AD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C0CBAA15-06C8-48CA-BD6C-63455AB752AD}.Debug|Win32.Build.0 = Debug|Win32
+		{C0CBAA15-06C8-48CA-BD6C-63455AB752AD}.Release|Win32.ActiveCfg = Release|Win32
+		{C0CBAA15-06C8-48CA-BD6C-63455AB752AD}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

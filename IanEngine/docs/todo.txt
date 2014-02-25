@@ -6,6 +6,7 @@
 - - - Create
 - - - Draw
 - - - Input
+- - - Collision
 - - - Destroy
 - - Rendering
 
