@@ -6,13 +6,13 @@ Sprite::Sprite()
 Sprite::~Sprite()
 {}
 
-Sprite::Sprite(/*const char* a_cpType,*/ const char* a_cpTexture, /*float a_fSheetSlices(won't need with XML sheet info?),*/ Vector3 a_v3Scale, Vector3 a_v3Position, Vector4 a_v4Color, 
+Sprite::Sprite(/*const char* a_cpType,*/ const char* a_cpTexture, /*float a_fSheetSlices(won't need with XML sheet info?),*/ int a_iWidth, int a_iHeight, Vector4 a_v4Color, 
 			   /*Vector3 a_v3Velocity,*/ /*Vector3 a_v3Force(gone with new physics?),*/ /*float a_fMass,*/ /*float a_fMovementPower(move to Entity child),*/ /*bool a_bAlive,*/ GLFWwindow* window)
 {
 	GameWindow = window;
 
-	m_v3Scale = a_v3Scale;
-	m_v3Position = a_v3Position;
+	m_v3Scale = Vector3(a_iWidth, a_iHeight, 1);
+	m_v3Position = Vector3(g_gl_width/2, g_gl_height/2, 0);
 
 	modelMatrix = new Matrix4();
 
@@ -83,8 +83,6 @@ Sprite::Sprite(/*const char* a_cpType,*/ const char* a_cpTexture, /*float a_fShe
 	glVertexAttribPointer(uvAttrib,  2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(7 * sizeof(float)));//check for extra value
 	
 	glBindVertexArray(0);
-
-	m_v3Position = Vector3(0,0,0);
 
 	matrix_location = glGetUniformLocation (m_ShaderProgram, "matrix");
 

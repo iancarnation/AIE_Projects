@@ -26,6 +26,13 @@ struct UV
 };
 
 extern Matrix4 * Ortho;
+
+// keep track of window size for things like the viewport and the mouse cursor
+extern int g_gl_width;
+extern int g_gl_height;
+
+
+
 void Orthographic(float a_fLeft, float a_fRight, float a_fTop, float a_fBottom, 
 				  float a_fNear, float a_fFar, Matrix4 * mat);
 

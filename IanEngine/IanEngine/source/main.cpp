@@ -9,10 +9,6 @@
 #include "Quad.h"
 #include "Sprite.h"
 
-// keep track of window size for things like the viewport and the mouse cursor
-int g_gl_width = 640;
-int g_gl_height = 480;
-
 // a call-back function
 void glfw_window_size_callback (GLFWwindow* window, int width, int height) {
 	g_gl_width = width;
@@ -59,7 +55,7 @@ int main()
 	GLFWwindow* window = glfwCreateWindow (
 		vmode->width, vmode->height, "Extended GL Init",NULL/* mon*/, NULL
 		);
-	glfwSetWindowSize(window, 640, 480);
+	glfwSetWindowSize(window, g_gl_width, g_gl_height);
 
 	if (!window) {
 		fprintf (stderr, "ERROR: could not open window with GLFW3\n");
@@ -90,7 +86,7 @@ int main()
 
 	//Quad * tester = new Quad();
 
-	Sprite * richard = new Sprite("./resources/simmons.png",Vector3(384,324,1), Vector3(0,0,0), Vector4(1,1,1,1),window); 
+	Sprite * richard = new Sprite("./resources/simmons.png", 384, 324, Vector4(1,1,1,1), window); 
 
 
 	//int matrix_location = glGetUniformLocation (shaderProgram, "matrix");

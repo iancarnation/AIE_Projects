@@ -12,8 +12,8 @@ class Sprite: public Quad
 public:
 	Sprite(void);
 	~Sprite(void);
-	Sprite(const char*, Vector3, Vector3, Vector4, GLFWwindow*,
-    /*optional params */Vector3 a_v3Velocity = Vector3(0,0,0), Vector3 a_v3Force = Vector3(0,0,0) ); // temp starter..add variables below once needed
+	Sprite(const char* a_cpTexture, int a_iWidth, int a_iHeight, Vector4 color, GLFWwindow*
+    /*optional params , Vector3 a_v3Velocity = Vector3(0,0,0), Vector3 a_v3Force = Vector3(0,0,0)*/); // temp starter..add variables below once needed, **move to AnimatedSprite later? **
 	//Sprite(const char*, const char*, Vector3, Vector3, Vector4, Vector3, float, bool, GLFWwindow*);
 
 	// -- Functions from AIE Framework..work through and implement functions that will be useful in new engine -- 
